@@ -11,13 +11,10 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     <nav>
       <div>
         <Link to="/products">All Products</Link>
-        <input type="text" />
-
-        {/*
-        home (i.e landing page - this a link around the company name)
-        search bar
-        cart
-        */}
+        <form>
+          <input type="text" placeholder="Search Products Here" />
+        </form>
+        <Link to="/checkout">Cart</Link>
       </div>
       {isLoggedIn ? (
         <div>
