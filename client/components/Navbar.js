@@ -15,6 +15,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <input type="text" placeholder="Search Products Here" />
           <button type="submit">Search</button>
         </form>
+        <Link to="/contact">Contact Us</Link>
         <Link to="/checkout">Cart</Link>
       </div>
       {isLoggedIn ? (
