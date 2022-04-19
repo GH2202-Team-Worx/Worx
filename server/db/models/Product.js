@@ -1,4 +1,3 @@
-const sequelize = require('sequelize');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
@@ -35,7 +34,7 @@ const Product = db.define('product', {
         'gold',
         'black',
         'white',
-        'null'
+        'wax'
       ),
       validate: {
         notEmpty: true,
@@ -66,3 +65,5 @@ const Product = db.define('product', {
     },
   },
 });
+
+module.exports = Product;
