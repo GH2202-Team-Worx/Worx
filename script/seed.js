@@ -8,16 +8,16 @@ const products = [{
   epoxyColor: 'blue',
   price: 200.00,
   category: 'Bowl',
-  image: 'https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/276123626_158077886599088_4538128186652999978_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=N0tLt3VXmlEAX9KWbmJ&_nc_ht=scontent-mia3-1.xx&oh=00_AT9sX3xrEBJ8b8LcArmdNUkEs3z7vHDEfJFcAb386oHKuA&oe=6264C172',
+  image: 'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
   customizable: true
 }, {
   name: 'Jewelry box',
-  description: 'Get your own custom stained box, the perfect gift idea for any event your attending!Our first time working with hickory, and it definitely won’t be our last! We hope you love this small beautiful bowl, perfect for whatever you need, as much as we do!',
+  description: 'Get your own custom stained box, the perfect gift idea for any event you\'re attending!',
   material: 'Poplar',
   epoxyColor: 'wax',
   price: 20.00,
   category: 'Box',
-  image: 'https://scontent-mia3-2.xx.fbcdn.net/v/t39.30808-6/275627014_156467416760135_2314966038615759731_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=X7_hcUuQyxQAX--erfZ&_nc_ht=scontent-mia3-2.xx&oh=00_AT9ge395gMEXPAoEfnTAJRtn62hwslJqeq46J2aaBikovA&oe=62645900',
+  image: 'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
   customizable: true
 }, {
   name: 'Hickory bowl',
@@ -26,7 +26,7 @@ const products = [{
   epoxyColor: 'wax',
   price: 30.00,
   category: 'Bowl',
-  image: 'https://scontent-mia3-2.xx.fbcdn.net/v/t39.30808-6/275585953_156078566799020_104830131098927512_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=ttD-1p2WX-8AX_fIVbO&_nc_ht=scontent-mia3-2.xx&oh=00_AT9qXe438DDsY_0UUem_CRlsIt0ftE2Ef4j_nZ1ZrdqpkA&oe=62649B61',
+  image: 'https://lh3.googleusercontent.com/V1yslY8Q4QWYFm-PnqIlAw7_Az3sGH60VubxTwhOazdC4qIn2v3dLzLVKd2YyiymJ_8z4wmlorQwnLWUk1r72nYoIl6WyZIhmSQUZKIMWp_iqe_i_DSVLcUD8KYt6PCkJe-aXtfl=w2400',
   customizable: true
 }]
 
