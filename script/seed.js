@@ -26,7 +26,7 @@ const products = [{
   epoxyColor: 'wax',
   price: 30.00,
   category: 'Bowl',
-  image: 'https://lh3.googleusercontent.com/V1yslY8Q4QWYFm-PnqIlAw7_Az3sGH60VubxTwhOazdC4qIn2v3dLzLVKd2YyiymJ_8z4wmlorQwnLWUk1r72nYoIl6WyZIhmSQUZKIMWp_iqe_i_DSVLcUD8KYt6PCkJe-aXtfl=w2400',
+  image: 'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
   customizable: true
 }]
 
