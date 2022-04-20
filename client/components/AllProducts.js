@@ -29,7 +29,7 @@ const AllProducts = ({ products, loadProducts }) => {
       {products.map((product) => {
         return (
           <div key={product.id}>
-            <Link to={`/product/${product.id}`} component={SingleProduct}>
+            <Link to={`/products/${product.id}`}>
               <img src={product.image} alt={product.name} />
               <div>{`${product.name} $${product.price}`}</div>
             </Link>
@@ -51,4 +51,5 @@ const mapDispatch = (dispatch) => {
     loadProducts: () => dispatch(fetchProducts()),
   };
 };
+
 export default connect(mapState, mapDispatch)(AllProducts);
