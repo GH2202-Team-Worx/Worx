@@ -48,7 +48,7 @@ User.prototype.generateToken = function () {
  */
 User.authenticate = async function ({ email, password }) {
   const user = await this.findOne({ where: { email } })
-  if (!user || !(await user.correctPassword(password))) {
+  if (!user || !password || !(await user.correctPassword(password))) {
     const error = Error('Incorrect email/password')
     error.status = 401
     throw error
@@ -76,11 +76,15 @@ User.findByToken = async function (token) {
 //  */
 const hashPassword = async (user) => {
   // in case the password has been changed, we want to encrypt it with bcrypt
-  if (user.changed('password')) {
+
+  // if null && guest dont hash
+  console.log("user", user)
+  if (user.changed('password') && user.password && !user.isGuest) {
+    console.log("user password", user.password)
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS)
   }
 }
 
 User.beforeCreate(hashPassword)
-// User.beforeUpdate(hashPassword)
+User.beforeUpdate(hashPassword)
 User.beforeBulkCreate(users => Promise.all(users.map(hashPassword)))
