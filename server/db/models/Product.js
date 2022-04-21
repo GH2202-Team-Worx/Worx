@@ -1,7 +1,7 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
+const Sequelize = require('sequelize');
+const db = require('../db');
 
-const Product = db.define("product", {
+const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -25,17 +25,17 @@ const Product = db.define("product", {
   },
   epoxyColor: {
     type: Sequelize.ENUM(
-      "red",
-      "orange",
-      "yellow",
-      "green",
-      "blue",
-      "purple",
-      "silver",
-      "gold",
-      "black",
-      "white",
-      "wax"
+      'red',
+      'orange',
+      'yellow',
+      'green',
+      'blue',
+      'purple',
+      'silver',
+      'gold',
+      'black',
+      'white',
+      'wax'
     ),
     validate: {
       notEmpty: true,
@@ -58,12 +58,14 @@ const Product = db.define("product", {
   image: {
     type: Sequelize.STRING,
     defaultValue:
-      "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/273447401_149490250791185_694933964468444001_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=nDEkCHoFM1wAX9O2VLw&_nc_ht=scontent-mia3-1.xx&oh=00_AT_AeIn7BPQcTd50nbE82EzRKZI6AJgzzr5ZdT1k2vHW1g&oe=6263C84E",
+      'https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/273447401_149490250791185_694933964468444001_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=nDEkCHoFM1wAX9O2VLw&_nc_ht=scontent-mia3-1.xx&oh=00_AT_AeIn7BPQcTd50nbE82EzRKZI6AJgzzr5ZdT1k2vHW1g&oe=6263C84E',
   },
   customizable: {
     type: Sequelize.BOOLEAN,
     defaultValue: true,
   },
+  featured: { type: Sequelize.BOOLEAN, defaultValue: false },
+  quantity: { type: Sequelize.INTEGER, defaultValue: 1 },
 });
 
 module.exports = Product;
