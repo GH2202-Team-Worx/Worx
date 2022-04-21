@@ -1,58 +1,137 @@
-'use strict'
+// const db = require("../server/db/db");
+// const Product = require("../server/db/models/Product");
+const {
+  db,
+  Product,
+  Order,
+  User,
+  OrderProduct,
+} = require('../server/db/models');
 
-const {db, models: {User} } = require('../server/db')
+const orderProducts = [
+  {
+    orderId: 1,
+    productId: 1,
+    customization: null,
+    gift: false,
+  },
+  {
+    orderId: 1,
+    productId: 2,
+    customization: 'Initials TEK',
+    gift: true,
+  },
+  {
+    orderId: 2,
+    productId: 2,
+    customization: null,
+    gift: false,
+  },
+];
 
-/**
- * seed - this function clears the database, updates tables to
- *      match the models, and populates the database.
- */
+const orders = [
+  {
+    totalPrice: 10.99,
+    status: 'Processing',
+    userId: 1,
+  },
+  { totalPrice: 15.75, status: 'Completed', userId: 2 },
+];
+
+const users = [
+  {
+    email: 'user1@gmail.com',
+    password: 'user1_pw',
+    address: '123 Main Street',
+    phone: '3127895432',
+    isGuest: false,
+  },
+  {
+    email: 'user2@yahoo.com',
+    password: null,
+    address: '456 Birch Lane',
+    phone: '1234567890',
+    isGuest: true,
+  },
+];
+
+const products = [
+  {
+    name: 'Blue Hickory',
+    description:
+      'Here’s our second time working with hickory! This gorgeous bowl has been an eye catcher from the moment we poured it, it’s beauty is just out of this world!',
+    material: 'Hickory',
+    epoxyColor: 'blue',
+    price: 200.0,
+    category: 'Bowl',
+    image:
+      'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
+    customizable: true,
+  },
+  {
+    name: 'Jewelry box',
+    description:
+      "Get your own custom stained box, the perfect gift idea for any event you're attending!",
+    material: 'Poplar',
+    epoxyColor: 'wax',
+    price: 20.0,
+    category: 'Box',
+    image:
+      'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
+    customizable: true,
+  },
+  {
+    name: 'Hickory bowl',
+    description:
+      'Our first time working with hickory, and it definitely won’t be our last! We hope you love this small beautiful bowl, perfect for whatever you need, as much as we do!',
+    material: 'Hickory',
+    epoxyColor: 'wax',
+    price: 30.0,
+    category: 'Bowl',
+    image:
+      'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
+    customizable: true,
+  },
+];
+
 async function seed() {
-  await db.sync({ force: true }) // clears db and matches models to tables
-  console.log('db synced!')
-
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ])
-
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1]
-    }
-  }
-}
-
-/*
- We've separated the `seed` function from the `runSeed` function.
- This way we can isolate the error handling and exit trapping.
- The `seed` function is concerned only with modifying the database.
-*/
-async function runSeed() {
-  console.log('seeding...')
   try {
-    await seed()
+    await db.sync({ force: true });
+
+    await Promise.all(
+      products.map((product) => {
+        return Product.create(product);
+      })
+    ),
+      await Promise.all(
+        users.map((user) => {
+          return User.create(user);
+        })
+      );
+    await Promise.all(
+      orders.map((order) => {
+        return Order.create(order);
+      })
+    );
+    await Promise.all(
+      orderProducts.map((orderProd) => {
+        return OrderProduct.create(orderProd);
+      })
+    );
   } catch (err) {
-    console.error(err)
-    process.exitCode = 1
-  } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
+    console.log(err);
   }
 }
 
-/*
-  Execute the `seed` function, IF we ran this module directly (`node seed`).
-  `Async` functions always return a promise, so we can use `catch` to handle
-  any errors that might occur inside of `seed`.
-*/
-if (module === require.main) {
-  runSeed()
+module.exports = seed;
+if (require.main === module) {
+  seed()
+    .then(() => {
+      console.log('Seeding success!');
+      db.close();
+    })
+    .catch((err) => {
+      console.error(err);
+      db.close();
+    });
 }
-
-// we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed

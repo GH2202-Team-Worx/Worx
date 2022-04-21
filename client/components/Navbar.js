@@ -1,12 +1,34 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
+import "./styles/Navbar.css";
+import icon from "../../public/photos/WoodWorxIcon.jpeg";
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>FS-App-Template</h1>
-    <nav>
+const Navbar = ({ handleClick, isLoggedIn }) => (
+  <div className="navbar-container">
+    <div className="navbar-left-elements">
+      <img className="icon" src={icon} alt="icon" />
+      <h1 className="navbar-company-name">
+        <Link to="/">
+          <div>Bell's</div>
+          <div>Custom</div>
+          <div>Worx</div>
+        </Link>
+      </h1>
+      <Link className="all-products-link" to="/products">
+        All Products
+      </Link>
+    </div>
+    <nav className="nav-links">
+      <div>
+        <form>
+          <input type="text" placeholder="Search Products Here" />
+          <button type="submit">Search</button>
+        </form>
+        <Link to="/contact">Contact Us</Link>
+        <Link to="/checkout">Cart</Link>
+      </div>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -23,25 +45,25 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         </div>
       )}
     </nav>
-    <hr />
+    {/* <hr /> */}
   </div>
-)
+);
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!state.auth.id
-  }
-}
+    isLoggedIn: !!state.auth.id,
+  };
+};
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      dispatch(logout())
-    }
-  }
-}
+      dispatch(logout());
+    },
+  };
+};
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar);
