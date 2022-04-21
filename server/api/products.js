@@ -4,12 +4,27 @@ module.exports = router;
 
 // GET /api/products
 router.get('/', async (req, res, next) => {
-  try {
-    const allProducts = await Product.findAll();
-    res.send(allProducts);
-  } catch (err) {
-    console.error('🥎 Unable to get all products...');
-    next(err);
+  //GET featured products only
+  if (req.query.filter === 'featured') {
+    try {
+      const product = await Product.findAll({
+        where: {
+          featured: true,
+        },
+      });
+      res.send(product);
+    } catch (err) {
+      console.error('🏓 Unable to get featured products...');
+      next(err);
+    }
+  } else {
+    try {
+      const allProducts = await Product.findAll();
+      res.send(allProducts);
+    } catch (err) {
+      console.error('🥎 Unable to get all products...');
+      next(err);
+    }
   }
 });
 
