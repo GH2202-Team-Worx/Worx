@@ -67,6 +67,8 @@ const products = [
     image:
       'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
     customizable: true,
+    featured: true,
+    quantity: 1
   },
   {
     name: 'Jewelry box',
@@ -79,6 +81,8 @@ const products = [
     image:
       'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
     customizable: true,
+    featured: true,
+    quantity: 2
   },
   {
     name: 'Hickory bowl',
@@ -91,6 +95,36 @@ const products = [
     image:
       'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
     customizable: true,
+    featured: true,
+    quantity: 1
+  },
+  {
+    name: 'Hickory bowl',
+    description:
+      'Our first time working with hickory, and it definitely won’t be our last! We hope you love this small beautiful bowl, perfect for whatever you need, as much as we do!',
+    material: 'Hickory',
+    epoxyColor: 'wax',
+    price: 30.0,
+    category: 'Bowl',
+    image:
+      'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
+    customizable: true,
+    featured: true,
+    quantity: 1
+  },
+  {
+    name: 'Hickory bowl',
+    description:
+      'Our first time working with hickory, and it definitely won’t be our last! We hope you love this small beautiful bowl, perfect for whatever you need, as much as we do!',
+    material: 'Hickory',
+    epoxyColor: 'wax',
+    price: 30.0,
+    category: 'Bowl',
+    image:
+      'https://target.scene7.com/is/image/Target/GUEST_94be93de-388f-4fcb-abb0-e62377243ba1?wid=488&hei=488&fmt=pjpeg',
+    customizable: true,
+    featured: true,
+    quantity: 1
   },
 ];
 
