@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../store/products';
+import { getProducts } from '../store/products';
 import SingleProduct from './SingleProduct';
 import { Link } from 'react-router-dom';
 
@@ -48,7 +48,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadProducts: () => dispatch(fetchProducts()),
+    loadProducts: () => dispatch(getProducts()),
   };
 };
 
