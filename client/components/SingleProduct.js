@@ -1,29 +1,21 @@
 //TODO: add to cart button
 
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../store/singleProduct';
 
 const SingleProduct = (props) => {
-  const { product, loadProduct } = props;
+  const dispatch = useDispatch()
+  const product = useSelector((state) => {
+    return state.product
+  })
   const productId = props.match.params.productId;
   useEffect(() => {
-    loadProduct(productId);
+    dispatch(fetchProduct(productId));
   }, []);
 
-  return <h1>SINGLE PRODUCT</h1>;
+  return <React.Fragment>{product.name}</React.Fragment>;
 };
 
-const mapState = (state) => {
-  return {
-    product: state.product,
-  };
-};
 
-const mapDispatch = (dispatch) => {
-  return {
-    loadProduct: (productId) => dispatch(fetchProduct(productId)),
-  };
-};
-
-export default connect(mapState, mapDispatch)(SingleProduct);
+export default SingleProduct;
