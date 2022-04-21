@@ -166,23 +166,21 @@ const products = [
   }
 ]
 
-const credentials = [
-  { username: 'angel', password: 'angel_pw' }, { username: 'caitlin', password: 'caitlin_pw' }, { username: 'brooke', password: 'brooke_pw' }, { username: 'hannah', password: 'hannah_pw' }]
 
 async function seed () {
   try {
     await db.sync({ force: true })
-    const [angel, caitlin, brooke, hannah] = await Promise.all(
-      credentials.map((userName) => {
-        return User.create(userName)
+
+    await Promise.all(
+      users.map((user) => {
+        return User.create(user)
       })
     )
-
     await Promise.all(
       products.map((product) => {
         return Product.create(product)
       })
-    ),
+    )
     await Promise.all(
       users.map((user) => {
         return User.create(user)
