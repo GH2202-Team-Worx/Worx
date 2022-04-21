@@ -34,7 +34,6 @@ img {
 @media (max-width: 1030px) {
   .bio {
     overflow: scroll;
-    background-color: blue;
   }
 }
 

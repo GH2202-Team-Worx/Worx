@@ -17,8 +17,9 @@ const Filter = (props) => {
         <option value="Bowl">Bowl</option>
         <option value="Bowl set">Bowl Set</option>
         <option value="Goblet">Goblet</option>
+        <option value="Vase">Vase</option>
         <option value="Box">Box</option>
-        <option value="Board">Board</option>
+        <option value="Cutting board">Cutting Board</option>
       </select>
     </div>
   );
