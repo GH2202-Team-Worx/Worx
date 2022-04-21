@@ -1,19 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
-const GET_PRODUCTS = 'GET_PRODUCTS';
+const GET_PRODUCTS = "GET_PRODUCTS";
 
-const getProducts = (products) => ({
+const _getProducts = (products) => ({
   type: GET_PRODUCTS,
   products,
 });
 
-export const fetchProducts = () => {
+export const getProducts = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get('/api/products');
-      dispatch(getProducts(data));
+      const { data } = await axios.get("/api/products");
+      dispatch(_getProducts(data));
     } catch (err) {
-      console.error('Unable to fetch products...', err);
+      console.error("Unable to fetch products...", err);
     }
   };
 };
