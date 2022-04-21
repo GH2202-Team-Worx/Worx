@@ -1,0 +1,44 @@
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: darkolivegreen;
+  gap: 10px;
+}
+
+.navbar-left-elements {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.all-products-link {
+  align-self: center;
+  padding: 5px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-evenly;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.icon {
+  width: 70px;
+  mix-blend-mode: multiply;
+}
+
+.navbar-company-name {
+  font-size: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+a {
+  color: white;
+  align-self: flex-end;
+}

@@ -1,5 +1,47 @@
 .mainContainer {
   display: flex;
-  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fceed6;
+  height: 100vh;
 }
 
+.about-us {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  border: 1px solid rgb(230, 179, 102);
+  padding: 5%;
+}
+
+img {
+  width: 45%;
+  padding: 10px;
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 3%;
+  background-color: rgb(233, 192, 139);
+  height: 85%;
+  /* min-height: 500px; */
+}
+
+@media (max-width: 1030px) {
+  .bio {
+    overflow: scroll;
+    background-color: blue;
+  }
+}
+
+.bio-header {
+  font-size: 1.5rem;
+}
+
+.about-paragraph {
+  padding: 7px;
+}
