@@ -25,20 +25,23 @@ const AllProducts = ({ products, loadProducts }) => {
 
   return (
     <div className="allproducts-container">
-      {products.length === 0 ? (
-        <p>Loading...</p>
-      ) : (
-        products.map((product) => {
-          return (
-            <div key={product.id}>
-              <Link to={`/products/${product.id}`}>
-                <img src={product.image} alt={product.name} />
-                <div>{`${product.name} $${product.price}`}</div>
-              </Link>
-            </div>
-          );
-        })
-      )}
+      <h3 className="allproducts-title">Products</h3>
+      <div className="allproducts-display">
+        {products.length === 0 ? (
+          <p>Loading...</p>
+        ) : (
+          products.map((product) => {
+            return (
+              <div key={product.id}>
+                <Link to={`/products/${product.id}`}>
+                  <img src={product.image} alt={product.name} />
+                  <div>{`${product.name} $${product.price}`}</div>
+                </Link>
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };
