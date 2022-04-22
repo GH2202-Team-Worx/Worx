@@ -14,18 +14,21 @@ const orderProducts = [
     productId: 1,
     customization: null,
     gift: false,
+    sellPrice: 5,
   },
   {
     orderId: 1,
     productId: 2,
     customization: 'Initials TEK',
     gift: true,
+    sellPrice: 200,
   },
   {
     orderId: 2,
     productId: 2,
     customization: null,
     gift: false,
+    sellPrice: 50,
   },
 ];
 
@@ -33,10 +36,14 @@ const orders = [
   {
     status: 'Processing',
     userId: 1,
+    shipping: 5.99,
+    tax: 2.5,
   },
   {
     status: 'Completed',
     userId: 2,
+    shipping: 0,
+    tax: 1.25,
   },
 ];
 
