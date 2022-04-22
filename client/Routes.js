@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
 import AllProducts from './components/AllProducts';
 import Main from './components/Main';
 import Checkout from './components/Checkout';
@@ -20,7 +19,14 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
+    let loggedIn = ''
 
+    if (!isLoggedIn) {
+      loggedIn = (<Switch><Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} /></Switch>)
+    } else {
+      loggedIn = (<Switch><Route path="/signup" component={Signup} /></Switch>)
+    }
     return (
       <div>
         <Switch>
@@ -30,18 +36,7 @@ class Routes extends Component {
           <Route path="/contact" component={Contact} />
           <Route path="/checkout" component={Checkout} />
         </Switch>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
-          </Switch>
-        ) : (
-          <Switch>
-            {/*<Route path="/" exact component={Login} />*/}
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
-        )}
+          {loggedIn}
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
 import { authenticate } from '../store'
 
 /**
@@ -7,7 +8,6 @@ import { authenticate } from '../store'
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
-
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
@@ -23,9 +23,17 @@ const AuthForm = props => {
           </label>
           <input name="password" type="password" />
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
+        {/* <div>
+          <label htmlFor='phoneNumber'>
+          <small>Phone Number</small>
+        </label>
+        <input name='phone' id='phone' type="tel" pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' />
+        </div> */}
+      <div>
+          <button type="submit">
+            <Link to="/">{displayName}</Link>
+          </button>
+      </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
     </div>
