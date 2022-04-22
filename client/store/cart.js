@@ -9,7 +9,7 @@ const _sendOrder = (payload) => ({
   payload,
 });
 
-export const sendOrder = (productId) => {
+export const sendOrder = (payload) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`/api/orders`);
@@ -38,7 +38,7 @@ export default function cartReducer(state = initialState, action) {
       };
     case DELETE_ITEM:
       const filteredItems = state.cartItems.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.id !== action.payload
       );
       return {
         cartItems: [filteredItems],
