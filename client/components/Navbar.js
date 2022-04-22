@@ -1,9 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { logout } from "../store";
-import "./styles/Navbar.css";
-import icon from "../../public/photos/WoodWorxIcon.jpeg";
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logout } from '../store'
+import './styles/Navbar.css'
+import icon from '../../public/photos/WoodWorxIcon.jpeg'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div className="navbar-container">
@@ -29,41 +29,42 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
         <Link to="/contact">Contact Us</Link>
         <Link to="/checkout">Cart</Link>
       </div>
-      {isLoggedIn ? (
+      {isLoggedIn
+        ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <Link to="/">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
         </div>
-      ) : (
+          ) : (
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
         </div>
-      )}
+          )}
     </nav>
     {/* <hr /> */}
   </div>
-);
+)
 
 /**
  * CONTAINER
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.auth.id,
-  };
-};
+    isLoggedIn: !!state.auth.id
+  }
+}
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick() {
-      dispatch(logout());
-    },
-  };
-};
+    handleClick () {
+      dispatch(logout())
+    }
+  }
+}
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default connect(mapState, mapDispatch)(Navbar)
