@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../store/products';
-// import SingleProduct from './SingleProduct';
 import { Link } from 'react-router-dom';
 import Filter from './Filter';
 
