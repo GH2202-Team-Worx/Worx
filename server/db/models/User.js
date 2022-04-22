@@ -4,8 +4,6 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 // const axios = require('axios');
 
-// ****is admin column
-
 const SALT_ROUNDS = 5
 
 const User = db.define('user', {
@@ -22,7 +20,11 @@ const User = db.define('user', {
   },
   address: { type: Sequelize.STRING, allowNull: false },
   phone: { type: Sequelize.STRING, allowNull: false },
-  isGuest: { type: Sequelize.BOOLEAN, defaultValue: true }
+  isGuest: { type: Sequelize.BOOLEAN, defaultValue: true },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 })
 
 module.exports = User

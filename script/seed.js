@@ -45,6 +45,7 @@ const users = [
     address: "123 Main Street",
     phone: "3127895432",
     isGuest: false,
+    isAdmin: false
   },
   {
     email: "user2@yahoo.com",
@@ -52,7 +53,15 @@ const users = [
     address: "456 Birch Lane",
     phone: "1234567890",
     isGuest: true,
-  },
+    isAdmin: false
+  },{
+    email: "adminUser2@yahoo.com",
+    password: 'admin',
+    address: "456 Birch Lane",
+    phone: "1234567890",
+    isGuest: false,
+    isAdmin: true
+  }
 ];
 
 const products = [
