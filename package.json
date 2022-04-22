@@ -7,7 +7,7 @@
     "node": "16.x"
   },
   "scripts": {
-    "build": "webpack -p",
+    "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development",
     "seed": "node script/seed.js",
     "start": "node server",
