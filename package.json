@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "description": "Bell's Custom Worx",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development",
@@ -15,7 +18,8 @@
     "test": "NODE_ENV=test JWT=a_secret mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" --require @babel/register --require esm ",
     "test:dev": "npm run test -- --watch",
     "test:dev:models": "npm run test:dev -- --grep=model",
-    "test:dev:routes": "npm run test:dev -- --grep=route"
+    "test:dev:routes": "npm run test:dev -- --grep=route",
+    "heroku-postbuild": "ng build --prod & npm run seed"
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
@@ -28,7 +32,18 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-test-renderer": "^16.4.2",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.3",
+    "redux-thunk": "^2.3.0",
+    "style-loader": "^3.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -44,20 +59,9 @@
     "esm": "^3.2.25",
     "mocha": "^6.2.3",
     "nodemon": "^1.19.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.0.1",
-    "react-router-dom": "^5.0.0",
-    "react-test-renderer": "^16.4.2",
-    "redux": "^4.0.1",
-    "redux-devtools-extension": "^2.13.5",
-    "redux-logger": "^3.0.6",
-    "redux-mock-store": "^1.5.3",
-    "redux-thunk": "^2.3.0",
-    "style-loader": "^3.3.1",
     "supertest": "^4.0.2",
     "url-loader": "^4.1.1",
-    "webpack": "^5.15.0",
+    "webpack": "^5.72.0",
     "webpack-cli": "^4.3.1"
   }
 }

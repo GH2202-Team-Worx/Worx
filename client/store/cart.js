@@ -1,23 +1,24 @@
 import axios from "axios";
 
 const ADD_PRODUCT = "ADD_PRODUCT";
+const SEND_ORDER = "SEND_ORDER";
+const DELETE_ITEM = "DELETE_ITEM";
 
-// const _addProduct = (product) => ({
-//   type: ADD_PRODUCT,
-//   product,
-// });
+const _sendOrder = (payload) => ({
+  type: SEND_ORDER,
+  payload,
+});
 
-// export const addProduct = (productId) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.get(`/api/products/${productId}`);
-//       dispatch(getProduct(data));
-//     } catch (err) {
-//       console.error("Unable to fetch product...", err);
-//     }
-//   };
-// };
-// const initialState = [];
+export const sendOrder = (productId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(`/api/orders`);
+      dispatch(_sendOrder(data));
+    } catch (err) {
+      console.error("Unable to send order...", err);
+    }
+  };
+};
 
 const initialState = {
   cartItems: [],
@@ -35,6 +36,16 @@ export default function cartReducer(state = initialState, action) {
         cartItems: newItems,
         cartTotal: newTotal,
       };
+    case DELETE_ITEM:
+      const filteredItems = state.cartItems.filter(
+        (item) => item.id !== action.payload.id
+      );
+      return {
+        cartItems: [filteredItems],
+        cartTotal: state.cartTotal,
+      };
+    case SEND_ORDER:
+
     default:
       return state;
   }

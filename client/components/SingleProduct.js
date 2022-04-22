@@ -13,7 +13,6 @@ const SingleProduct = (props) => {
   });
 
   console.log("CURRENT CART: ", currentCart);
-
   console.log("PRODUCT: ", product);
 
   const productId = props.match.params.productId;

@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getFeatured } from '../store/products';
 import './styles/featuredProds.css';
 
-const FeaturedProd = ({ featuredProds, loadFeatured }) => {
+const FeaturedProd = () => {
+  const dispatch = useDispatch();
+  const featuredProds = useSelector(state => state.products)
   useEffect(() => {
-    loadFeatured();
+    dispatch(getFeatured());
   }, []);
 
   return (
@@ -28,16 +31,17 @@ const FeaturedProd = ({ featuredProds, loadFeatured }) => {
   );
 };
 
-const mapState = (state) => {
-  return {
-    featuredProds: state.products,
-  };
-};
+// const mapState = (state) => {
+//   return {
+//     featuredProds: state.products,
+//   };
+// };
 
-const mapDispatch = (dispatch) => {
-  return {
-    loadFeatured: () => dispatch(getFeatured()),
-  };
-};
+// const mapDispatch = (dispatch) => {
+//   return {
+//     loadFeatured: () => dispatch(getFeatured()),
+//   };
+// };
 
-export default connect(mapState, mapDispatch)(FeaturedProd);
+// export default connect(mapState, mapDispatch)(FeaturedProd);
+export default FeaturedProd;
