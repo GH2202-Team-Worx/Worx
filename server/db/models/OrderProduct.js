@@ -11,6 +11,7 @@ const OrderProduct = db.define('orderproduct', {
     //   notEmpty: true,
     // },
   },
+  quantity: { type: Sequelize.INTEGER, defaultValue: 1 },
 });
 
 module.exports = OrderProduct;
