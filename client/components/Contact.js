@@ -1,41 +1,41 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
+import './styles/contact.css';
 
 const Contact = () => {
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
-  const sendEmail = async (evt) => {
-    try {
-      evt.preventDefault();
-      if (!email || !subject || !message) {
-        alert('Email, subject, and message are required!');
-      } else if (!email.includes('@') || !email.includes('.')) {
-        alert('Must enter a valid email');
-      } else {
-        console.log('💌 SENDING FORM MADE THIS EXECUTE');
-        //unsure of this next line. cannot be tested until emailjs is functioning
-        // await emailjs.sendForm(/*SERVICE-ID, TEMPLATE_ID, evt.target, USER_ID*/);
-        setEmail('');
-        setSubject('');
-        setMessage('');
-      }
-    } catch (err) {
-      console.error(err);
-      return (
-        <div id="contact-err">
-          <p>The message failed to send. Please try again</p>
-          <Contact />
-        </div>
-      );
-    }
-  };
-
   const handleChange = (evt) => {
     if (evt.target.name === 'email') setEmail(evt.target.value);
     if (evt.target.name === 'subject') setSubject(evt.target.value);
     if (evt.target.name === 'message') setMessage(evt.target.value);
+  };
+
+  const sendEmail = async (evt) => {
+    evt.preventDefault();
+    if (!email || !subject || !message) {
+      alert('Email, subject, and message are required!');
+    } else if (!email.includes('@') || !email.includes('.')) {
+      alert('Must enter a valid email');
+    } else {
+      try {
+        const response = await emailjs.sendForm(
+          'service_msucc8a',
+          'template_kms7f6e',
+          evt.target,
+          'hiX-yiEKPs0JeFpQY'
+        );
+        console.log('SUCCESS!', response.status, response.text);
+        setEmail('');
+        setSubject('');
+        setMessage('');
+      } catch (err) {
+        console.error('FAILED...', err);
+        alert('Message failed to send. Please try again');
+      }
+    }
   };
 
   return (
@@ -52,7 +52,7 @@ const Contact = () => {
 
       <form onSubmit={sendEmail}>
         <label>
-          Email*
+          Email<span>*</span>
           <input
             type="email"
             name="email"
@@ -61,7 +61,7 @@ const Contact = () => {
           />
         </label>
         <label>
-          Subject*
+          Subject<span>*</span>
           <input
             type="text"
             name="subject"
@@ -70,7 +70,7 @@ const Contact = () => {
           />
         </label>
         <label>
-          Message*
+          Message<span>*</span>
           <textarea
             type="textarea"
             name="message"
@@ -78,10 +78,7 @@ const Contact = () => {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">
-          <img />
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
@@ -94,13 +91,4 @@ export default Contact;
 //2. make submit button green with a little picture of a letter to the left of it (maybe make add to cart button blue?)
 //3. make error message red if contact form fails to send
 //4. change the alerts to messages in red that show up
-
-//make react component on the frontend -
-//  instructions on sending email. mention order # if referring to an order. should hear back to 2-3 days (??)
-//  react form with contact information(name, email, message)
-//  set local state for name email and message.
-//  when sending, submit button can change to sending...
-//  **put front end checks in to make sure none of the boxes are empty when sending and email is a valid email
-
-//email sends on frontend using emailjs-com (nodemailer can be used on backend if decided on or useful in another part) -
-//  after email is sent, the frontend can change to either a success component ("Thank you for contacting us. You should hear back within x amt of days") or a failed to send component
+//5. add a msg that comes up after successfully sending mail that says "Thank you for contacting us!"
