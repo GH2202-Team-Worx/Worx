@@ -1,16 +1,30 @@
 const router = require('express').Router();
-const { Order, OrderProduct } = require('../db/models');
+const { Order, OrderProduct, User, Product } = require('../db/models');
 module.exports = router;
 
+//for cart: user can only have 1 "Cart" order
+
 router.post('/', async (req, res, next) => {
-  console.log('req body: ', req.body)
   try {
+    //creates an order
     const order = await Order.create(req.body);
-    const prods = await req.body.products.map((prod) =>
-      OrderProduct.create({ orderId: order.id, productId: prod.id })
+    //adds products to the order
+    const products = await Promise.all(
+      req.body.products.map(
+        async (prod) =>
+          await order.addProduct(prod.id, {
+            through: {
+              orderId: order.id,
+              productId: prod.id,
+              customization: prod.customization,
+              sellPrice: prod.sellPrice,
+              gift: prod.gift,
+            },
+          })
+      )
     );
-    order.products = prods;
-    res.send(order);
+
+    res.send({ order, products });
   } catch (err) {
     next(err);
   }
