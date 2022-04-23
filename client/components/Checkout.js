@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import ShippingInformation from "./ShippingInformation";
+import BillInformation from "./BillingInformation";
 import "./styles/Checkout.css";
 
 const Checkout = () => {
@@ -26,12 +28,17 @@ const Checkout = () => {
               <p>{item.name}</p>
               <ul>
                 <li>{item.description}</li>
+                <li>{item.price}</li>
               </ul>
-              <button onClick={deleteItemHandler}>Delete</button>
+              <button onClick={deleteItemHandler}>Delete Item</button>
             </div>
           ))}
           <div>Running Total: {cartTotal}</div>
         </div>
+      </div>
+      <div className="checkout-shippingBilling-container">
+        <ShippingInformation />
+        <BillInformation />
       </div>
       <button onClick={sendOrderHandler}>Place Order</button>
     </div>
