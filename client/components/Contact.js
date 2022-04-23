@@ -47,37 +47,39 @@ const Contact = () => {
         number. We will get back to you within 3-5 days via email. If the issue
         is more urgent, you will receive a quicker reply via phone.
       </p>
-      <p>Email: bellscustomworx@gmail.com</p>
-      <p>Phone number: (843) 534-8946</p>
+      <div className="contact-info">
+        <p>Email: bellscustomworx@gmail.com</p>
+        <p>Phone number: (843) 534-8946</p>
+      </div>
 
-      <form onSubmit={sendEmail}>
+      <form id="contact-form" onSubmit={sendEmail}>
         <label>
-          Email<span>*</span>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
+          Email<span className="required">*</span>
         </label>
+        <input
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+        />
         <label>
-          Subject<span>*</span>
-          <input
-            type="text"
-            name="subject"
-            value={subject}
-            onChange={handleChange}
-          />
+          Subject<span className="required">*</span>
         </label>
+        <input
+          type="text"
+          name="subject"
+          value={subject}
+          onChange={handleChange}
+        />
         <label>
-          Message<span>*</span>
-          <textarea
-            type="textarea"
-            name="message"
-            value={message}
-            onChange={handleChange}
-          />
+          Message<span className="required">*</span>
         </label>
+        <textarea
+          type="textarea"
+          name="message"
+          value={message}
+          onChange={handleChange}
+        />
         <button type="submit">Submit</button>
       </form>
     </div>
