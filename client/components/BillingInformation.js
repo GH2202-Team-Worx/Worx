@@ -1,6 +1,9 @@
-import React from "react";
+import React from 'react';
 
-const BillInformation = (props) => {
+//stripejs
+//this shouldn't be kept on db without encryption
+
+const BillingInformation = (props) => {
   return (
     <div>
       <h3>Billing Information</h3>
@@ -24,4 +27,4 @@ const BillInformation = (props) => {
   );
 };
 
-export default BillInformation;
+export default BillingInformation;

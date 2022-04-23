@@ -1,21 +1,22 @@
-import axios from "axios";
+import axios from 'axios';
 
-const ADD_PRODUCT = "ADD_PRODUCT";
-const SEND_ORDER = "SEND_ORDER";
-const DELETE_ITEM = "DELETE_ITEM";
+const ADD_PRODUCT = 'ADD_PRODUCT';
+const SEND_ORDER = 'SEND_ORDER';
+const DELETE_ITEM = 'DELETE_ITEM';
 
 const _sendOrder = (payload) => ({
   type: SEND_ORDER,
   payload,
 });
 
-export const sendOrder = (payload) => {
+export const sendOrder = (cartItems, cartTotal) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`/api/orders`);
+      const { data } = await axios.post(`/api/orders`, cartItems, cartTotal);
+      //what data is being returned here? Just this cart?
       dispatch(_sendOrder(data));
     } catch (err) {
-      console.error("Unable to send order...", err);
+      console.error('Unable to send order...', err);
     }
   };
 };
@@ -45,7 +46,8 @@ export default function cartReducer(state = initialState, action) {
         cartTotal: state.cartTotal,
       };
     case SEND_ORDER:
-
+    //payload coming in for sendorder are the cartitems that were just posted as a cart to backend
+    //do we want to just return
     default:
       return state;
   }

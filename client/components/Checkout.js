@@ -1,21 +1,22 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import ShippingInformation from "./ShippingInformation";
-import BillInformation from "./BillingInformation";
-import "./styles/Checkout.css";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { sendOrder } from '../store/cart';
+import ShippingInformation from './ShippingInformation';
+import BillInformation from './BillingInformation';
+import './styles/Checkout.css';
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
 
-  console.log("CART ITEMS: ", cartItems);
+  console.log('CART ITEMS: ', cartItems);
 
   const deleteItemHandler = (event) => {
-    dispatch({ type: "DELETE_ITEM", payload: event.target.value.id });
+    dispatch({ type: 'DELETE_ITEM', payload: event.target.value.id });
   };
 
   const sendOrderHandler = () => {
-    dispatchEvent({ type: "SEND_ORDER", payload: state.cartReducer });
+    dispatch(sendOrder(cartItems, cartTotal));
   };
 
   return (
@@ -28,12 +29,12 @@ const Checkout = () => {
               <p>{item.name}</p>
               <ul>
                 <li>{item.description}</li>
-                <li>{item.price}</li>
+                <li>{`$${item.price}`}</li>
               </ul>
               <button onClick={deleteItemHandler}>Delete Item</button>
             </div>
           ))}
-          <div>Running Total: {cartTotal}</div>
+          <div>{`Running Total: $${cartTotal}`}</div>
         </div>
       </div>
       <div className="checkout-shippingBilling-container">

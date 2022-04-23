@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react';
+
+//sending to the order db
 
 const ShippingInformation = (props) => {
   return (
@@ -19,7 +21,7 @@ const ShippingInformation = (props) => {
       </label>
       <input name="street" id="street" type="text" />
       <label htmlFor="address">
-        <small>{"Street Address (Apt/Suite No.)"}</small>
+        <small>{'Street Address (Apt/Suite No.)'}</small>
       </label>
       <input name="street" id="street" type="text" />
       <label htmlFor="city">
