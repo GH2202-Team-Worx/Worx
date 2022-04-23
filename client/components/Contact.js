@@ -3,8 +3,7 @@ import React from 'react';
 const Contact = () => {
   return (
     <div>
-      <h1>Contact Us</h1>
-      <p>We'd love to hear from you!</p>
+      <h1>We'd love to hear from you!</h1>
       <p>
         Please feel free to contact us via phone, email, or the contact form
         below. If contacting us about an order, kindly include your order
@@ -16,15 +15,15 @@ const Contact = () => {
 
       <form>
         <label>
-          * Email:
+          Email*
           <input type="text" name="email" />
         </label>
         <label>
-          * Subject:
+          Subject*
           <input type="text" name="email" />
         </label>
         <label>
-          * Message:
+          Message*
           <input type="text" name="email" />
         </label>
         <button type="submit">Submit</button>
