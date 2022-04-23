@@ -2,7 +2,7 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    <div>
+    <div id="contact-us">
       <h1>We'd love to hear from you!</h1>
       <p>
         Please feel free to contact us via phone, email, or the contact form
@@ -24,7 +24,7 @@ const Contact = () => {
         </label>
         <label>
           Message*
-          <input type="text" name="email" />
+          <textarea type="textarea" name="email" />
         </label>
         <button type="submit">Submit</button>
       </form>
@@ -36,7 +36,7 @@ export default Contact;
 
 //TODO:
 //1. make stars red in CSS
-//2. make h1 smaller
+//2. make submit button green with a little picture of a letter to the left of it (maybe make add to cart button blue?)
 
 //make react component on the frontend -
 //  instructions on sending email. mention order # if referring to an order. should hear back to 2-3 days (??)
