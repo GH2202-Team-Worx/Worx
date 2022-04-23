@@ -14,8 +14,8 @@
 
 #contact-form {
   width: 450px;
-  height: 520px;
-  border: 2px solid black;
+  height: 500px;
+  border: 2px double darkslategrey;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -33,7 +33,7 @@
 
 #contact-form > textarea {
   width: 350px;
-  height: 350px;
+  height: 250px;
   margin-top: 2px;
   margin-bottom: 10px;
 }

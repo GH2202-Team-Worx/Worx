@@ -3,11 +3,13 @@ import emailjs from 'emailjs-com';
 import './styles/contact.css';
 
 const Contact = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
   const handleChange = (evt) => {
+    if (evt.target.name === 'name') setName(evt.target.value);
     if (evt.target.name === 'email') setEmail(evt.target.value);
     if (evt.target.name === 'subject') setSubject(evt.target.value);
     if (evt.target.name === 'message') setMessage(evt.target.value);
@@ -28,6 +30,7 @@ const Contact = () => {
           'hiX-yiEKPs0JeFpQY'
         );
         console.log('SUCCESS!', response.status, response.text);
+        setName('');
         setEmail('');
         setSubject('');
         setMessage('');
@@ -53,6 +56,10 @@ const Contact = () => {
       </div>
 
       <form id="contact-form" onSubmit={sendEmail}>
+        <label>
+          Name<span className="required">*</span>
+        </label>
+        <input type="name" name="name" value={name} onChange={handleChange} />
         <label>
           Email<span className="required">*</span>
         </label>
