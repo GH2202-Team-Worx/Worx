@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { sendOrder } from '../store/cart';
 import ShippingInformation from './ShippingInformation';
@@ -6,6 +6,20 @@ import BillInformation from './BillingInformation';
 import './styles/Checkout.css';
 
 const Checkout = () => {
+  const [shipping, setShipping] = useState({
+    phone: 0,
+    streetOne: '',
+    streetTwo: '',
+    city: '',
+    state: '',
+    zip: 0,
+  });
+  const [billing, setBilling] = useState({
+    name: '',
+    ccn: 0,
+    expiry: 0,
+    cvc: 0,
+  });
   const dispatch = useDispatch();
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
 
@@ -38,8 +52,8 @@ const Checkout = () => {
         </div>
       </div>
       <div className="checkout-shippingBilling-container">
-        <ShippingInformation />
-        <BillInformation />
+        <ShippingInformation shipping={shipping} setShipping={setShipping} />
+        <BillInformation billing={billing} setBilling={setBilling} />
       </div>
       <button onClick={sendOrderHandler}>Place Order</button>
     </div>
