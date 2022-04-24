@@ -4,7 +4,7 @@ const ADD_PRODUCT = 'ADD_PRODUCT';
 const SEND_ORDER = 'SEND_ORDER';
 const DELETE_ITEM = 'DELETE_ITEM';
 
-const _addProduct = (product) => ({
+export const _addProduct = (product) => ({
   type: ADD_PRODUCT,
   product,
 });
