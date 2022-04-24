@@ -14,11 +14,10 @@ const _sendOrder = (payload) => ({
   payload,
 });
 
-//addProduct thunk is called only for loggedin users in SingleProduct.Since backend returns cart and product, I only passed the product to _addProduct. That way, guests and loggedin users can both use the _addProduct creator.
+//addProduct thunk is called only for loggedin users in SingleProduct.Since backend returns cart and product, I only passed the product to _addProduct. That way, guests and loggedin users can both use the _addProduct creator. BLOCKER: cannot sign in to test this
 export const addProduct = (product) => {
   return async (dispatch) => {
     try {
-      console.log('LOGGED IN ADD RAN');
       const { data } = await axios.post('/api/orders/cart', product);
       dispatch(_addProduct(data.product));
     } catch (err) {
