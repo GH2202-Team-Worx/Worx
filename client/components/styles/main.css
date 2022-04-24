@@ -3,8 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #E5E5E5;
-  height: 100vh;
+  background-color: #f5ebd7;
 }
 
 .about-us {
@@ -12,7 +11,7 @@
   justify-content: center;
   align-items: center;
   width: 80%;
-  border: 1px solid #DAC2AC;
+  border: 1px solid #dac2ac;
   padding: 5%;
 }
 
@@ -26,7 +25,7 @@ img {
   flex-direction: column;
   align-items: flex-start;
   padding: 3%;
-  background-color: #DAC2AC;
+  background-color: #dac2ac;
   height: 85%;
   /* min-height: 500px; */
 }

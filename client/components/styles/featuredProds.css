@@ -1,9 +1,9 @@
 #featuredProds {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #DAC2AC;
+  /* border: 1px solid #DAC2AC; */
   margin: 3rem;
 }
 
@@ -12,4 +12,27 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.featured-prods-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.featured-products-title {
+  align-self: flex-start;
+  padding-bottom: 5px;
+}
+
+.featured-prods-description {
+  color: black;
+}
+
+.featured-prods-description:link {
+  color: black;
+}
+.featured-prods-description:hover {
+  color: deepskyblue;
 }
