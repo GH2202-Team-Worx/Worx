@@ -7,7 +7,6 @@ const Main = () => {
   return (
     <React.Fragment>
       <div className="mainContainer">
-        {/* <h1>I am a landing page!</h1> */}
         <FeaturedProd />
         <div className="about-us">
           <img className="family-photo" src={familyPhoto} alt="family-photo" />
