@@ -5,14 +5,16 @@ const Order = db.define('order', {
   status: {
     type: Sequelize.ENUM('Cart', 'Processing', 'Completed'),
   },
-  shipping: {
+  shippingAddress: Sequelize.STRING,
+  paymentInfo: Sequelize.STRING,
+  shippingAmt: {
     type: Sequelize.DECIMAL(10, 2),
     // allowNull: false,
     // validate: {
     //   notEmpty: true,
     // },
   },
-  tax: {
+  taxAmt: {
     type: Sequelize.DECIMAL(10, 2),
     // allowNull: false,
     // validate: {
