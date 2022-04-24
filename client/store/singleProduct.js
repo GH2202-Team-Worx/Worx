@@ -2,16 +2,16 @@ import axios from 'axios';
 
 const GET_PRODUCT = 'GET_PRODUCT';
 
-const getProduct = (product) => ({
+const _getProduct = (product) => ({
   type: GET_PRODUCT,
   product,
 });
 
-export const fetchProduct = (productId) => {
+export const getProduct = (productId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/products/${productId}`);
-      dispatch(getProduct(data));
+      dispatch(_getProduct(data));
     } catch (err) {
       console.error('Unable to fetch product...', err);
     }

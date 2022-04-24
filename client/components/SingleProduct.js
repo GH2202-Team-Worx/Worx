@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProduct } from "../store/singleProduct";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getProduct } from '../store/singleProduct';
 
 const SingleProduct = (props) => {
   const dispatch = useDispatch();
@@ -12,17 +12,17 @@ const SingleProduct = (props) => {
     return state.cartReducer;
   });
 
-  console.log("CURRENT CART: ", currentCart);
-  console.log("PRODUCT: ", product);
+  console.log('CURRENT CART: ', currentCart);
+  console.log('PRODUCT: ', product);
 
   const productId = props.match.params.productId;
 
   useEffect(() => {
-    dispatch(fetchProduct(productId));
+    dispatch(getProduct(productId));
   }, []);
 
   const handleAddToCart = () => {
-    dispatch({ type: "ADD_PRODUCT", payload: product });
+    dispatch({ type: 'ADD_PRODUCT', payload: product });
   };
 
   if (!product) {
