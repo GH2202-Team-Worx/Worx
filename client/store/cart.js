@@ -4,10 +4,27 @@ const ADD_PRODUCT = 'ADD_PRODUCT';
 const SEND_ORDER = 'SEND_ORDER';
 const DELETE_ITEM = 'DELETE_ITEM';
 
+const _addProduct = (product) => ({
+  type: ADD_PRODUCT,
+  product,
+});
+
 const _sendOrder = (payload) => ({
   type: SEND_ORDER,
   payload,
 });
+
+//addProduct thunk is called in SingleProduct. I think this should only be called for loggedin users. since backend returns cart and product, I only passed the product to _addProduct. That way, guests and loggedin users can both use the _addProduct creator.
+export const addProduct = (product) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post('/api/orders/cart', product);
+      dispatch(_addProduct(data.product));
+    } catch (err) {
+      console.error('😤 Unable to add product', err);
+    }
+  };
+};
 
 //this isn't set up on the backend yet. i think we will end up having to add shipping and billing into this request though because it is the one that is going to complete the order, where the others will update it
 //do we send the processing status or should that just be changed automatically on the backend route connected to send order
