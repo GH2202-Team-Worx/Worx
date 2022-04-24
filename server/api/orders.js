@@ -2,14 +2,12 @@ const router = require('express').Router();
 const { Order, OrderProduct, User, Product } = require('../db/models');
 module.exports = router;
 
-//if user is guest, front end saves the cart locally and only sends to back end route "api/order/" w/ status "Processing" when order is placed.
+//if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
 
 //save order
 router.post('/', async (req, res, next) => {
   try {
-    //creates an order
     const order = await Order.create(req.body);
-    //adds products to the order
     const products = await Promise.all(
       req.body.products.map(
         async (prod) =>
@@ -25,20 +23,20 @@ router.post('/', async (req, res, next) => {
           })
       )
     );
-    //finds and deletes that user's cart if it existed?
-
     res.send({ order, products });
   } catch (err) {
     next(err);
   }
 });
+//TODO: turning a "cart" into a placed order
 
-//if user is logged in, front end sends cart data to server via "api/order/cart" with status "Cart" whenever cart is modified.
+//if user is logged in, front end should send cart data to server via "api/order/cart" with status "Cart" whenever cart is modified.
 
 //create and add to cart
+//front end should send product and order - server will find the order or create one
+//returns cart and product
 router.post('/cart', async (req, res, next) => {
   try {
-    //find or create cart
     const [cart, created] = await Order.findOrCreate({
       where: {
         userId: req.body.userId,
@@ -52,7 +50,6 @@ router.post('/cart', async (req, res, next) => {
         taxAmt: req.body.taxAmt,
       },
     });
-    // adds product to the cart
     const prod = req.body.product;
     const product = await cart.addProduct(prod.id, {
       through: {
@@ -70,7 +67,8 @@ router.post('/cart', async (req, res, next) => {
 });
 
 //remove item from cart
-//send userId in req.body
+//front end should send userId in req.body
+//returns all cart products w/o deleted one
 router.delete('/cart/:productId', async (req, res, next) => {
   try {
     const cart = await Order.findOne({
@@ -88,7 +86,8 @@ router.delete('/cart/:productId', async (req, res, next) => {
 });
 
 //update items in cart
-//send userId in req.body
+//front end should send userId and updated orderProduct in req.body
+//returns updated orderProduct info
 router.put('/cart/:productId', async (req, res, next) => {
   try {
     const cart = await Order.findOne({
@@ -97,8 +96,18 @@ router.put('/cart/:productId', async (req, res, next) => {
         status: 'Cart',
       },
     });
-    cart.removeProduct(req.params.productId);
-    res.send(cart);
+    const cartProduct = await OrderProduct.findOne({
+      where: {
+        orderId: cart.id,
+        productId: req.body.product.id,
+      },
+    });
+    cartProduct.gift = req.body.product.gift;
+    cartProduct.customization = req.body.product.customization;
+    cartProduct.sellPrice = req.body.product.sellPrice;
+    cartProduct.quantity = req.body.product.quantity;
+    await cartProduct.save();
+    res.send(cartProduct);
   } catch (err) {
     next(err);
   }
