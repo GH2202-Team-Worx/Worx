@@ -18,7 +18,7 @@ const SingleProduct = (props) => {
     dispatch(getProduct(productId));
   }, []);
 
-  //I think we have to add some ternary logic here to see if this is a guest/logged in. if logged in addproduct. if not just go straight to the action creator so that it doesn't persist in the db. this may mean that backend should only return the product and not the whole cart, because then the reducer can do the job of adding it all together for both
+  //I added some ternary logic here to see if this is a guest/logged in (based on how it was done in the NavBar). If logged in, addProduct through thunk. If not, _addProduct through action creator so that it doesn't persist in the db.
   const handleAddToCart = () => {
     isLoggedIn ? dispatch(addProduct(product)) : dispatch(_addProduct(product));
   };
@@ -31,7 +31,7 @@ const SingleProduct = (props) => {
     <React.Fragment>
       <img src={product.image} alt={product.name} />
       <div>{product.name}</div>
-      <div>{product.price}</div>
+      <div>{`$${product.price}`}</div>
       <div>
         {product.material} {product.epoxyColor}
       </div>
