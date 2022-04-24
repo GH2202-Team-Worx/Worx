@@ -9,6 +9,7 @@ const _sendOrder = (payload) => ({
   payload,
 });
 
+//this isn't set up on the backend yet. i think we will end up having to add shipping and billing into this request though because it is the one that is going to complete the order, where the others will update it
 export const sendOrder = (cartItems, cartTotal) => {
   return async (dispatch) => {
     try {

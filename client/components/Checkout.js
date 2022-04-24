@@ -5,6 +5,10 @@ import ShippingInformation from './ShippingInformation';
 import BillInformation from './BillingInformation';
 import './styles/Checkout.css';
 
+//notes from server/api/orders
+//if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
+//if user is logged in, front end should send cart data to server via "api/order/cart" with status "Cart" whenever cart is modified.
+
 const Checkout = () => {
   const [shipping, setShipping] = useState({
     phone: 0,
