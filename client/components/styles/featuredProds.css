@@ -21,6 +21,16 @@
   justify-content: center;
 }
 
+.featured-prod-image {
+  width: 50%;
+  padding: 10px 10px;
+}
+
+.featured-prod-name {
+  align-self: center;
+  justify-content: center;
+}
+
 .featured-products-title {
   align-self: flex-start;
   font-size: 1.2rem;
@@ -29,6 +39,7 @@
 
 .featured-prods-description {
   color: black;
+  align-self: center;
 }
 
 .featured-prods-description:link {

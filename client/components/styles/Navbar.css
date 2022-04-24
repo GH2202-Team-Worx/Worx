@@ -5,6 +5,7 @@
   align-items: center;
   background-color: darkolivegreen;
   gap: 10px;
+  background-image: url(../../../public/photos/WoodHeader.png);
 }
 
 .navbar-left-elements {

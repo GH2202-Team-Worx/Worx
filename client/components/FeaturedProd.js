@@ -24,8 +24,12 @@ const FeaturedProd = () => {
                   className="featured-prods-description"
                   to={`/products/${prod.id}`}
                 >
-                  <img src={prod.image} alt={prod.name} />
-                  <h4>{`${prod.name}`}</h4>
+                  <img
+                    className="featured-prod-image"
+                    src={prod.image}
+                    alt={prod.name}
+                  />
+                  <h4 className="featured-prod-name">{`${prod.name}`}</h4>
                 </Link>
               </div>
             );

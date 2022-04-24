@@ -1,7 +1,7 @@
 import React from "react";
 import FeaturedProd from "./FeaturedProd";
 import "./styles/main.css";
-import familyPhoto from "../../public/photos/BellFamilyPhoto.jpeg";
+import familyPhoto from "../../public/photos/cropped_family_photo.png";
 
 const Main = () => {
   return (
@@ -26,7 +26,7 @@ const Main = () => {
             </p>
             <p className="about-paragraph">
               The Bell family is a family of artists working together to give
-              you one -of-a-kind products every time. David, the master
+              you one-of-a-kind products every time. David, the master
               machinist, was the one who really started it all. A piqued
               interest in similar artistry quickly blossomed into this
               family-wide passion. We wanted to create products that are

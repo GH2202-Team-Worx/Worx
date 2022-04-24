@@ -8,29 +8,36 @@
 
 .about-us {
   display: flex;
+  justify-content: space-evenly;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 70%;
   border: 1px solid #dac2ac;
+  background-color: #dac2ac;
   padding: 5%;
+  gap: 2rem;
 }
 
-img {
-  width: 45%;
-  padding: 10px;
+.family-photo {
+  /* width: 100%; */
+  height: auto;
+  flex: 1;
+  object-fit: contain;
+  /* padding: 10px; */
 }
 
 .bio {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 3%;
-  background-color: #dac2ac;
-  height: 85%;
+  flex: 1;
+  /* padding: 10px; */
+  /* background-color: #dac2ac; */
+  height: 427px;
   /* min-height: 500px; */
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1400px) {
   .bio {
     overflow: scroll;
   }
@@ -42,4 +49,5 @@ img {
 
 .about-paragraph {
   padding: 7px;
+  line-height: 1.5;
 }
