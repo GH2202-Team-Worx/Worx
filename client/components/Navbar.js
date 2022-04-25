@@ -1,58 +1,71 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import { connect, useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { logout } from "../store";
 import "./styles/Navbar.css";
 import icon from "../../public/photos/WoodWorxIcon.jpeg";
+import { fetchSingleUser } from "../store/users";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div className="navbar-container">
-    <div className="navbar-left-elements">
-      <img className="icon" src={icon} alt="icon" />
-      <h1 className="navbar-company-name">
-        <Link to="/">
-          <div>Bell's</div>
-          <div>Custom</div>
-          <div>Worx</div>
-        </Link>
-      </h1>
-      <Link className="all-products-link" to="/products">
-        All Products
-      </Link>
-    </div>
-    <nav className="nav-links">
+
+const Navbar = ({ handleClick, isLoggedIn }) => {
+  // const [user, setUser] = useState({})
+  // const dispatch = useDispatch()
+  // const {name} = useParams()
+  // console.log('name', name)
+  // useEffect(() => {
+  //   const currentUser = dispatch(fetchSingleUser(params.id))
+  //   setUser(currentUser)
+  // })
+  let signIn = ''
+  if (isLoggedIn) {
+    signIn = (
       <div>
-        <form>
-          <input
-            className="search-input"
-            type="text"
-            placeholder="Search products here"
-          />
-          <button className="search-button" type="submit">
-            Search
-          </button>
-        </form>
-        <Link to="/contact">Contact Us</Link>
-        <Link to="/checkout">Cart</Link>
+        {/* <Link to="/">{this.auth}</Link> */}
+        <a href="#" onClick={handleClick}>
+          Logout
+        </a>
+        <Link to='/admin'>My Dashboard</Link>
       </div>
-      {isLoggedIn ? (
+    )
+  } else {
+    signIn = (
+      <div>
+        <Link to="/login">Login</Link>
+        <Link to="/signup">Sign Up</Link>
+      </div>
+    )
+  }
+
+  return (
+    <div className="navbar-container">
+      <div className="navbar-left-elements">
+        <img className="icon" src={icon} alt="icon" />
+        <h1 className="navbar-company-name">
+          <Link to="/">
+            <div>Bell's</div>
+            <div>Custom</div>
+            <div>Worx</div>
+          </Link>
+        </h1>
+        <Link className="all-products-link" to="/products">
+          All Products
+        </Link>
+      </div>
+      <nav className="nav-links">
         <div>
-          <Link to="/">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+          <form>
+            <input className="search-input" type="text" placeholder="Search Products Here" />
+            <button className="search-button" type="submit">Search</button>
+          </form>
+          <Link to="/contact">Contact Us</Link>
+          <Link to="/checkout">Cart</Link>
         </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </nav>
-    {/* <hr /> */}
-  </div>
-);
+        {signIn}
+      </nav>
+      {/* <hr /> */}
+    </div>
+  )
+}
 
 /**
  * CONTAINER
@@ -68,6 +81,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout());
     },
+    singleUser: (id) => dispatch(fetchSingleUser(id))
   };
 };
 

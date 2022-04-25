@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Login, Signup } from './components/AuthForm';
+import { withRouter, Route, Switch } from 'react-router-dom';
+import LoginForm from './components/LoginForm';
 import AllProducts from './components/AllProducts';
 import Main from './components/Main';
 import Checkout from './components/Checkout';
 import Contact from './components/Contact';
 import { me } from './store';
 import SingleProduct from './components/SingleProduct';
+import SignupForm from './components/SignupForm';
+import AdminDashboard from './components/AdminDash';
 
 /**
  * COMPONENT
@@ -16,17 +18,17 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
+  // const { isLoggedIn } = this.props;
+  //   let loggedIn = ''
+
+  //   if (!isLoggedIn) {
+  //     loggedIn = (<Switch><Route path="/login" component={Login} />
+  //     <Route path="/signup" component={Signup} /></Switch>)
+  //   } else {
+  //     loggedIn = (<Switch><Route path="/signup" component={Signup} /></Switch>)
+  //   }
 
   render() {
-    const { isLoggedIn } = this.props;
-    let loggedIn = ''
-
-    if (!isLoggedIn) {
-      loggedIn = (<Switch><Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} /></Switch>)
-    } else {
-      loggedIn = (<Switch><Route path="/signup" component={Signup} /></Switch>)
-    }
     return (
       <div>
         <Switch>
@@ -35,8 +37,10 @@ class Routes extends Component {
           <Route path="/products/:productId" component={SingleProduct} />
           <Route path="/contact" component={Contact} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/login" component={LoginForm} />
+          <Route path='/signup' component={SignupForm} />
+          <Route path='/admin' component={AdminDashboard} />
         </Switch>
-          {loggedIn}
       </div>
     );
   }

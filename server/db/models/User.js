@@ -20,8 +20,8 @@ const User = db.define('user', {
   },
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
-  address: { type: Sequelize.STRING, allowNull: false },
-  phone: { type: Sequelize.STRING, allowNull: false },
+  address: { type: Sequelize.STRING },
+  phone: { type: Sequelize.STRING },
   isGuest: { type: Sequelize.BOOLEAN, defaultValue: true },
 
   isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false },
@@ -80,7 +80,7 @@ const hashPassword = async (user) => {
   // in case the password has been changed, we want to encrypt it with bcrypt
 
   // if null && guest dont hash
-  if (user.changed('password') && user.password && !user.isGuest) {
+  if (user.changed('password') && user.password) {
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 };

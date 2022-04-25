@@ -2,6 +2,7 @@ import axios from "axios";
 
 const GET_PRODUCTS = "GET_PRODUCTS";
 const GET_FEATURED = "GET_FEATURED";
+const CREATE_PRODUCT = "CREATE_PRODUCT"
 
 const _getProducts = (products) => ({
   type: GET_PRODUCTS,
@@ -12,6 +13,11 @@ const _getFeatured = (products) => ({
   type: GET_FEATURED,
   products,
 });
+
+const _createProduct = (product) => ({
+  type: CREATE_PRODUCT,
+  product
+})
 
 export const getProducts = () => {
   return async (dispatch) => {
@@ -35,12 +41,25 @@ export const getFeatured = () => {
   };
 };
 
+export const createProduct = (product) => {
+  return async (dispatch) => {
+    try {
+      const { data: createdProduct } = await axios.post('api/products', product)
+      dispatch(_createProduct(createdProduct))
+    } catch (err) {
+      console.log('Unable to create product', err)
+    }
+  }
+}
+
 export default function productsReducer(state = [], action) {
   switch (action.type) {
     case GET_PRODUCTS:
       return action.products;
     case GET_FEATURED:
       return action.products;
+    case CREATE_PRODUCT:
+      return action.product
     default:
       return state;
   }
