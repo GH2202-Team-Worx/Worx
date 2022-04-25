@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { deleteProduct, _deleteProduct, sendOrder } from '../store/cart';
 import ShippingInformation from './ShippingInformation';
-import BillInformation from './BillingInformation';
+import BillingInformation from './BillingInformation';
 import './styles/Checkout.css';
 
 //notes from server/api/orders
@@ -16,6 +16,7 @@ const Checkout = () => {
   const params = useParams();
   const [shipping, setShipping] = useState({
     phone: 0,
+    //fullname item on shipping info
     streetOne: '',
     streetTwo: '',
     city: '',
@@ -45,6 +46,8 @@ const Checkout = () => {
   };
 
   const sendOrderHandler = () => {
+    //compile shipping into sep strings for db
+    //cartItems, cartTotal, shipping, billing
     dispatch(sendOrder(cartItems, cartTotal));
   };
 
@@ -74,7 +77,7 @@ const Checkout = () => {
       </div>
       <div className="checkout-shippingBilling-container">
         <ShippingInformation shipping={shipping} setShipping={setShipping} />
-        <BillInformation billing={billing} setBilling={setBilling} />
+        <BillingInformation billing={billing} setBilling={setBilling} />
       </div>
       <button onClick={sendOrderHandler}>Place Order</button>
     </div>
