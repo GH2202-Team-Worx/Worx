@@ -38,3 +38,12 @@ router.get('/:productId', async (req, res, next) => {
     next(err);
   }
 });
+
+router.post('/', async (req, res, next) => {
+  try {
+    const newProduct = await Product.create(req.body)
+    res.send(newProduct).status(201)
+  } catch (err) {
+    next(err)
+  }
+})

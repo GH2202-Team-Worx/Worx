@@ -20,8 +20,8 @@ const User = db.define('user', {
   },
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
-  address: { type: Sequelize.STRING, allowNull: false },
-  phone: { type: Sequelize.STRING, allowNull: false },
+  address: { type: Sequelize.STRING },
+  phone: { type: Sequelize.STRING },
   isGuest: { type: Sequelize.BOOLEAN, defaultValue: true },
 
   isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false },

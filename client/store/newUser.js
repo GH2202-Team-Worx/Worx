@@ -14,7 +14,7 @@ export const createNewUser = (newUser, history) => {
   return async (dispatch) => {
     const { data } = await Axios.post('/api/users', { ...newUser, isGuest: false })
     dispatch(authenticate(newUser.email, newUser.password, 'login'))
-    dispatch(history.push('/'))
+    history.push('/')
   }
 }
 

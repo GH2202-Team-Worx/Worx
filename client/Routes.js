@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import { me } from './store';
 import SingleProduct from './components/SingleProduct';
 import SignupForm from './components/SignupForm';
+import AdminDashboard from './components/AdminDash';
 
 /**
  * COMPONENT
@@ -38,6 +39,7 @@ class Routes extends Component {
           <Route path="/checkout" component={Checkout} />
           <Route path="/login" component={LoginForm} />
           <Route path='/signup' component={SignupForm} />
+          <Route path='/admin' component={AdminDashboard} />
         </Switch>
       </div>
     );

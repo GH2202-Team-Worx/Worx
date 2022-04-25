@@ -1,19 +1,30 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import { connect, useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { logout } from "../store";
 import "./styles/Navbar.css";
 import icon from "../../public/photos/WoodWorxIcon.jpeg";
+import { fetchSingleUser } from "../store/users";
+
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
+  // const [user, setUser] = useState({})
+  // const dispatch = useDispatch()
+  // const {name} = useParams()
+  // console.log('name', name)
+  // useEffect(() => {
+  //   const currentUser = dispatch(fetchSingleUser(params.id))
+  //   setUser(currentUser)
+  // })
   let signIn = ''
   if (isLoggedIn) {
     signIn = (
       <div>
-        <Link to="/">Home</Link>
+        {/* <Link to="/">{this.auth}</Link> */}
         <a href="#" onClick={handleClick}>
           Logout
         </a>
+        <Link to='/admin'>My Dashboard</Link>
       </div>
     )
   } else {
@@ -70,6 +81,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout());
     },
+    singleUser: (id) => dispatch(fetchSingleUser(id))
   };
 };
 
