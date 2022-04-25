@@ -7,7 +7,7 @@ import './styles/SingleProduct.css';
 const SingleProduct = (props) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.singleProduct);
-  const currentCart = useSelector((state) => state.cartReducer);
+  //const currentCart = useSelector((state) => state.cartReducer);
   const isLoggedIn = useSelector((state) => !!state.auth.id);
 
   // console.log("CURRENT CART: ", currentCart);
@@ -48,7 +48,7 @@ const SingleProduct = (props) => {
             Shipping Information: Please allow 3-5 business days for shipping
             after the product is completed.
           </p>
-          <button className="sp-button" type="submit">
+          <button className="sp-button" type="button" onClick={handleAddToCart}>
             Add to Cart
           </button>
         </div>

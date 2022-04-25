@@ -1,11 +1,16 @@
 import axios from 'axios';
 
 const ADD_PRODUCT = 'ADD_PRODUCT';
-const SEND_ORDER = 'SEND_ORDER';
 const DELETE_ITEM = 'DELETE_ITEM';
+const SEND_ORDER = 'SEND_ORDER';
 
 export const _addProduct = (product) => ({
   type: ADD_PRODUCT,
+  product,
+});
+
+export const _deleteProduct = (product) => ({
+  type: DELETE_ITEM,
   product,
 });
 
@@ -22,6 +27,19 @@ export const addProduct = (product) => {
       dispatch(_addProduct(data.product));
     } catch (err) {
       console.error('😤 Unable to add product', err);
+    }
+  };
+};
+
+export const deleteProduct = (userId, productId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(`/api/orders/cart/${productId}`, {
+        data: { userId },
+      });
+      dispatch(_deleteProduct(data));
+    } catch (err) {
+      console.error('😡 Unable to delete product', err);
     }
   };
 };
@@ -58,13 +76,14 @@ export default function cartReducer(state = initialState, action) {
       };
     case DELETE_ITEM:
       const filteredItems = state.cartItems.filter(
-        (item) => item.id !== action.payload
+        (item) => item.id !== action.product.id
       );
+      const deletedTotal = state.cartTotal - +action.product.price;
       return {
-        cartItems: [filteredItems],
-        cartTotal: state.cartTotal,
+        cartItems: filteredItems,
+        cartTotal: deletedTotal,
       };
-    case SEND_ORDER:
+    // case SEND_ORDER:
     //payload coming in for sendorder are the cartitems that were just posted as a cart to backend
     //do we want to just return
     default:

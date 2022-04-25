@@ -77,9 +77,13 @@ router.delete('/cart/:productId', async (req, res, next) => {
         status: 'Cart',
       },
     });
+    let deletedProduct = cart.findOne({
+      where: { productId: req.params.productId },
+    });
     cart.removeProduct(req.params.productId);
-    const cartProds = await cart.getProducts();
-    res.send(cartProds);
+    // const cartProds = await cart.getProducts();
+    // res.send(cartProds);
+    res.send(deletedProduct);
   } catch (err) {
     next(err);
   }
