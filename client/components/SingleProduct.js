@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getProduct } from '../store/singleProduct';
-import { _addProduct, addProduct } from '../store/cart';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getProduct } from "../store/singleProduct";
+import { _addProduct, addProduct } from "../store/cart";
 
 const SingleProduct = (props) => {
   const dispatch = useDispatch();
@@ -9,8 +9,8 @@ const SingleProduct = (props) => {
   const currentCart = useSelector((state) => state.cartReducer);
   const isLoggedIn = useSelector((state) => !!state.auth.id);
 
-  console.log('CURRENT CART: ', currentCart);
-  console.log('PRODUCT: ', product);
+  // console.log("CURRENT CART: ", currentCart);
+  // console.log("PRODUCT: ", product);
 
   const productId = props.match.params.productId;
 
@@ -21,6 +21,12 @@ const SingleProduct = (props) => {
   //I added some ternary logic here to see if this is a guest/logged in (based on how it was done in the NavBar). If logged in, addProduct through thunk. If not, _addProduct through action creator so that it doesn't persist in the db.
   const handleAddToCart = () => {
     isLoggedIn ? dispatch(addProduct(product)) : dispatch(_addProduct(product));
+    // let storedItemsArray = JSON.parse(localStorage.getItem("cartItems"));
+    // console.log(storedItemsArray);
+    // let windowItemsArray = [];
+    // windowItemsArray.push(product);
+    // localStorage.setItem("cartItems", JSON.stringify(storedItems));
+    localStorage.setItem(`${product.id}`, JSON.stringify(product));
   };
 
   if (!product) {
