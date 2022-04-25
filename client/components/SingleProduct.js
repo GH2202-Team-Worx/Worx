@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getProduct } from "../store/singleProduct";
-import { _addProduct, addProduct } from "../store/cart";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getProduct } from '../store/singleProduct';
+import { _addProduct, addProduct } from '../store/cart';
+import './styles/SingleProduct.css';
 
 const SingleProduct = (props) => {
   const dispatch = useDispatch();
@@ -32,19 +33,26 @@ const SingleProduct = (props) => {
   if (!product) {
     return <div>Loading...</div>;
   }
-
   return (
     <React.Fragment>
-      <img src={product.image} alt={product.name} />
-      <div>{product.name}</div>
-      <div>{`$${product.price}`}</div>
-      <div>
-        {product.material} {product.epoxyColor}
+      <div className="single-product-container">
+        <img className="sp-image" src={product.image} alt={product.name} />
+        <div className="sp-overview">
+          <div className="sp-title">{product.name}</div>
+          <div className="sp-price">${product.price}</div>
+          <div className="sp-material">
+            Material: {product.material} {product.epoxyColor}
+          </div>
+          <div className="sp-description">{product.description}</div>
+          <p className="sp-shipping">
+            Shipping Information: Please allow 3-5 business days for shipping
+            after the product is completed.
+          </p>
+          <button className="sp-button" type="submit">
+            Add to Cart
+          </button>
+        </div>
       </div>
-      <div>{product.description}</div>
-      <button onClick={handleAddToCart} type="button">
-        Add to Cart
-      </button>
     </React.Fragment>
   );
 };
