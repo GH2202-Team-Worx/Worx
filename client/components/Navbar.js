@@ -1,9 +1,9 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { logout } from '../store'
-import './styles/Navbar.css'
-import icon from '../../public/photos/WoodWorxIcon.jpeg'
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../store";
+import "./styles/Navbar.css";
+import icon from "../../public/photos/WoodWorxIcon.jpeg";
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   let signIn = ''
@@ -43,8 +43,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       <nav className="nav-links">
         <div>
           <form>
-            <input type="text" placeholder="Search Products Here" />
-            <button type="submit">Search</button>
+            <input className="search-input" type="text" placeholder="Search Products Here" />
+            <button className="search-button" type="submit">Search</button>
           </form>
           <Link to="/contact">Contact Us</Link>
           <Link to="/checkout">Cart</Link>
@@ -61,16 +61,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.auth.id
-  }
-}
+    isLoggedIn: !!state.auth.id,
+  };
+};
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick () {
-      dispatch(logout())
-    }
-  }
-}
+    handleClick() {
+      dispatch(logout());
+    },
+  };
+};
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar);

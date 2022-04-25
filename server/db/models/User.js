@@ -4,9 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 // const axios = require('axios');
 
-
 const SALT_ROUNDS = 5;
-
 
 const User = db.define('user', {
   email: {
@@ -20,15 +18,14 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
   },
-  address: { type: Sequelize.STRING, allowNull: true },
-  firstName: { type: Sequelize.STRING, allowNull: true },
-  lastName: { type: Sequelize.STRING, allowNull: true },
-  phone: { type: Sequelize.STRING, allowNull: true },
+  firstName: Sequelize.STRING,
+  lastName: Sequelize.STRING,
+  address: { type: Sequelize.STRING, allowNull: false },
+  phone: { type: Sequelize.STRING, allowNull: false },
   isGuest: { type: Sequelize.BOOLEAN, defaultValue: true },
 
   isAdmin: { type: Sequelize.BOOLEAN, defaultValue: false },
 });
-
 
 module.exports = User;
 
