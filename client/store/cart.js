@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const DELETE_ITEM = 'DELETE_ITEM';
-const EDIT_PRODUCT = 'EDIT_PRODUCT'
+const EDIT_PRODUCT = 'EDIT_PRODUCT';
 const SEND_ORDER = 'SEND_ORDER';
-const PURCHASE_INTENT = 'PURCHASE_INTENT'
+const PURCHASE_INTENT = 'PURCHASE_INTENT';
 
 export const _addProduct = (product) => ({
   type: ADD_PRODUCT,
@@ -16,10 +16,10 @@ export const _deleteProduct = (product) => ({
   product,
 });
 
-export const _editItem = (product) => ({
+export const _editProduct = (product) => ({
   type: EDIT_PRODUCT,
-  product
-})
+  product,
+});
 
 const _sendOrder = (payload) => ({
   type: SEND_ORDER,
@@ -28,14 +28,17 @@ const _sendOrder = (payload) => ({
 
 const _intendToPurchase = (clientSecret) => ({
   type: PURCHASE_INTENT,
-  clientSecret
-})
+  clientSecret,
+});
 
 //addProduct thunk is called only for loggedin users in SingleProduct.Since backend returns cart and product, I only passed the product to _addProduct. That way, guests and loggedin users can both use the _addProduct creator. BLOCKER: cannot sign in to test this
-export const addProduct = (product) => {
+export const addProduct = (userId, product) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post('/api/orders/cart', product);
+      const { data } = await axios.post('/api/orders/cart', {
+        userId,
+        product,
+      });
       dispatch(_addProduct(data.product));
     } catch (err) {
       console.error('😤 Unable to add product', err);
@@ -59,7 +62,10 @@ export const deleteProduct = (userId, productId) => {
 export const editProduct = (userId, product) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`/api/orders/cart/${product.id}`, {userId, product});
+      const { data } = await axios.put(`/api/orders/cart/${product.id}`, {
+        userId,
+        product,
+      });
       dispatch(_editProduct(data.product));
     } catch (err) {
       console.error('😤 Unable to edit product', err);
@@ -83,51 +89,74 @@ export const sendOrder = (cartItems, cartTotal) => {
 export const intendToPurchase = (cartTotal) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post('/api/orders/create-payment-intent', {cartTotal});
-      dispatch(_intendToPurchase(data))
-      console.log('intend to purchase worked!!!')
-      console.log(data)
+      const { data } = await axios.post('/api/orders/create-payment-intent', {
+        cartTotal,
+      });
+      dispatch(_intendToPurchase(data));
+      console.log('intend to purchase worked!!!');
+      console.log(data);
     } catch (err) {
       console.error('Unable to create payment intent...', err);
     }
-  }
-}
+  };
+};
 
 const initialState = {
   cartItems: [],
   cartTotal: 0,
-  clientSecret: ''
+  clientSecret: '',
 };
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_PRODUCT:
-      // Add item to cartItems array
-      const newItems = [...state.cartItems, action.product];
+      {// Add item to cartItems array
+      let product;
+      Array.isArray(action.product)
+        ? (product = action.product[0])
+        : (product = action.product);
+      const newItems = [...state.cartItems, product];
       // Update cartTotal amount
-      const newTotal = state.cartTotal + +action.product.price;
+      const newTotal = state.cartTotal + +product.price;
+
       return {
         ...state,
         cartItems: newItems,
         cartTotal: newTotal,
-      };
-      case EDIT_PRODUCT:
-
-    case DELETE_ITEM:
-      const filteredItems = state.cartItems.filter(
-        (item) => item.id !== action.product.id
+      };}
+    case EDIT_PRODUCT:
+      {let product;
+      Array.isArray(action.product)
+        ? (product = action.product[0])
+        : (product = action.product);
+      const oldCart = [...state.cartItems];
+      const updatedCart = oldCart.filter(
+        (item) => item.id !== product.id
       );
-      const deletedTotal = state.cartTotal - +action.product.price;
+      updatedCart.push(product);
+      return {
+        ...state,
+        cartItems: updatedCart,
+      };}
+    case DELETE_ITEM:
+      {let product;
+      Array.isArray(action.product)
+        ? (product = action.product[0])
+        : (product = action.product);
+      const filteredItems = state.cartItems.filter(
+        (item) => item.id !== product.id
+      );
+      const deletedTotal = state.cartTotal - +product.price;
       return {
         ...state,
         cartItems: filteredItems,
         cartTotal: deletedTotal,
-      };
+      };}
     case PURCHASE_INTENT:
       return {
         ...state,
-        clientSecret: action.clientSecret
-      }
+        clientSecret: action.clientSecret,
+      };
     // case SEND_ORDER:
     //payload coming in for sendorder are the cartitems that were just posted as a cart to backend
     //do we want to just return

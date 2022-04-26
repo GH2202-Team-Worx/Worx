@@ -15,3 +15,17 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
+
+router.post('/', async (req, res, next) => {
+  // if admin, can make new person admin, if not admin can not set self/newperson to admin
+  try {
+    await User.create(req.body)
+    res.sendStatus(201);
+  } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists');
+    } else {
+      next(err);
+    }
+  }
+});

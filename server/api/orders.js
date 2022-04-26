@@ -2,7 +2,9 @@ const router = require('express').Router();
 const { Order, OrderProduct, User, Product } = require('../db/models');
 module.exports = router;
 
-const stripe = require("stripe")('sk_test_51KsV0OFre9FhvB1NlvzO4wwWGcZewRVasAQWN2tMHYXWai1DuUKgtjqvQ02W2HP4WE9V8rNOCbHPUbTjyiBCFtMP00qlnXLZnJ');
+const stripe = require('stripe')(
+  'sk_test_51KsV0OFre9FhvB1NlvzO4wwWGcZewRVasAQWN2tMHYXWai1DuUKgtjqvQ02W2HP4WE9V8rNOCbHPUbTjyiBCFtMP00qlnXLZnJ'
+);
 
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
 
@@ -18,9 +20,10 @@ router.post('/', async (req, res, next) => {
               orderId: order.id,
               productId: prod.id,
               customization: prod.customization,
-              sellPrice: prod.sellPrice,
+              price: prod.price,
               gift: prod.gift,
               quantity: prod.quantity,
+              name: prod.name,
             },
           })
       )
@@ -35,8 +38,8 @@ router.post('/', async (req, res, next) => {
 //if user is logged in, front end should send cart data to server via "api/order/cart" with status "Cart" whenever cart is modified.
 
 //create and add to cart
-//front end should send product and order - server will find the order or create one
-//returns cart and product
+//front end should send product and userId - server will find the order or create one
+//returns order and product
 router.post('/cart', async (req, res, next) => {
   try {
     const [cart, created] = await Order.findOrCreate({
@@ -46,10 +49,6 @@ router.post('/cart', async (req, res, next) => {
       },
       defaults: {
         status: req.body.status,
-        shippingAddress: req.body.shippingAddress,
-        paymentInfo: req.body.paymentInfo,
-        shippingAmt: req.body.shippingAmt,
-        taxAmt: req.body.taxAmt,
       },
     });
     const prod = req.body.product;
@@ -58,11 +57,13 @@ router.post('/cart', async (req, res, next) => {
         orderId: cart.id,
         productId: prod.id,
         customization: prod.customization,
-        sellPrice: prod.sellPrice,
+        price: prod.price,
         gift: prod.gift,
       },
     });
-    res.send({ cart, product });
+    const productInfo = await Product.findByPk(prod.id);
+
+    res.send({ cart, product, productInfo });
   } catch (err) {
     next(err);
   }
@@ -110,7 +111,7 @@ router.put('/cart/:productId', async (req, res, next) => {
     });
     cartProduct.gift = req.body.product.gift;
     cartProduct.customization = req.body.product.customization;
-    cartProduct.sellPrice = req.body.product.sellPrice;
+    cartProduct.price = req.body.product.price;
     cartProduct.quantity = req.body.product.quantity;
     await cartProduct.save();
     res.send(cartProduct);
@@ -120,16 +121,16 @@ router.put('/cart/:productId', async (req, res, next) => {
 });
 
 //stripe route
-router.post("/create-payment-intent", async (req, res, next) => {
+router.post('/create-payment-intent', async (req, res, next) => {
   // Create a PaymentIntent with the order amount and currency
-  try{
+  try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: req.body.cartTotal,
-      currency: "usd",
+      currency: 'usd',
       // automatic_payment_methods: {
       //   enabled: true,
       // },
-      payment_method_types: ['card']
+      payment_method_types: ['card'],
     });
     res.send({
       clientSecret: paymentIntent.client_secret,
@@ -137,5 +138,4 @@ router.post("/create-payment-intent", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-
 });

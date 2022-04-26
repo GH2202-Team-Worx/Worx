@@ -20,6 +20,7 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const params = useParams();
+
   const [shipping, setShipping] = useState({
     phone: 0,
     //fullname item on shipping info
@@ -43,14 +44,7 @@ const Checkout = () => {
   // Getting items from localStorage
   // const storedItems = JSON.parse(localStorage.getItem("cartItems"));
 
-  const deleteItemHandler = (item) => {
-    //unable to test if params includes userID without login funtionality
-    const userId = params.userId;
 
-    isLoggedIn
-      ? dispatch(deleteProduct(userId, item.id))
-      : dispatch(_deleteProduct(item));
-  };
 
   const sendOrderHandler = () => {
     //compile shipping into sep strings for db

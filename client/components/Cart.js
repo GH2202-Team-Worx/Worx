@@ -4,36 +4,31 @@ import { useParams, Link } from 'react-router-dom';
 import {
   deleteProduct,
   _deleteProduct,
-  sendOrder,
+  editProduct,
+  _editProduct,
 } from '../store/cart';
 import './styles/Checkout.css';
-
-//notes from server/api/orders
-//if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
-//if user is logged in, front end should send cart data to server via "api/order/cart" with status "Cart" whenever cart is modified.
 
 const Cart = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.auth.id);
-  const params = useParams();
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
-
+  const [customization, setCustomization] = useState();
+  const [isGift, setIsGift] = useState(false)
+  const auth = useSelector((state) => state.auth);
   // Getting items from localStorage
   // const storedItems = JSON.parse(localStorage.getItem("cartItems"));
 
   const deleteItemHandler = (item) => {
-    //unable to test if params includes userID without login funtionality
-    const userId = params.userId;
-
     isLoggedIn
-      ? dispatch(deleteProduct(userId, item.id))
+      ? dispatch(deleteProduct(auth.id, item.id))
       : dispatch(_deleteProduct(item));
   };
 
-  const checkoutHandler = () => {
-    //compile shipping into sep strings for db
-    //cartItems, cartTotal, shipping, billing
-    dispatch(sendOrder(cartItems, cartTotal));
+  const editItemHandler = (item) => {
+    isLoggedIn
+      ? dispatch(editProduct(auth.id, item))
+      : dispatch(_editProduct(item));
   };
 
   return (
@@ -45,20 +40,31 @@ const Cart = () => {
             <p>There are no items in your cart.</p>
           ) : (
             cartItems.map((item) => (
-              <div key={item.id}>
+              <div key={item.productId}>
                 <p>{item.name}</p>
-                <img className='checkout-image' src={item.image} />
-                <ul>
-                  <li>{item.description}</li>
-                  <li>{`$${item.price}`}</li>
-                </ul>
+                <img className="checkout-image" src={item.image} />
+                <p>{`$${item.price}`}</p>
                 <button type="button" onClick={() => deleteItemHandler(item)}>
                   Delete Item
                 </button>
                 <label for="customization">Customization:</label>
-                <input type="text" id="customization" name="customization" />
+                <input
+                  type="text"
+                  id="customization"
+                  name="customization"
+                  value={customization}
+                  onChange={(evt) => setCustomization(evt.target.value)}
+                />
+                <button type="button" onClick={() => editItemHandler(item)}>
+                  Save Customization
+                </button>
                 <label for="isGift">Is this a gift?</label>
-                <input type="checkbox" id="isGift" name="isGift" />
+                <input
+                  type="checkbox"
+                  id="isGift"
+                  name="isGift"
+                  onClick={() => setIsGift(!isGift)}
+                />
               </div>
             ))
           )}
@@ -66,7 +72,7 @@ const Cart = () => {
         </div>
       </div>
       <Link to="/checkout">
-        <button onClick={checkoutHandler}>Check Out</button>
+        <button>Check Out</button>
       </Link>
     </div>
   );
