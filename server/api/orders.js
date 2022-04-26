@@ -8,6 +8,24 @@ const stripe = require('stripe')(
 
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
 
+// GET api/orders
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        userId: req.params.userId,
+        status: 'Cart',
+      },
+      include: Product,
+    });
+    console.log('CART', cart.products);
+    res.send(cart);
+  } catch (err) {
+    console.error('🥸 Unable to get order from db');
+    next(err);
+  }
+});
+
 //save order
 router.post('/', async (req, res, next) => {
   try {
@@ -89,13 +107,8 @@ router.delete('/cart/:productId', async (req, res, next) => {
         status: 'Cart',
       },
     });
-    let deletedProduct = cart.findOne({
-      where: { productId: req.params.productId },
-    });
     cart.removeProduct(req.params.productId);
-    // const cartProds = await cart.getProducts();
-    // res.send(cartProds);
-    res.send(deletedProduct);
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

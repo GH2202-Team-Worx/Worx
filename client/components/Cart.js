@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
+  getCart,
   deleteProduct,
   _deleteProduct,
   editProduct,
@@ -19,10 +20,14 @@ const Cart = () => {
   // Getting items from localStorage
   // const storedItems = JSON.parse(localStorage.getItem("cartItems"));
 
-  //login check inside useEffect
+  //put this on homepage (first page that you go to when someone logs in - or call in thunk when someone logs in - because cart does not show total until you actually click on cart)
+  useEffect(() => {
+    if (isLoggedIn) dispatch(getCart(auth.id));
+  }, []);
+
   const deleteItemHandler = (item) => {
     isLoggedIn
-      ? dispatch(deleteProduct(auth.id, item.id))
+      ? dispatch(deleteProduct(auth.id, item))
       : dispatch(_deleteProduct(item));
   };
 
