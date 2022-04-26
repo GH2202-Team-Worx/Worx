@@ -66,11 +66,11 @@ export const addProduct = (userId, product) => {
 export const editProduct = (userId, product) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`/api/orders/cart/${product.id}`, {
+      await axios.put(`/api/orders/cart/${product.id}`, {
         userId,
         product,
       });
-      dispatch(_editProduct(data.product));
+      dispatch(_editProduct(product));
     } catch (err) {
       console.error('😤 Unable to edit product', err);
     }
@@ -152,23 +152,17 @@ export default function cartReducer(state = initialState, action) {
       };
     }
     case EDIT_PRODUCT: {
-      let product;
-      Array.isArray(action.product)
-        ? (product = action.product[0])
-        : (product = action.product);
       const oldCart = [...state.cartItems];
-      const updatedCart = oldCart.filter((item) => item.id !== product.id);
-      updatedCart.push(product);
+      const updatedCart = oldCart.filter(
+        (item) => item.id !== action.product.id
+      );
+      updatedCart.push(action.product);
       return {
         ...state,
         cartItems: updatedCart,
       };
     }
     case DELETE_ITEM: {
-      // let product;
-      // Array.isArray(action.product)
-      //   ? (product = action.product[0])
-      //   : (product = action.product);
       const filteredItems = state.cartItems.filter(
         (item) => item.id !== action.product.id
       );

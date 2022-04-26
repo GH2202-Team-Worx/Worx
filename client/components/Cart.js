@@ -14,7 +14,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
-  const [customization, setCustomization] = useState();
+  const [customization, setCustomization] = useState('');
   const [isGift, setIsGift] = useState(false);
   const auth = useSelector((state) => state.auth);
   // Getting items from localStorage
@@ -32,10 +32,13 @@ const Cart = () => {
       : dispatch(_deleteProduct(item));
   };
 
-  const editItemHandler = (item) => {
+  const editItemHandler = (item, custom) => {
+    const updatedItem = { ...item };
+    updatedItem.orderproduct.customization = custom;
+
     isLoggedIn
-      ? dispatch(editProduct(auth.id, item))
-      : dispatch(_editProduct(item));
+      ? dispatch(editProduct(auth.id, updatedItem))
+      : dispatch(_editProduct(updatedItem));
   };
 
   return (
@@ -54,15 +57,24 @@ const Cart = () => {
                 <button type="button" onClick={() => deleteItemHandler(item)}>
                   Delete Item
                 </button>
-                <label htmlFor="customization">Customization:</label>
+                <p>
+                  {item.orderproduct.customization
+                    ? `Current customization is: ${item.orderproduct.customization}`
+                    : ''}
+                </p>
+                <label htmlFor="customization">Edit Customization:</label>
                 <input
                   type="text"
                   id="customization"
                   name="customization"
-                  value={customization}
-                  onChange={(evt) => setCustomization(evt.target.value)}
+                  // we don't know why this works but without id it changes every product in cart
+                  value={customization.id}
+                  onChange={(e) => setCustomization(e.target.value)}
                 />
-                <button type="button" onClick={() => editItemHandler(item)}>
+                <button
+                  type="button"
+                  onClick={() => editItemHandler(item, customization)}
+                >
                   Save Customization
                 </button>
                 <label htmlFor="isGift">Is this a gift?</label>
