@@ -1,14 +1,19 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
-import AllProducts from './components/AllProducts';
-import Main from './components/Main';
-import Checkout from './components/Checkout';
-import Contact from './components/Contact';
-import { me } from './store';
-import SingleProduct from './components/SingleProduct';
+
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
+import AllProducts from "./components/AllProducts";
+import Main from "./components/Main";
+import Checkout from "./components/Checkout";
+import Contact from "./components/Contact";
+import { me } from "./store";
+import SingleProduct from "./components/SingleProduct";
+import SignupForm from "./components/SignupForm";
+import AdminDashboard from "./components/AdminDash";
+import Orders from "./components/Orders";
+import SingleOrder from "./components/SingleOrder";
+
 
 /**
  * COMPONENT
@@ -17,10 +22,9 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
+  // need (if logged in) if admin show admindashbord else show userdash
 
   render() {
-    const { isLoggedIn } = this.props;
-
     return (
       <div>
         <Switch>
@@ -29,19 +33,14 @@ class Routes extends Component {
           <Route path="/products/:productId" component={SingleProduct} />
           <Route path="/contact" component={Contact} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/login" component={LoginForm} />
+
+          <Route path="/signup" component={SignupForm} />
+          <Route path="/admin" component={AdminDashboard} />
+          <Route exact path="/orders" component={Orders} />
+          <Route exact path="/orders/:orderId" component={SingleOrder} />
+          <Route path='/user' component={UserDashboard} />
         </Switch>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
-          </Switch>
-        ) : (
-          <Switch>
-            {/*<Route path="/" exact component={Login} />*/}
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
-        )}
       </div>
     );
   }

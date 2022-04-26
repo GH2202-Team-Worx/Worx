@@ -1,55 +1,57 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchProducts } from '../store/products';
-import SingleProduct from './SingleProduct';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../store/products';
 import { Link } from 'react-router-dom';
+import Filter from './Filter';
 
-//this component would show all products
-{
-  /* <Link to="/products/bowls">Bowls</Link>
-<Link to="/products/goblets">Goblets</Link>
-<Link to="/products/boards">Cutting Boards</Link>
-<Link to="/products/jewleryboxes">Jewlery Boxes</Link>
-<Link to="/products/misc">Misc.</Link> */
-}
-//Drop down menu for above to filter by categories
-//Separate filter section to filter by other filters discussed
+const AllProducts = () => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+  const [filteredCategory, setFilteredCategory] = useState('');
 
-//TODO: refactor mapState and mapDispatch to hooks
-
-const AllProducts = ({ products, loadProducts }) => {
   useEffect(() => {
-    loadProducts();
+    dispatch(getProducts());
   }, []);
 
-  if (products.length === 0) return <div>Loading ...</div>;
+  const filterChangeHandler = (selectedCategory) => {
+    setFilteredCategory(selectedCategory);
+  };
+
+  const productsToShow = () => {
+    if (filteredCategory) {
+      const filteredProducts = products.filter(
+        (product) => product.category === filteredCategory
+      );
+      return filteredProducts;
+    } else {
+      return products;
+    }
+  };
 
   return (
     <div>
-      {products.map((product) => {
-        return (
-          <div key={product.id}>
-            <Link to={`/products/${product.id}`}>
-              <img src={product.image} alt={product.name} />
-              <div>{`${product.name} $${product.price}`}</div>
-            </Link>
-          </div>
-        );
-      })}
+      <div>
+        <Filter
+          selected={filteredCategory}
+          onChangeFilter={filterChangeHandler}
+        />
+      </div>
+      {productsToShow().length === 0 ? (
+        <div>There are no products to show at this time</div>
+      ) : (
+        productsToShow().map((product) => {
+          return (
+            <div key={product.id}>
+              <Link to={`/products/${product.id}`}>
+                <img src={product.image} alt={product.name} />
+                <div>{`${product.name} $${product.price}`}</div>
+              </Link>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };
 
-const mapState = (state) => {
-  return {
-    products: state.products,
-  };
-};
-
-const mapDispatch = (dispatch) => {
-  return {
-    loadProducts: () => dispatch(fetchProducts()),
-  };
-};
-
-export default connect(mapState, mapDispatch)(AllProducts);
+export default AllProducts;
