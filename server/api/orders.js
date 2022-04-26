@@ -60,7 +60,7 @@ router.post('/', async (req, res, next) => {
 //returns order and product
 router.post('/cart', async (req, res, next) => {
   try {
-    const [cart, created] = await Order.findOrCreate({
+    const [cart] = await Order.findOrCreate({
       where: {
         userId: req.body.userId,
         status: 'Cart',
@@ -79,16 +79,6 @@ router.post('/cart', async (req, res, next) => {
         gift: prod.gift,
       },
     });
-    // // const productInfo = await Product.findByPk(prod.id);
-    // const productInfo = await OrderProduct.findOne({
-    //   where: {
-    //     productId: prod.id,
-    //     orderId: product.orderId
-    //   },
-    //   include: {
-    //     model: Product
-    //   }
-    // })
 
     res.send({ cart, product });
   } catch (err) {
