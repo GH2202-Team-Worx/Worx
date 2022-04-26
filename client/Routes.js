@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 171d827cb82d1cf618de511cd412b78ec1e4842f
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
@@ -37,19 +33,11 @@ class Routes extends Component {
           <Route path="/contact" component={Contact} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/login" component={LoginForm} />
-<<<<<<< HEAD
-=======
-
->>>>>>> 171d827cb82d1cf618de511cd412b78ec1e4842f
           <Route path="/signup" component={SignupForm} />
           <Route path="/admin" component={AdminDashboard} />
           <Route path="/user" component={UserDashboard} />
           <Route exact path="/orders" component={Orders} />
           <Route exact path="/orders/:orderId" component={SingleOrder} />
-<<<<<<< HEAD
-=======
-          <Route path='/user' component={UserDashboard} />
->>>>>>> 171d827cb82d1cf618de511cd412b78ec1e4842f
         </Switch>
       </div>
     );
