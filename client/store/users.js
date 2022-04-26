@@ -26,6 +26,27 @@ export const fetchSingleUser = (id) => {
   }
 }
 
+const EDIT_USER = 'EDIT_USER'
+
+const _editUser = (user) => {
+  return {
+    type: EDIT_USER,
+    user
+  }
+}
+
+export const fetchUpdatedUser = (data) => {
+  return async (dispatch) => {
+    console.log('id', data)
+    try {
+      const { updatedUser } = await axios.put(`/api/users/${data.id}`, { firstName: data.firstName, lastName: data.lastName, email: data.email, phone: data.phone, address: data.address })
+      dispatch(_editUser(updatedUser))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 export default function usersReducer (state = [], action) {
   switch (action.type) {
     case GET_USERS:
