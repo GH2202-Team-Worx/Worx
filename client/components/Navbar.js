@@ -16,6 +16,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
   //   const currentUser = dispatch(fetchSingleUser(params.id))
   //   setUser(currentUser)
   // })
+  const cartItems = {length: 3}
+
   let signIn = ''
   if (isLoggedIn) {
     signIn = (
@@ -53,12 +55,12 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       </div>
       <nav className="nav-links">
         <div>
-          <form>
+          {/* <form>
             <input className="search-input" type="text" placeholder="Search Products Here" />
             <button className="search-button" type="submit">Search</button>
-          </form>
+          </form> */}
           <Link to="/contact">Contact Us</Link>
-          <Link to="/cart">Cart</Link>
+          <Link to="/cart">Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''} </Link>
         </div>
         {signIn}
       </nav>
