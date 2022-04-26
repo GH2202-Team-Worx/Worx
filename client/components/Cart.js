@@ -47,14 +47,14 @@ const Cart = () => {
             <p>There are no items in your cart.</p>
           ) : (
             cartItems.map((item) => (
-              <div key={item.productId}>
+              <div key={item.id}>
                 <p>{item.name}</p>
                 <img className="checkout-image" src={item.image} />
                 <p>{`$${item.price}`}</p>
                 <button type="button" onClick={() => deleteItemHandler(item)}>
                   Delete Item
                 </button>
-                <label for="customization">Customization:</label>
+                <label htmlFor="customization">Customization:</label>
                 <input
                   type="text"
                   id="customization"
@@ -65,7 +65,7 @@ const Cart = () => {
                 <button type="button" onClick={() => editItemHandler(item)}>
                   Save Customization
                 </button>
-                <label for="isGift">Is this a gift?</label>
+                <label htmlFor="isGift">Is this a gift?</label>
                 <input
                   type="checkbox"
                   id="isGift"
