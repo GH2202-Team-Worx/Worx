@@ -11,6 +11,7 @@ import SingleProduct from "./components/SingleProduct";
 import SignupForm from "./components/SignupForm";
 import AdminDashboard from "./components/AdminDash";
 import Orders from "./components/Orders";
+import SingleOrder from "./components/SingleOrder";
 
 /**
  * COMPONENT
@@ -41,7 +42,8 @@ class Routes extends Component {
           <Route path="/login" component={LoginForm} />
           <Route path="/signup" component={SignupForm} />
           <Route path="/admin" component={AdminDashboard} />
-          <Route path="/orders" component={Orders} />
+          <Route exact path="/orders" component={Orders} />
+          <Route exact path="/orders/:orderId" component={SingleOrder} />
         </Switch>
       </div>
     );

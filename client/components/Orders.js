@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getOrders } from "../store/orders";
 import OrdersFilter from "./OrdersFilter";
 
@@ -28,8 +29,6 @@ const Orders = (props) => {
       return currentOrders;
     }
   };
-
-  console.log("ORDERS", orders);
   console.log("CHECK", currentOrders);
 
   return (
@@ -52,7 +51,7 @@ const Orders = (props) => {
                 <div>{order.paymentInfo}</div>
                 <div>{order.shippingAmt}</div>
                 <div>{order.taxAmt}</div>
-                {/* <Link to={`/orders/${order.id}`}>View Order</Link> */}
+                <Link to={`/orders/${order.id}`}>View Order</Link>
               </div>
             );
           })
