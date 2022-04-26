@@ -21,6 +21,7 @@ const Cart = () => {
   // const storedItems = JSON.parse(localStorage.getItem("cartItems"));
 
   //put this on homepage (first page that you go to when someone logs in - or call in thunk when someone logs in - because cart does not show total until you actually click on cart)
+  //can load localstorage and this use effect in navbar or routes
   useEffect(() => {
     if (isLoggedIn) dispatch(getCart(auth.id));
   }, []);

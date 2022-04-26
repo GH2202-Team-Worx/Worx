@@ -11,6 +11,7 @@ import { me } from './store';
 import SingleProduct from './components/SingleProduct';
 import SignupForm from './components/SignupForm';
 import AdminDashboard from './components/AdminDash';
+// import { getCart } from './store/cart';
 
 /**
  * COMPONENT
@@ -18,6 +19,7 @@ import AdminDashboard from './components/AdminDash';
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
+    // this.props.loadCart(this.props.auth.id);
   }
   // const { isLoggedIn } = this.props;
   //   let loggedIn = ''
@@ -40,8 +42,8 @@ class Routes extends Component {
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/login" component={LoginForm} />
-          <Route path='/signup' component={SignupForm} />
-          <Route path='/admin' component={AdminDashboard} />
+          <Route path="/signup" component={SignupForm} />
+          <Route path="/admin" component={AdminDashboard} />
         </Switch>
       </div>
     );
@@ -56,6 +58,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
+    // auth: state.auth,
   };
 };
 
@@ -64,6 +67,9 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me());
     },
+    // loadCart(userId) {
+    //   dispatch(getCart(userId));
+    // },
   };
 };
 
