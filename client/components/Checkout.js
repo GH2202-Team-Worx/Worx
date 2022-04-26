@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { deleteProduct, _deleteProduct, sendOrder, intendToPurchase } from '../store/cart';
+import {
+  deleteProduct,
+  _deleteProduct,
+  sendOrder,
+  intendToPurchase,
+} from '../store/cart';
 import ShippingInformation from './ShippingInformation';
 import BillingInformation from './BillingInformation';
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import './styles/Checkout.css';
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
-const stripePromise = loadStripe("pk_test_51KsV0OFre9FhvB1Nn9maNQyFsjbnUnTmzUadLpoQxqD0nKhbcep8g7WQ96OJ35jhTSnRzYOucWnO5ihmXvpjlHIf00lsp2xvDl");
+const stripePromise = loadStripe(
+  'pk_test_51KsV0OFre9FhvB1Nn9maNQyFsjbnUnTmzUadLpoQxqD0nKhbcep8g7WQ96OJ35jhTSnRzYOucWnO5ihmXvpjlHIf00lsp2xvDl'
+);
 
 //notes from server/api/orders
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
@@ -18,8 +24,6 @@ const stripePromise = loadStripe("pk_test_51KsV0OFre9FhvB1Nn9maNQyFsjbnUnTmzUadL
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => !!state.auth.id);
-  const params = useParams();
 
   const [shipping, setShipping] = useState({
     phone: 0,
@@ -36,15 +40,17 @@ const Checkout = () => {
     expiry: 0,
     cvc: 0,
   });
+
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
+
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    dispatch(intendToPurchase(cartTotal))}, [])
+    dispatch(intendToPurchase(cartTotal));
+  }, []);
 
   // Getting items from localStorage
   // const storedItems = JSON.parse(localStorage.getItem("cartItems"));
-
-
 
   const sendOrderHandler = () => {
     //compile shipping into sep strings for db
@@ -63,12 +69,14 @@ const Checkout = () => {
             cartItems.map((item) => (
               <div key={item.id}>
                 <p>{item.name}</p>
-                <img className='checkout-image' src={item.image} />
+                <img className="checkout-image" src={item.image} />
                 <ul>
                   <li>{item.description}</li>
                   <li>{`$${item.price}`}</li>
-                  <li>{`customization: ${item.customization ? item.customization : 'none'}`}</li>
-                  <li>{`${item.isGift ? 'This item is a gift': '' }`}</li>
+                  <li>{`customization: ${
+                    item.customization ? item.customization : 'none'
+                  }`}</li>
+                  <li>{`${item.isGift ? 'This item is a gift' : ''}`}</li>
                 </ul>
               </div>
             ))

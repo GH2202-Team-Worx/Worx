@@ -1,11 +1,10 @@
-import React, {useState, useEffect} from "react";
-import { connect, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { logout } from "../store";
-import "./styles/Navbar.css";
-import icon from "../../public/photos/WoodWorxIcon.jpeg";
-import { fetchSingleUser } from "../store/users";
-
+import React, { useState, useEffect } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { logout } from '../store';
+import './styles/Navbar.css';
+import icon from '../../public/photos/WoodWorxIcon.jpeg';
+import { fetchSingleUser } from '../store/users';
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   // const [user, setUser] = useState({})
@@ -16,9 +15,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
   //   const currentUser = dispatch(fetchSingleUser(params.id))
   //   setUser(currentUser)
   // })
-  const cartItems = {length: 3}
+  // const cartItems = {length: 3}
 
-  let signIn = ''
+  const { cartItems } = useSelector((state) => state.cartReducer);
+
+  let signIn = '';
   if (isLoggedIn) {
     signIn = (
       <div>
@@ -26,16 +27,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
         <a href="#" onClick={handleClick}>
           Logout
         </a>
-        <Link to='/admin'>My Dashboard</Link>
+        <Link to="/admin">My Dashboard</Link>
       </div>
-    )
+    );
   } else {
     signIn = (
       <div>
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
       </div>
-    )
+    );
   }
 
   return (
@@ -60,14 +61,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             <button className="search-button" type="submit">Search</button>
           </form> */}
           <Link to="/contact">Contact Us</Link>
-          <Link to="/cart">Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''} </Link>
+          <Link to="/cart">
+            Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''}{' '}
+          </Link>
         </div>
         {signIn}
       </nav>
       {/* <hr /> */}
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
@@ -83,7 +86,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout());
     },
-    singleUser: (id) => dispatch(fetchSingleUser(id))
+    singleUser: (id) => dispatch(fetchSingleUser(id)),
   };
 };
 

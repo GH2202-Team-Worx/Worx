@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   deleteProduct,
   _deleteProduct,
@@ -14,7 +14,7 @@ const Cart = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
   const [customization, setCustomization] = useState();
-  const [isGift, setIsGift] = useState(false)
+  const [isGift, setIsGift] = useState(false);
   const auth = useSelector((state) => state.auth);
   // Getting items from localStorage
   // const storedItems = JSON.parse(localStorage.getItem("cartItems"));
