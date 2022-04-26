@@ -1,11 +1,34 @@
-const router = require('express').Router();
-const { Order, OrderProduct, User, Product } = require('../db/models');
+const router = require("express").Router();
+const { Order, OrderProduct, User, Product } = require("../db/models");
 module.exports = router;
 
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
 
+// GET /api/orders   only avilable from admin dashboard
+
+router.get("/", async (req, res, next) => {
+  try {
+    const orders = await Order.findAll();
+    res.send(orders);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// GET /api/orders/:orderId  only available from admin dashboard
+
+router.get("/:orderId", async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.params.orderId);
+    res.send(order);
+  } catch (err) {
+    console.log("Unable to retrive product from database...");
+    next(err);
+  }
+});
+
 //save order
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const order = await Order.create(req.body);
     const products = await Promise.all(
@@ -35,12 +58,12 @@ router.post('/', async (req, res, next) => {
 //create and add to cart
 //front end should send product and order - server will find the order or create one
 //returns cart and product
-router.post('/cart', async (req, res, next) => {
+router.post("/cart", async (req, res, next) => {
   try {
     const [cart, created] = await Order.findOrCreate({
       where: {
         userId: req.body.userId,
-        status: 'Cart',
+        status: "Cart",
       },
       defaults: {
         status: req.body.status,
@@ -69,12 +92,12 @@ router.post('/cart', async (req, res, next) => {
 //remove item from cart
 //front end should send userId in req.body
 //returns all cart products w/o deleted one
-router.delete('/cart/:productId', async (req, res, next) => {
+router.delete("/cart/:productId", async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: {
         userId: req.body.userId,
-        status: 'Cart',
+        status: "Cart",
       },
     });
     cart.removeProduct(req.params.productId);
@@ -88,12 +111,12 @@ router.delete('/cart/:productId', async (req, res, next) => {
 //update items in cart
 //front end should send userId and updated orderProduct in req.body
 //returns updated orderProduct info
-router.put('/cart/:productId', async (req, res, next) => {
+router.put("/cart/:productId", async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: {
         userId: req.body.userId,
-        status: 'Cart',
+        status: "Cart",
       },
     });
     const cartProduct = await OrderProduct.findOne({

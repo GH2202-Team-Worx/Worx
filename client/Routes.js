@@ -1,15 +1,16 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Route, Switch } from 'react-router-dom';
-import LoginForm from './components/LoginForm';
-import AllProducts from './components/AllProducts';
-import Main from './components/Main';
-import Checkout from './components/Checkout';
-import Contact from './components/Contact';
-import { me } from './store';
-import SingleProduct from './components/SingleProduct';
-import SignupForm from './components/SignupForm';
-import AdminDashboard from './components/AdminDash';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
+import AllProducts from "./components/AllProducts";
+import Main from "./components/Main";
+import Checkout from "./components/Checkout";
+import Contact from "./components/Contact";
+import { me } from "./store";
+import SingleProduct from "./components/SingleProduct";
+import SignupForm from "./components/SignupForm";
+import AdminDashboard from "./components/AdminDash";
+import Orders from "./components/Orders";
 
 /**
  * COMPONENT
@@ -38,8 +39,9 @@ class Routes extends Component {
           <Route path="/contact" component={Contact} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/login" component={LoginForm} />
-          <Route path='/signup' component={SignupForm} />
-          <Route path='/admin' component={AdminDashboard} />
+          <Route path="/signup" component={SignupForm} />
+          <Route path="/admin" component={AdminDashboard} />
+          <Route path="/orders" component={Orders} />
         </Switch>
       </div>
     );

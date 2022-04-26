@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../store/singleProduct";
+import { fetchSingleUser } from "../store/users";
 import "./styles/SingleProduct.css";
 
 const SingleProduct = (props) => {
@@ -9,13 +10,24 @@ const SingleProduct = (props) => {
     return state.singleProduct;
   });
 
+  // const user = useSelector((state) => {
+  //   return state.usersReducer;
+  // });
+
   const productId = props.match.params.productId;
 
   useEffect(() => {
     dispatch(fetchProduct(productId));
   }, []);
 
-  if (!product) {
+  // const userId = props.match.params.id;
+
+  // useEffect((userId) => {
+  //   dispatch(fetchSingleUser(userId));
+  //   console.log("ID:", userId);
+  // });
+
+  if (!productId) {
     return <div>Loading...</div>;
   }
   return (
