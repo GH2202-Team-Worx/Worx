@@ -1,3 +1,4 @@
+
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
@@ -13,6 +14,7 @@ import AdminDashboard from "./components/AdminDash";
 import Orders from "./components/Orders";
 import SingleOrder from "./components/SingleOrder";
 
+
 /**
  * COMPONENT
  */
@@ -20,15 +22,7 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
-  // const { isLoggedIn } = this.props;
-  //   let loggedIn = ''
-
-  //   if (!isLoggedIn) {
-  //     loggedIn = (<Switch><Route path="/login" component={Login} />
-  //     <Route path="/signup" component={Signup} /></Switch>)
-  //   } else {
-  //     loggedIn = (<Switch><Route path="/signup" component={Signup} /></Switch>)
-  //   }
+  // need (if logged in) if admin show admindashbord else show userdash
 
   render() {
     return (
@@ -40,10 +34,12 @@ class Routes extends Component {
           <Route path="/contact" component={Contact} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/login" component={LoginForm} />
+
           <Route path="/signup" component={SignupForm} />
           <Route path="/admin" component={AdminDashboard} />
           <Route exact path="/orders" component={Orders} />
           <Route exact path="/orders/:orderId" component={SingleOrder} />
+          <Route path='/user' component={UserDashboard} />
         </Switch>
       </div>
     );

@@ -38,6 +38,7 @@ const AdminDashboard = () => {
   const handleImageChange = (e) => setImage(e.target.value);
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
     console.log("is this working?");
     //console.log('newProduct quant', newProduct)
@@ -147,4 +148,4 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-// 'name, description,material, epoxycolor,price, category, image, customizable, featured, quant.'
+
