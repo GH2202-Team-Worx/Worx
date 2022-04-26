@@ -8,14 +8,6 @@ import { fetchSingleUser } from "../store/users";
 
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
-  // const [user, setUser] = useState({})
-  // const dispatch = useDispatch()
-  // const {name} = useParams()
-  // console.log('name', name)
-  // useEffect(() => {
-  //   const currentUser = dispatch(fetchSingleUser(params.id))
-  //   setUser(currentUser)
-  // })
   let signIn = ''
   if (isLoggedIn) {
     signIn = (
@@ -24,7 +16,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
         <a href="#" onClick={handleClick}>
           Logout
         </a>
-        <Link to='/admin'>My Dashboard</Link>
+        <Link to='/user'>My Profile</Link>
       </div>
     )
   } else {
