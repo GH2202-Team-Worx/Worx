@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { Order, OrderProduct, User, Product } = require('../db/models');
 module.exports = router;
 
+const stripe = require("stripe")('sk_test_51KsV0OFre9FhvB1NlvzO4wwWGcZewRVasAQWN2tMHYXWai1DuUKgtjqvQ02W2HP4WE9V8rNOCbHPUbTjyiBCFtMP00qlnXLZnJ');
+
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
 
 //save order
@@ -115,4 +117,25 @@ router.put('/cart/:productId', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+});
+
+//stripe route
+router.post("/create-payment-intent", async (req, res, next) => {
+  // Create a PaymentIntent with the order amount and currency
+  try{
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: req.body.cartTotal,
+      currency: "usd",
+      // automatic_payment_methods: {
+      //   enabled: true,
+      // },
+      payment_method_types: ['card']
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (err) {
+    next(err);
+  }
+
 });

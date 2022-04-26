@@ -33,7 +33,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </button>
         </form>
         <Link to="/contact">Contact Us</Link>
-        <Link to="/checkout">Cart</Link>
+        <Link to="/cart">Cart</Link>
       </div>
       {isLoggedIn ? (
         <div>

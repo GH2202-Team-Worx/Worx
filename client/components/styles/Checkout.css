@@ -4,4 +4,10 @@
   justify-content: center;
   align-items: center;
   width: 80%;
+  list-style: none;
+}
+
+.checkout-image {
+  width: 100px;
+  height: auto;
 }
