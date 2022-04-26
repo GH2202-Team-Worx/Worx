@@ -10,6 +10,7 @@ import { me } from './store';
 import SingleProduct from './components/SingleProduct';
 import SignupForm from './components/SignupForm';
 import AdminDashboard from './components/AdminDash';
+import UserDashboard from './components/UserDash';
 
 /**
  * COMPONENT
@@ -18,15 +19,7 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
-  // const { isLoggedIn } = this.props;
-  //   let loggedIn = ''
-
-  //   if (!isLoggedIn) {
-  //     loggedIn = (<Switch><Route path="/login" component={Login} />
-  //     <Route path="/signup" component={Signup} /></Switch>)
-  //   } else {
-  //     loggedIn = (<Switch><Route path="/signup" component={Signup} /></Switch>)
-  //   }
+  // need (if logged in) if admin show admindashbord else show userdash
 
   render() {
     return (
@@ -40,6 +33,7 @@ class Routes extends Component {
           <Route path="/login" component={LoginForm} />
           <Route path='/signup' component={SignupForm} />
           <Route path='/admin' component={AdminDashboard} />
+          <Route path='/user' component={UserDashboard} />
         </Switch>
       </div>
     );

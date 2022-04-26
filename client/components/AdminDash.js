@@ -40,8 +40,6 @@ const AdminDashboard = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('is this working?')
-    //console.log('newProduct quant', newProduct)
     dispatch(createProduct({ name, description, material, epoxyColor, price, category, image, customizable, featured, quantity }))
   }
 
@@ -78,4 +76,3 @@ const AdminDashboard = () => {
 }
 
 export default AdminDashboard
-// 'name, description,material, epoxycolor,price, category, image, customizable, featured, quant.'
