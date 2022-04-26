@@ -38,6 +38,10 @@ const AdminDashboard = () => {
   const handleImageChange = (e) => setImage(e.target.value);
 
   const handleSubmit = (event) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 171d827cb82d1cf618de511cd412b78ec1e4842f
     event.preventDefault();
     dispatch(
       createProduct({
