@@ -61,9 +61,18 @@ router.post('/cart', async (req, res, next) => {
         gift: prod.gift,
       },
     });
-    const productInfo = await Product.findByPk(prod.id);
+    // // const productInfo = await Product.findByPk(prod.id);
+    // const productInfo = await OrderProduct.findOne({
+    //   where: {
+    //     productId: prod.id,
+    //     orderId: product.orderId
+    //   },
+    //   include: {
+    //     model: Product
+    //   }
+    // })
 
-    res.send({ cart, product, productInfo });
+    res.send({ cart, product });
   } catch (err) {
     next(err);
   }

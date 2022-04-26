@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -19,6 +19,7 @@ const Cart = () => {
   // Getting items from localStorage
   // const storedItems = JSON.parse(localStorage.getItem("cartItems"));
 
+  //login check inside useEffect
   const deleteItemHandler = (item) => {
     isLoggedIn
       ? dispatch(deleteProduct(auth.id, item.id))
