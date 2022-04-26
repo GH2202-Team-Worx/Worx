@@ -17,6 +17,7 @@ const Cart = () => {
   const [customization, setCustomization] = useState('');
   const [isGift, setIsGift] = useState(false);
   const auth = useSelector((state) => state.auth);
+
   // Getting items from localStorage
   // const storedItems = JSON.parse(localStorage.getItem("cartItems"));
 

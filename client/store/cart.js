@@ -111,8 +111,6 @@ export const intendToPurchase = (cartTotal) => {
         cartTotal,
       });
       dispatch(_intendToPurchase(data));
-      console.log('intend to purchase worked!!!');
-      console.log(data);
     } catch (err) {
       console.error('Unable to create payment intent...', err);
     }

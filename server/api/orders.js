@@ -18,7 +18,6 @@ router.get('/:userId', async (req, res, next) => {
       },
       include: Product,
     });
-    console.log('CART', cart.products);
     res.send(cart);
   } catch (err) {
     console.error('🥸 Unable to get order from db');
