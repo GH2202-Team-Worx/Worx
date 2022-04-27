@@ -8,7 +8,7 @@ const stripe = require('stripe')(
 
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
 
-// GET api/orders
+// GET api/orders/:userId
 router.get('/:userId', async (req, res, next) => {
   try {
     const cart = await Order.findOne({
@@ -21,6 +21,26 @@ router.get('/:userId', async (req, res, next) => {
     res.send(cart);
   } catch (err) {
     console.error('🥸 Unable to get order from db');
+  }
+});
+
+// GET /api/orders   only avilable from admin dashboard
+router.get('/', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll();
+    res.send(orders);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// GET /api/orders/:orderId  only available from admin dashboard
+router.get('/:orderId', async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.params.orderId);
+    res.send(order);
+  } catch (err) {
+    console.log('Unable to retrive product from database...');
     next(err);
   }
 });

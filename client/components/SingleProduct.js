@@ -14,6 +14,10 @@ const SingleProduct = (props) => {
   // console.log("CURRENT CART: ", currentCart);
   // console.log("PRODUCT: ", product);
 
+  // const user = useSelector((state) => {
+  //   return state.usersReducer;
+  // });
+
   const productId = props.match.params.productId;
 
   useEffect(() => {
@@ -22,7 +26,9 @@ const SingleProduct = (props) => {
 
   //I added some ternary logic here to see if this is a guest/logged in (based on how it was done in the NavBar). If logged in, addProduct through thunk. If not, _addProduct through action creator so that it doesn't persist in the db.
   const handleAddToCart = () => {
-    isLoggedIn ? dispatch(addProduct(auth.id, product)) : dispatch(_addProduct(product));
+    isLoggedIn
+      ? dispatch(addProduct(auth.id, product))
+      : dispatch(_addProduct(product));
     // let storedItemsArray = JSON.parse(localStorage.getItem("cartItems"));
     // console.log(storedItemsArray);
     // let windowItemsArray = [];
