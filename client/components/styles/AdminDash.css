@@ -1,0 +1,14 @@
+.admin-dash-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 50px;
+}
+.admin-dash-button {
+  padding: 15px;
+  font-weight: bold;
+  background-color: darkolivegreen;
+  color: white;
+  border-radius: 7px;
+}

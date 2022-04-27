@@ -19,6 +19,8 @@ import Reviews from './components/Reviews';
 import { getCart, intendToPurchase } from './store/cart';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import AddProduct from './components/AddProduct';
+import AllUsers from './components/AllUsers';
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -86,6 +88,8 @@ const Routes = () => {
         <Route path="/order/confirmation" component={OrderConfirmation} />
         <Route path="/user" component={UserDashboard} />
         <Route path="/review" component={Reviews} />
+        <Route exact path="/addproduct" component={AddProduct} />
+        <Route path="/allUsers" component={AllUsers} />
       </Switch>
     </div>
   );

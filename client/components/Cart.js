@@ -50,49 +50,43 @@ const Cart = () => {
           {cartItems.length === 0 ? (
             <p>There are no items in your cart.</p>
           ) : (
-            cartItems.map((item) => {
-              // console.log('cart item: ', item);
-              return (
-                <div key={item.id}>
-                  <p>{item.name}</p>
-                  <img className="checkout-image" src={item.image} />
-                  <p>{`$${item.price}`}</p>
-                  <button type="button" onClick={() => deleteItemHandler(item)}>
-                    Delete Item
-                  </button>
-                  <p>
-                    {isLoggedIn && item.customization
-                      ? `Current customization is: ${item.customization}`
-                      : ''}
-                  </p>
-                  <label htmlFor="customization">Edit Customization:</label>
-                  <input
-                    type="text"
-                    id={`customization.${item.id}`}
-                    name={`customization.${item.id}`}
-                    // we don't know why this works but without id it changes every product in cart
-                    value={customization}
-                    onChange={(e) => {
-                      if (`customization.${item.id}` === e.target.name)
-                        setCustomization(e.target.value);
-                    }}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => editItemHandler(item, customization)}
-                  >
-                    Save Customization
-                  </button>
-                  <label htmlFor="isGift">Is this a gift?</label>
-                  <input
-                    type="checkbox"
-                    id="isGift"
-                    name="isGift"
-                    onClick={() => setIsGift(!isGift)}
-                  />
-                </div>
-              );
-            })
+            cartItems.map((item) => (
+              <div key={item.id}>
+                <p>{item.name}</p>
+                <img className="checkout-image" src={item.image} />
+                <p>{`$${item.price}`}</p>
+                <button type="button" onClick={() => deleteItemHandler(item)}>
+                  Delete Item
+                </button>
+                <p>
+                  {item.customization
+                    ? `Current customization is: ${item.customization}`
+                    : ''}
+                </p>
+                <label htmlFor="customization">Edit Customization:</label>
+                <input
+                  type="text"
+                  id="customization"
+                  name="customization"
+                  // we don't know why this works but without id it changes every product in cart
+                  value={customization.id}
+                  onChange={(e) => setCustomization(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={() => editItemHandler(item, customization)}
+                >
+                  Save Customization
+                </button>
+                <label htmlFor="isGift">Is this a gift?</label>
+                <input
+                  type="checkbox"
+                  id="isGift"
+                  name="isGift"
+                  onClick={() => setIsGift(!isGift)}
+                />
+              </div>
+            ))
           )}
           <div>{`Total Price: $${cartTotal}`}</div>
         </div>

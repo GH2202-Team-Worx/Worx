@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { logout } from '../store';
-import './styles/Navbar.css';
-import icon from '../../public/photos/WoodWorxIcon.jpeg';
-import { fetchSingleUser } from '../store/users';
-
+import React, { useState, useEffect } from "react";
+import { connect, useSelector, useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { logout } from "../store";
+import "./styles/Navbar.css";
+import icon from "../../public/photos/WoodWorxIcon.jpeg";
+import { fetchSingleUser } from "../store/users";
 
 // is admin function?
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
@@ -34,24 +33,25 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
           </form>
           <Link to="/contact">Contact Us</Link>
           <Link to="/cart">
-            Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''}{' '}
+            Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
           </Link>
         </div>
-        {(isLoggedIn
-          ? (
+        {isLoggedIn ? (
           <div>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
-            {(isAdmin ? <Link to='/admin'>My Dashboard</Link> : <Link to='/user'>My Profile</Link>) }
+            {isAdmin ? (
+              <Link to="/admin">My Dashboard</Link>
+            ) : (
+              <Link to="/user">My Profile</Link>
+            )}
           </div>
-            )
-          : (
+        ) : (
           <div>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
           </div>
-            )
         )}
       </nav>
       {/* <hr /> */}
@@ -65,16 +65,16 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
-    isAdmin: state.auth.isAdmin
-  }
-}
+    isAdmin: state.auth.isAdmin,
+  };
+};
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick () {
-      dispatch(logout())
-    }
-  }
-}
+    handleClick() {
+      dispatch(logout());
+    },
+  };
+};
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar);

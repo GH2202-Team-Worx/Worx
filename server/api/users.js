@@ -1,61 +1,89 @@
-const router = require('express').Router()
-const { User } = require('../db/models')
-const Order = require('../db/models/Order')
-module.exports = router
+const router = require("express").Router();
+const { User, Product } = require("../db/models");
+const Order = require("../db/models/Order");
+module.exports = router;
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'email']
-    })
-    res.json(users)
+      attributes: ["id", "email"],
+    });
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   // if admin, can make new person admin, if not admin can not set self/newperson to admin
   try {
-    await User.create(req.body)
-    res.sendStatus(201)
+    await User.create(req.body);
+    res.sendStatus(201);
   } catch (err) {
-    if (err.name === 'SequelizeUniqueConstraintError') {
-      res.status(401).send('User already exists')
+    if (err.name === "SequelizeUniqueConstraintError") {
+      res.status(401).send("User already exists");
     } else {
-      next(err)
+      next(err);
     }
   }
-})
+});
 
-router.put('/:id', async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
-        id: req.params.id
-      }
-    })
-    res.send(await user.update(req.body))
-    res.status(202)
+        id: req.params.id,
+      },
+    });
+    res.send(await user.update(req.body));
+    res.status(202);
   } catch (err) {
-    next(err)
+    next(err);
+  }
+});
+
+// GET /api/users/id need eager loading to include
+router.get("/:id", async (req, res, next) => {
+  try {
+    console.log("userId for orders", req.params.id);
+    const userOrders = await User.findByPk(req.params.id, {
+      include: {
+        model: Order,
+      },
+    });
+    console.log("retrieved orders for user", userOrders);
+    res.send(userOrders);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/:userId/cart", async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        userId: req.params.userId,
+        status: "Cart",
+      },
+      include: { model: Product, required: false },
+    });
+    res.send(cart);
+  } catch (err) {
+    console.error("Unable to get order from db");
+    next(err);
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
-    console.log("userId for orders", req.params.id)
-    const userOrders = await Order.findAll({
-      where: {
-        userId: req.params.id
-      }
-    })
-    console.log("retrieved orders for user", userOrders)
-    res.send(userOrders)
+    //const deleteUser = User.findByPk(req.params.id)
+    //console.log(deleteUser)
+    await User.destroy({ where: { id: req.params.id } });
+    res.status(204).end();
   } catch (err) {
-    next(err)
+    next(err);
   }
 })

@@ -40,7 +40,7 @@ const _intendToPurchase = (clientSecret) => ({
 export const getCart = (userId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`api/orders/${userId}`);
+      const { data } = await axios.get(`/api/users/${userId}/cart`);
       dispatch(_getCart(data.products));
     } catch (err) {
       console.error('😭 Unable to grab cart', err);

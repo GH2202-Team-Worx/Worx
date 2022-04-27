@@ -8,23 +8,6 @@ const stripe = require('stripe')(
 
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
 
-// GET api/orders/:userId
-router.get('/:userId', async (req, res, next) => {
-  try {
-    const cart = await Order.findOne({
-      where: {
-        userId: req.params.userId,
-        status: 'Cart',
-      },
-      include: Product,
-    });
-    res.send(cart);
-  } catch (err) {
-    console.error('🥸 Unable to get order from db');
-    next(err);
-  }
-});
-
 // GET /api/orders   only avilable from admin dashboard
 router.get('/', async (req, res, next) => {
   try {
@@ -37,11 +20,30 @@ router.get('/', async (req, res, next) => {
 
 // GET /api/orders/:orderId  only available from admin dashboard
 router.get('/:orderId', async (req, res, next) => {
+  console.log('API route HIT!');
   try {
+    console.log('PARAMS', req.params);
     const order = await Order.findByPk(req.params.orderId);
     res.send(order);
   } catch (err) {
     console.log('Unable to retrive product from database...');
+    next(err);
+  }
+});
+
+// PUT /api/orders/:orderId    update an order from admin dashboard
+
+router.put('/:orderId', async (req, res, next) => {
+  console.log('params', req.params);
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: req.params.orderId,
+      },
+    });
+    res.send(await order.update(req.body));
+    res.status(202);
+  } catch (err) {
     next(err);
   }
 });

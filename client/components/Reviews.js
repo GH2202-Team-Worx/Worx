@@ -7,13 +7,35 @@ const Reviews = () => {
   const [review, setReview] = useState('');
   const [name, setName] = useState('');
   const reviews = useSelector((state) => state.reviews);
+
+  // console.log('reviews', reviews)
+
   useEffect(() => {
     dispatch(fetchReviews());
-  });
+  }, []);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
   };
+
+  let listOfReviews;
+
+  if (reviews !== undefined) {
+    listOfReviews = reviews.map((review) => {
+      return (
+        <div key={review.id}>
+          <h3>{review.name}</h3>
+          <h4>{review.description}</h4>
+        </div>
+      );
+    });
+  } else {
+    listOfReviews = (
+      <div>
+        <h3>No reviews at this time.</h3>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -35,7 +57,7 @@ const Reviews = () => {
         />
         <button type="submit">Submit</button>
       </form>
-      <div>{/* {reviews.length} */}</div>
+      <div>{listOfReviews}</div>
     </div>
   );
 };
