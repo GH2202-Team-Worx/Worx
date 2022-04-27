@@ -28,10 +28,10 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
       </div>
       <nav className="nav-links">
         <div>
-          {/* <form>
+          <form>
             <input className="search-input" type="text" placeholder="Search Products Here" />
             <button className="search-button" type="submit">Search</button>
-          </form> */}
+          </form>
           <Link to="/contact">Contact Us</Link>
           <Link to="/cart">
             Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''}{' '}
