@@ -17,7 +17,6 @@ const LoginForm = props => {
     const email = evt.target.email.value
     const password = evt.target.password.value
     dispatch(authenticate(email, password, formName))
-    history.push('/')
   }
   // need to check if user is admin, if so need to make new page where admins can see all orders placed
   // get user id

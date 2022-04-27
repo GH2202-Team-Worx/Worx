@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  deleteProduct,
-  _deleteProduct,
-  sendOrder,
-  intendToPurchase,
-} from '../store/cart';
+import { sendOrder } from '../store/cart';
 import ShippingInformation from './ShippingInformation';
-import BillingInformation from './BillingInformation';
+// import BillingInformation from './BillingInformation';
 import {
   PaymentElement,
   useStripe,
@@ -24,19 +19,19 @@ const Checkout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [shipping, setShipping] = useState({
     phone: 0,
-    //fullname item on shipping info
+    shipName: '',
     streetOne: '',
     streetTwo: '',
     city: '',
     state: '',
     zip: 0,
   });
-  const [billing, setBilling] = useState({
-    name: '',
-    ccn: 0,
-    expiry: 0,
-    cvc: 0,
-  });
+  // const [billing, setBilling] = useState({
+  //   name: '',
+  //   ccn: 0,
+  //   expiry: 0,
+  //   cvc: 0,
+  // });
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.auth.id);
@@ -53,11 +48,48 @@ const Checkout = () => {
   // Getting items from localStorage
   // const storedItems = JSON.parse(localStorage.getItem("cartItems"));
 
-  const sendOrderHandler = () => {
-    //compile shipping into sep strings for db
-    //cartItems, cartTotal, shipping, billing
-    dispatch(sendOrder(cartItems, cartTotal));
-  };
+  // const sendOrderHandler = () => {
+  //   //compile shipping into sep strings for db
+  //   //cartItems, cartTotal, shipping, billing
+
+  // };
+
+  useEffect(() => {
+    if (!stripe) {
+      return;
+    }
+
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      'payment_intent_client_secret'
+    );
+
+    if (!clientSecret) {
+      return;
+    }
+
+    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+      switch (paymentIntent.status) {
+        case 'succeeded':
+          setMessage('Payment succeeded!');
+          console.log('SUCCESS 💅🏼');
+          // dispatch(sendOrder(cartItems, cartTotal));
+          break;
+        case 'processing':
+          setMessage('Your payment is processing.');
+          console.log('PROCESSING 🦺');
+          break;
+        case 'requires_payment_method':
+          setMessage('Your payment was not successful, please try again.');
+          console.log('TRY AGAIN 🦄');
+          break;
+        default:
+          setMessage('Something went wrong.');
+          console.log('FAILURE ⛑');
+
+          break;
+      }
+    });
+  }, [stripe]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,7 +106,7 @@ const Checkout = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: 'http://localhost:3000',
+        return_url: 'http://localhost:8080/order/confirmation',
       },
     });
 
@@ -105,7 +137,7 @@ const Checkout = () => {
                 <p>{item.name}</p>
                 <img className="checkout-image" src={item.image} />
                 <ul>
-                  <li>{item.description}</li>
+                  {/* <li>{item.description}</li> */}
                   <li>{`$${item.price}`}</li>
                   <li>{`customization: ${
                     item.customization ? item.customization : 'none'
@@ -120,13 +152,17 @@ const Checkout = () => {
       </div>
       <div className="checkout-shippingBilling-container">
         <ShippingInformation shipping={shipping} setShipping={setShipping} />
-        <BillingInformation billing={billing} setBilling={setBilling} />
+        {/* <BillingInformation billing={billing} setBilling={setBilling} /> */}
       </div>
-      <button onClick={sendOrderHandler}>Place Order</button>
+      {/* <button onClick={sendOrderHandler}>Place Order</button> */}
 
       <form id="payment-form" onSubmit={handleSubmit}>
         <PaymentElement id="payment-element" />
-        <button disabled={isLoading || !stripe || !elements} id="submit">
+        <button
+          // onClick={sendOrderHandler}
+          disabled={isLoading || !stripe || !elements}
+          id="submit"
+        >
           <span id="button-text">
             {isLoading ? (
               <div className="spinner" id="spinner"></div>
