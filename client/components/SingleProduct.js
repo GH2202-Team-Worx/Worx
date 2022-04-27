@@ -1,14 +1,18 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProduct } from "../store/singleProduct";
-import { fetchSingleUser } from "../store/users";
-import "./styles/SingleProduct.css";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getProduct } from '../store/singleProduct';
+import { _addProduct, addProduct } from '../store/cart';
+import './styles/SingleProduct.css';
 
 const SingleProduct = (props) => {
   const dispatch = useDispatch();
-  const product = useSelector((state) => {
-    return state.singleProduct;
-  });
+  const product = useSelector((state) => state.singleProduct);
+  const auth = useSelector((state) => state.auth);
+  //const currentCart = useSelector((state) => state.cartReducer);
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
+
+  // console.log("CURRENT CART: ", currentCart);
+  // console.log("PRODUCT: ", product);
 
   // const user = useSelector((state) => {
   //   return state.usersReducer;
@@ -17,17 +21,23 @@ const SingleProduct = (props) => {
   const productId = props.match.params.productId;
 
   useEffect(() => {
-    dispatch(fetchProduct(productId));
+    dispatch(getProduct(productId));
   }, []);
 
-  // const userId = props.match.params.id;
+  //I added some ternary logic here to see if this is a guest/logged in (based on how it was done in the NavBar). If logged in, addProduct through thunk. If not, _addProduct through action creator so that it doesn't persist in the db.
+  const handleAddToCart = () => {
+    isLoggedIn
+      ? dispatch(addProduct(auth.id, product))
+      : dispatch(_addProduct(product));
+    // let storedItemsArray = JSON.parse(localStorage.getItem("cartItems"));
+    // console.log(storedItemsArray);
+    // let windowItemsArray = [];
+    // windowItemsArray.push(product);
+    // localStorage.setItem("cartItems", JSON.stringify(storedItems));
+    localStorage.setItem(`${product.id}`, JSON.stringify(product));
+  };
 
-  // useEffect((userId) => {
-  //   dispatch(fetchSingleUser(userId));
-  //   console.log("ID:", userId);
-  // });
-
-  if (!productId) {
+  if (!product) {
     return <div>Loading...</div>;
   }
   return (
@@ -45,7 +55,7 @@ const SingleProduct = (props) => {
             Shipping Information: Please allow 3-5 business days for shipping
             after the product is completed.
           </p>
-          <button className="sp-button" type="submit">
+          <button className="sp-button" type="button" onClick={handleAddToCart}>
             Add to Cart
           </button>
         </div>
