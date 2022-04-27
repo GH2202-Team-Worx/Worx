@@ -11,8 +11,10 @@ import { me } from "./store";
 import SingleProduct from "./components/SingleProduct";
 import SignupForm from "./components/SignupForm";
 import AdminDashboard from "./components/AdminDash";
+import UserDashboard from "./components/UserDash";
 import Orders from "./components/Orders";
 import SingleOrder from "./components/SingleOrder";
+import Reviews from "./components/Reviews";
 
 
 /**
@@ -40,6 +42,7 @@ class Routes extends Component {
           <Route exact path="/orders" component={Orders} />
           <Route exact path="/orders/:orderId" component={SingleOrder} />
           <Route path='/user' component={UserDashboard} />
+          <Route path='/review' component={Reviews} />
         </Switch>
       </div>
     );
