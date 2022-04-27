@@ -1,14 +1,25 @@
-import React, {useState, useEffect} from "react";
-import { connect, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { logout } from "../store";
-import "./styles/Navbar.css";
-import icon from "../../public/photos/WoodWorxIcon.jpeg";
-import { fetchSingleUser } from "../store/users";
-
+import React, { useState, useEffect } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { logout } from '../store';
+import './styles/Navbar.css';
+import icon from '../../public/photos/WoodWorxIcon.jpeg';
+import { fetchSingleUser } from '../store/users';
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
-  let signIn = ''
+  // const [user, setUser] = useState({})
+  // const dispatch = useDispatch()
+  // const {name} = useParams()
+  // console.log('name', name)
+  // useEffect(() => {
+  //   const currentUser = dispatch(fetchSingleUser(params.id))
+  //   setUser(currentUser)
+  // })
+  // const cartItems = {length: 3}
+
+  const { cartItems } = useSelector((state) => state.cartReducer);
+
+  let signIn = '';
   if (isLoggedIn) {
     signIn = (
       <div>
@@ -16,16 +27,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
         <a href="#" onClick={handleClick}>
           Logout
         </a>
-        <Link to='/user'>My Profile</Link>
+        <Link to="/admin">My Dashboard</Link>
       </div>
-    )
+    );
   } else {
     signIn = (
       <div>
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
       </div>
-    )
+    );
   }
 
   return (
@@ -45,19 +56,21 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       </div>
       <nav className="nav-links">
         <div>
-          <form>
+          {/* <form>
             <input className="search-input" type="text" placeholder="Search Products Here" />
             <button className="search-button" type="submit">Search</button>
-          </form>
+          </form> */}
           <Link to="/contact">Contact Us</Link>
-          <Link to="/checkout">Cart</Link>
+          <Link to="/cart">
+            Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''}{' '}
+          </Link>
         </div>
         {signIn}
       </nav>
       {/* <hr /> */}
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
@@ -73,7 +86,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout());
     },
-    singleUser: (id) => dispatch(fetchSingleUser(id))
+    singleUser: (id) => dispatch(fetchSingleUser(id)),
   };
 };
 
