@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// GET /api/orders/:orderId  only available from admin dashboard
+// GET /api/orders/:orderId    only available from admin dashboard
 
 router.get("/:orderId", async (req, res, next) => {
   try {
@@ -23,6 +23,23 @@ router.get("/:orderId", async (req, res, next) => {
     res.send(order);
   } catch (err) {
     console.log("Unable to retrive product from database...");
+    next(err);
+  }
+});
+
+// PUT /api/orders/:orderId    update an order from admin dashboard
+
+router.put("/:orderId", async (req, res, next) => {
+  console.log("params", req.params);
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: req.params.orderId,
+      },
+    });
+    res.send(await order.update(req.body));
+    res.status(202);
+  } catch (err) {
     next(err);
   }
 });

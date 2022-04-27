@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { logout } from "../store";
@@ -6,9 +6,8 @@ import "./styles/Navbar.css";
 import icon from "../../public/photos/WoodWorxIcon.jpeg";
 import { fetchSingleUser } from "../store/users";
 
-
 const Navbar = ({ handleClick, isLoggedIn }) => {
-  let signIn = ''
+  let signIn = "";
   if (isLoggedIn) {
     signIn = (
       <div>
@@ -16,16 +15,17 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
         <a href="#" onClick={handleClick}>
           Logout
         </a>
-        <Link to='/user'>My Profile</Link>
+        {/* <Link to='/user'>My Profile</Link> */}
+        <Link to="/admin">My Dashboard</Link>
       </div>
-    )
+    );
   } else {
     signIn = (
       <div>
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
       </div>
-    )
+    );
   }
 
   return (
@@ -46,8 +46,14 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       <nav className="nav-links">
         <div>
           <form>
-            <input className="search-input" type="text" placeholder="Search Products Here" />
-            <button className="search-button" type="submit">Search</button>
+            <input
+              className="search-input"
+              type="text"
+              placeholder="Search Products Here"
+            />
+            <button className="search-button" type="submit">
+              Search
+            </button>
           </form>
           <Link to="/contact">Contact Us</Link>
           <Link to="/checkout">Cart</Link>
@@ -56,8 +62,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       </nav>
       {/* <hr /> */}
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
@@ -73,7 +79,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout());
     },
-    singleUser: (id) => dispatch(fetchSingleUser(id))
+    singleUser: (id) => dispatch(fetchSingleUser(id)),
   };
 };
 

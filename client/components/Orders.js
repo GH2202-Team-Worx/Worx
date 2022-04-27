@@ -29,7 +29,6 @@ const Orders = (props) => {
       return currentOrders;
     }
   };
-  console.log("CHECK", currentOrders);
 
   return (
     <div>
