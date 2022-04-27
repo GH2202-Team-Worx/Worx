@@ -21,6 +21,7 @@ router.get('/:userId', async (req, res, next) => {
     res.send(cart);
   } catch (err) {
     console.error('🥸 Unable to get order from db');
+    next(err);
   }
 });
 
@@ -141,7 +142,7 @@ router.put('/cart/:productId', async (req, res, next) => {
       },
     });
 
-    const editedProd = req.body.product.orderproduct
+    const editedProd = req.body.product.orderproduct;
 
     cartProduct.gift = editedProd.gift;
     cartProduct.customization = editedProd.customization;
@@ -158,15 +159,14 @@ router.put('/cart/:productId', async (req, res, next) => {
 router.post('/create-payment-intent', async (req, res, next) => {
   // Create a PaymentIntent with the order amount and currency
   try {
+    //this can be taken out and amount can be req.body.cartTotal once db is adjusted to multiple everything by 100 (stripe does not include the decimals)
+    const amount = req.body.cartTotal * 100;
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: req.body.cartTotal,
-      // amount: 50,
+      amount,
       currency: 'usd',
-      // automatic_payment_methods: {
-      //   enabled: true,
       payment_method_types: ['card'],
-      })
-      res.send({clientSecret: paymentIntent.client_secret});
+    });
+    res.send({ clientSecret: paymentIntent.client_secret });
   } catch (err) {
     next(err);
   }

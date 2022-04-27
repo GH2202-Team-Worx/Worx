@@ -134,6 +134,7 @@ export default function cartReducer(state = initialState, action) {
         (prevVal, currentVal) => prevVal + +currentVal.price,
         0
       );
+
       return {
         ...state,
         cartItems: cart,
@@ -145,7 +146,6 @@ export default function cartReducer(state = initialState, action) {
       const newItems = [...state.cartItems, action.product];
       // Update cartTotal amount
       const newTotal = state.cartTotal + +action.product.price;
-      console.log('cart items from store', newItems)
       return {
         ...state,
         cartItems: newItems,
