@@ -107,7 +107,6 @@ export const sendOrder = (cartItems, cartTotal) => {
 export const intendToPurchase = (cartTotal) => {
   return async (dispatch) => {
     try {
-      console.log('CART TOTAL:', cartTotal);
       const { data } = await axios.post('/api/orders/create-payment-intent', {
         cartTotal,
       });
@@ -175,7 +174,7 @@ export default function cartReducer(state = initialState, action) {
     case PURCHASE_INTENT:
       return {
         ...state,
-        clientSecret: action.clientSecret,
+        clientSecret: action.clientSecret.clientSecret,
       };
     // case SEND_ORDER:
     //payload coming in for sendorder are the cartitems that were just posted as a cart to backend

@@ -11,6 +11,7 @@ import { me } from './store';
 import SingleProduct from './components/SingleProduct';
 import SignupForm from './components/SignupForm';
 import AdminDashboard from './components/AdminDash';
+import OrderConfirmation from './components/OrderConfirmation';
 import { getCart, intendToPurchase } from './store/cart';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -76,6 +77,7 @@ const Routes = () => {
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         <Route path="/admin" component={AdminDashboard} />
+        <Route path="/order-confirmation" component={OrderConfirmation} />
       </Switch>
     </div>
   );
