@@ -55,11 +55,17 @@ const Routes = () => {
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/contact" component={Contact} />
         <Route path="/cart" component={Cart} />
-        {/* {clientSecret && ( */}
-        {/* <Elements options={options} stripe={stripePromise}> */}
-        <Route path="/checkout" component={Checkout} />
-        {/* </Elements> */}
-        {/* )} */}
+
+        <Route
+          path="/checkout"
+          component={() =>
+            clientSecret && (
+              <Elements options={options} stripe={stripePromise}>
+                <Checkout />
+              </Elements>
+            )
+          }
+        />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         <Route path="/admin" component={AdminDashboard} />

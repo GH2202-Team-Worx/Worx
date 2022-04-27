@@ -11,3 +11,13 @@
   width: 100px;
   height: auto;
 }
+
+.checkout-container button {
+  background-color: #dac2ac;
+  padding: 7px 7px;
+  font-weight: bold;
+  font-size: 1rem;
+  align-self: center;
+  justify-content: flex-end;
+  border: none;
+}
