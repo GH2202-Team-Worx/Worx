@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createProduct } from "../store/products";
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [material, setMaterial] = useState("");

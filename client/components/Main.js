@@ -2,6 +2,7 @@ import React from "react";
 import FeaturedProd from "./FeaturedProd";
 import "./styles/main.css";
 import familyPhoto from "../../public/photos/cropped_family_photo.png";
+import Reviews from './Reviews'
 
 const Main = () => {
   return (
@@ -35,6 +36,9 @@ const Main = () => {
               American dream.
             </p>
           </div>
+        </div>
+        <div>
+          <Reviews />
         </div>
       </div>
     </React.Fragment>
