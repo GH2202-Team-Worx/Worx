@@ -1,64 +1,65 @@
-import React, { useEffect, Fragment } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { withRouter, Route, Switch } from 'react-router-dom'
-import LoginForm from './components/LoginForm'
-import AllProducts from './components/AllProducts'
-import Main from './components/Main'
-import Checkout from './components/Checkout'
-import Cart from './components/Cart'
-import Contact from './components/Contact'
-import { me } from './store'
-import SingleProduct from './components/SingleProduct'
-import SignupForm from './components/SignupForm'
-import AdminDashboard from './components/AdminDash'
-import OrderConfirmation from './components/OrderConfirmation'
-import Orders from './components/Orders'
-import SingleOrder from './components/SingleOrder'
-import UserDashboard from './components/UserDash'
-import Reviews from './components/Reviews'
-import { getCart, intendToPurchase } from './store/cart'
-import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js'
+import React, { useEffect, Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { withRouter, Route, Switch } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
+import AllProducts from "./components/AllProducts";
+import Main from "./components/Main";
+import Checkout from "./components/Checkout";
+import Cart from "./components/Cart";
+import Contact from "./components/Contact";
+import { me } from "./store";
+import SingleProduct from "./components/SingleProduct";
+import SignupForm from "./components/SignupForm";
+import AdminDashboard from "./components/AdminDash";
+import OrderConfirmation from "./components/OrderConfirmation";
+import Orders from "./components/Orders";
+import SingleOrder from "./components/SingleOrder";
+import UserDashboard from "./components/UserDash";
+import Reviews from "./components/Reviews";
+import { getCart, intendToPurchase } from "./store/cart";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import AddProduct from "./components/AddProduct";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
 const stripePromise = loadStripe(
-  'pk_test_51KsV0OFre9FhvB1Nn9maNQyFsjbnUnTmzUadLpoQxqD0nKhbcep8g7WQ96OJ35jhTSnRzYOucWnO5ihmXvpjlHIf00lsp2xvDl'
-)
+  "pk_test_51KsV0OFre9FhvB1Nn9maNQyFsjbnUnTmzUadLpoQxqD0nKhbcep8g7WQ96OJ35jhTSnRzYOucWnO5ihmXvpjlHIf00lsp2xvDl"
+);
 
 /**
  * COMPONENT
  */
 const Routes = () => {
-  const dispatch = useDispatch()
-  const isLoggedIn = useSelector((state) => !!state.auth.id)
-  const auth = useSelector((state) => state.auth)
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const auth = useSelector((state) => state.auth);
   const { cartItems, cartTotal, clientSecret } = useSelector(
     (state) => state.cartReducer
-  )
+  );
 
   useEffect(() => {
-    dispatch(me())
-  }, [])
+    dispatch(me());
+  }, []);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     // after stripe works, before using website calc cartTotal on backend and use THAT total to send to stripe
-    if (cartTotal) dispatch(intendToPurchase(cartTotal))
-  }, [cartItems])
+    if (cartTotal) dispatch(intendToPurchase(cartTotal));
+  }, [cartItems]);
 
   useEffect(() => {
-    if (isLoggedIn) dispatch(getCart(auth.id))
-  }, [isLoggedIn])
+    if (isLoggedIn) dispatch(getCart(auth.id));
+  }, [isLoggedIn]);
 
   const appearance = {
-    theme: 'stripe'
-  }
+    theme: "stripe",
+  };
   const options = {
     clientSecret,
-    appearance
-  }
+    appearance,
+  };
 
   return (
     <div>
@@ -85,11 +86,12 @@ const Routes = () => {
         <Route exact path="/orders/:orderId" component={SingleOrder} />
         <Route path="/order/confirmation" component={OrderConfirmation} />
         <Route path="/user" component={UserDashboard} />
-        <Route path='/review' component={Reviews} />
+        <Route path="/review" component={Reviews} />
+        <Route exact path="/addproduct" component={AddProduct} />
       </Switch>
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
@@ -118,7 +120,7 @@ const Routes = () => {
 // when the url changes
 // export default withRouter(connect(mapState, mapDispatch)(Routes));
 
-export default Routes
+export default Routes;
 
 // componentDidMount() {
 // this.props.loadInitialData();

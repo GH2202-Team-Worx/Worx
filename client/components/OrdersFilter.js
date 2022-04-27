@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import "./styles/Filter.css";
 
 const OrdersFilter = (props) => {
   const dropDownChangeHandler = (event) => {
+    console.log("EVENT: ", event.target.value);
     props.onChangeFilter(event.target.value);
   };
 
   return (
     <div>
-      <label htmlFor="status-select">Check orders by status:</label>
+      {/* <label htmlFor="status-select">Status:</label> */}
       <select
+        className="category-dropdown"
         name="status"
         value={props.selected}
         onChange={dropDownChangeHandler}
       >
-        <option value="">Please choose an option</option>
+        <option value="">Select status</option>
         <option value="Created">Created</option>
         <option value="Processing">Processing</option>
         <option value="Cancelled">Cancelled</option>

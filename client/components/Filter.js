@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles/Filter.css";
 
 const Filter = (props) => {
   const dropDownChangeHandler = (event) => {
@@ -7,8 +8,9 @@ const Filter = (props) => {
 
   return (
     <div>
-      <label htmlFor="category-select">Choose a category:</label>
+      {/* <label htmlFor="category-select">Choose a category:</label> */}
       <select
+        className="category-dropdown"
         name="category"
         value={props.selected}
         onChange={dropDownChangeHandler}

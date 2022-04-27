@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   getCart,
   deleteProduct,
   _deleteProduct,
   editProduct,
   _editProduct,
-} from '../store/cart';
-import './styles/Checkout.css';
+} from "../store/cart";
+import "./styles/Checkout.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
-  const [customization, setCustomization] = useState('');
+  const [customization, setCustomization] = useState("");
   const [isGift, setIsGift] = useState(false);
   const auth = useSelector((state) => state.auth);
 
@@ -59,9 +59,9 @@ const Cart = () => {
                   Delete Item
                 </button>
                 <p>
-                  {item.orderproduct.customization
-                    ? `Current customization is: ${item.orderproduct.customization}`
-                    : ''}
+                  {item.customization
+                    ? `Current customization is: ${item.customization}`
+                    : ""}
                 </p>
                 <label htmlFor="customization">Edit Customization:</label>
                 <input

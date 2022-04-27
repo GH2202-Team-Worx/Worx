@@ -1,31 +1,15 @@
-const router = require('express').Router();
-const { Order, OrderProduct, User, Product } = require('../db/models');
+const router = require("express").Router();
+const { Order, OrderProduct, User, Product } = require("../db/models");
 module.exports = router;
 
-const stripe = require('stripe')(
-  'sk_test_51KsV0OFre9FhvB1NlvzO4wwWGcZewRVasAQWN2tMHYXWai1DuUKgtjqvQ02W2HP4WE9V8rNOCbHPUbTjyiBCFtMP00qlnXLZnJ'
+const stripe = require("stripe")(
+  "sk_test_51KsV0OFre9FhvB1NlvzO4wwWGcZewRVasAQWN2tMHYXWai1DuUKgtjqvQ02W2HP4WE9V8rNOCbHPUbTjyiBCFtMP00qlnXLZnJ"
 );
 
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
 
-// GET api/orders/:userId
-router.get('/:userId', async (req, res, next) => {
-  try {
-    const cart = await Order.findOne({
-      where: {
-        userId: req.params.userId,
-        status: 'Cart',
-      },
-      include: Product,
-    });
-    res.send(cart);
-  } catch (err) {
-    console.error('🥸 Unable to get order from db');
-  }
-});
-
 // GET /api/orders   only avilable from admin dashboard
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const orders = await Order.findAll();
     res.send(orders);
@@ -35,18 +19,37 @@ router.get('/', async (req, res, next) => {
 });
 
 // GET /api/orders/:orderId  only available from admin dashboard
-router.get('/:orderId', async (req, res, next) => {
+router.get("/:orderId", async (req, res, next) => {
+  console.log("API route HIT!");
   try {
+    console.log("PARAMS", req.params);
     const order = await Order.findByPk(req.params.orderId);
     res.send(order);
   } catch (err) {
-    console.log('Unable to retrive product from database...');
+    console.log("Unable to retrive product from database...");
+    next(err);
+  }
+});
+
+// PUT /api/orders/:orderId    update an order from admin dashboard
+
+router.put("/:orderId", async (req, res, next) => {
+  console.log("params", req.params);
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: req.params.orderId,
+      },
+    });
+    res.send(await order.update(req.body));
+    res.status(202);
+  } catch (err) {
     next(err);
   }
 });
 
 //save order
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const order = await Order.create(req.body);
     const products = await Promise.all(
@@ -77,12 +80,12 @@ router.post('/', async (req, res, next) => {
 //create and add to cart
 //front end should send product and userId - server will find the order or create one
 //returns order and product
-router.post('/cart', async (req, res, next) => {
+router.post("/cart", async (req, res, next) => {
   try {
     const [cart] = await Order.findOrCreate({
       where: {
         userId: req.body.userId,
-        status: 'Cart',
+        status: "Cart",
       },
       defaults: {
         status: req.body.status,
@@ -108,12 +111,12 @@ router.post('/cart', async (req, res, next) => {
 //remove item from cart
 //front end should send userId in req.body
 //returns all cart products w/o deleted one
-router.delete('/cart/:productId', async (req, res, next) => {
+router.delete("/cart/:productId", async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: {
         userId: req.body.userId,
-        status: 'Cart',
+        status: "Cart",
       },
     });
     cart.removeProduct(req.params.productId);
@@ -126,12 +129,12 @@ router.delete('/cart/:productId', async (req, res, next) => {
 //update items in cart
 //front end should send userId and updated orderProduct in req.body
 //returns updated orderProduct info
-router.put('/cart/:productId', async (req, res, next) => {
+router.put("/cart/:productId", async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: {
         userId: req.body.userId,
-        status: 'Cart',
+        status: "Cart",
       },
     });
     const cartProduct = await OrderProduct.findOne({
@@ -152,12 +155,12 @@ router.put('/cart/:productId', async (req, res, next) => {
 });
 
 //stripe route
-router.post('/create-payment-intent', async (req, res, next) => {
+router.post("/create-payment-intent", async (req, res, next) => {
   // Create a PaymentIntent with the order amount and currency
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: req.body.cartTotal,
-      currency: 'usd',
+      currency: "usd",
       automatic_payment_methods: {
         enabled: true,
       },

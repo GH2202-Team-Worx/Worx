@@ -1,0 +1,21 @@
+/* .orders-main {
+  display: flex;
+} */
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.orders-items-container {
+  display: flex;
+  gap: 40px;
+}
+
+.view-orders-title {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
