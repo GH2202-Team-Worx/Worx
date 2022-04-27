@@ -19,6 +19,7 @@ export const fetchReviews = () => {
 export default function reviewReducer(state = [], action) {
   switch (action.type) {
     case GET_REVIEWS:
+      console.log('reviews in shop', action.reviews)
       return action.reviews
     default:
       return state

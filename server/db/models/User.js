@@ -18,8 +18,12 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
   },
-  firstName: Sequelize.STRING,
-  lastName: Sequelize.STRING,
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING,
+  },
   address: { type: Sequelize.STRING },
   phone: { type: Sequelize.STRING },
   isGuest: { type: Sequelize.BOOLEAN, defaultValue: true },
