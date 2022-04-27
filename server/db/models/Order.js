@@ -5,6 +5,7 @@ const Order = db.define('order', {
   status: {
     type: Sequelize.ENUM('Cart', 'Processing', 'Completed'),
   },
+  shippingName: Sequelize.STRING,
   shippingAddress: Sequelize.STRING,
   paymentInfo: Sequelize.STRING,
   shippingAmt: {

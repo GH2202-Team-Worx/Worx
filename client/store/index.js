@@ -7,6 +7,7 @@ import products from "./products";
 import singleProduct from "./singleProduct";
 import createUserReducer from "./newUser";
 import usersReducer from "./users";
+import cartReducer from './cart';
 import ordersReducer from "./orders";
 import orderReducer from "./singleOrder";
 import reviewReducer from "./reviews";
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   auth,
   products,
   singleProduct,
+  cartReducer,
   createUserReducer,
   usersReducer,
   ordersReducer,
@@ -27,4 +29,4 @@ const middleware = composeWithDevTools(
 const store = createStore(reducer, middleware);
 
 export default store;
-export * from "./auth";
+export * from './auth';

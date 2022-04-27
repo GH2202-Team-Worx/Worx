@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { connect, useDispatch } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
-import { logout } from '../store'
-import './styles/Navbar.css'
-import icon from '../../public/photos/WoodWorxIcon.jpeg'
+import React, { useState, useEffect } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { logout } from '../store';
+import './styles/Navbar.css';
+import icon from '../../public/photos/WoodWorxIcon.jpeg';
+import { fetchSingleUser } from '../store/users';
+
 
 // is admin function?
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
+  const { cartItems } = useSelector((state) => state.cartReducer);
+
   return (
     <div className="navbar-container">
       <div className="navbar-left-elements">
@@ -24,12 +28,14 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
       </div>
       <nav className="nav-links">
         <div>
-          <form>
+          {/* <form>
             <input className="search-input" type="text" placeholder="Search Products Here" />
             <button className="search-button" type="submit">Search</button>
-          </form>
+          </form> */}
           <Link to="/contact">Contact Us</Link>
-          <Link to="/checkout">Cart</Link>
+          <Link to="/cart">
+            Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''}{' '}
+          </Link>
         </div>
         {(isLoggedIn
           ? (
@@ -50,8 +56,8 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
       </nav>
       {/* <hr /> */}
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER

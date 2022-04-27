@@ -1,12 +1,31 @@
-const router = require("express").Router();
-const { Order, OrderProduct, User, Product } = require("../db/models");
+const router = require('express').Router();
+const { Order, OrderProduct, User, Product } = require('../db/models');
 module.exports = router;
+
+const stripe = require('stripe')(
+  'sk_test_51KsV0OFre9FhvB1NlvzO4wwWGcZewRVasAQWN2tMHYXWai1DuUKgtjqvQ02W2HP4WE9V8rNOCbHPUbTjyiBCFtMP00qlnXLZnJ'
+);
 
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.
 
-// GET /api/orders   only avilable from admin dashboard
+// GET api/orders/:userId
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const cart = await Order.findOne({
+      where: {
+        userId: req.params.userId,
+        status: 'Cart',
+      },
+      include: Product,
+    });
+    res.send(cart);
+  } catch (err) {
+    console.error('🥸 Unable to get order from db');
+  }
+});
 
-router.get("/", async (req, res, next) => {
+// GET /api/orders   only avilable from admin dashboard
+router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll();
     res.send(orders);
@@ -16,19 +35,18 @@ router.get("/", async (req, res, next) => {
 });
 
 // GET /api/orders/:orderId  only available from admin dashboard
-
-router.get("/:orderId", async (req, res, next) => {
+router.get('/:orderId', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.orderId);
     res.send(order);
   } catch (err) {
-    console.log("Unable to retrive product from database...");
+    console.log('Unable to retrive product from database...');
     next(err);
   }
 });
 
 //save order
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const order = await Order.create(req.body);
     const products = await Promise.all(
@@ -39,9 +57,10 @@ router.post("/", async (req, res, next) => {
               orderId: order.id,
               productId: prod.id,
               customization: prod.customization,
-              sellPrice: prod.sellPrice,
+              price: prod.price,
               gift: prod.gift,
               quantity: prod.quantity,
+              name: prod.name,
             },
           })
       )
@@ -56,21 +75,17 @@ router.post("/", async (req, res, next) => {
 //if user is logged in, front end should send cart data to server via "api/order/cart" with status "Cart" whenever cart is modified.
 
 //create and add to cart
-//front end should send product and order - server will find the order or create one
-//returns cart and product
-router.post("/cart", async (req, res, next) => {
+//front end should send product and userId - server will find the order or create one
+//returns order and product
+router.post('/cart', async (req, res, next) => {
   try {
-    const [cart, created] = await Order.findOrCreate({
+    const [cart] = await Order.findOrCreate({
       where: {
         userId: req.body.userId,
-        status: "Cart",
+        status: 'Cart',
       },
       defaults: {
         status: req.body.status,
-        shippingAddress: req.body.shippingAddress,
-        paymentInfo: req.body.paymentInfo,
-        shippingAmt: req.body.shippingAmt,
-        taxAmt: req.body.taxAmt,
       },
     });
     const prod = req.body.product;
@@ -79,10 +94,11 @@ router.post("/cart", async (req, res, next) => {
         orderId: cart.id,
         productId: prod.id,
         customization: prod.customization,
-        sellPrice: prod.sellPrice,
+        price: prod.price,
         gift: prod.gift,
       },
     });
+
     res.send({ cart, product });
   } catch (err) {
     next(err);
@@ -92,17 +108,16 @@ router.post("/cart", async (req, res, next) => {
 //remove item from cart
 //front end should send userId in req.body
 //returns all cart products w/o deleted one
-router.delete("/cart/:productId", async (req, res, next) => {
+router.delete('/cart/:productId', async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: {
         userId: req.body.userId,
-        status: "Cart",
+        status: 'Cart',
       },
     });
     cart.removeProduct(req.params.productId);
-    const cartProds = await cart.getProducts();
-    res.send(cartProds);
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
@@ -111,12 +126,12 @@ router.delete("/cart/:productId", async (req, res, next) => {
 //update items in cart
 //front end should send userId and updated orderProduct in req.body
 //returns updated orderProduct info
-router.put("/cart/:productId", async (req, res, next) => {
+router.put('/cart/:productId', async (req, res, next) => {
   try {
     const cart = await Order.findOne({
       where: {
         userId: req.body.userId,
-        status: "Cart",
+        status: 'Cart',
       },
     });
     const cartProduct = await OrderProduct.findOne({
@@ -127,10 +142,30 @@ router.put("/cart/:productId", async (req, res, next) => {
     });
     cartProduct.gift = req.body.product.gift;
     cartProduct.customization = req.body.product.customization;
-    cartProduct.sellPrice = req.body.product.sellPrice;
+    cartProduct.price = req.body.product.price;
     cartProduct.quantity = req.body.product.quantity;
     await cartProduct.save();
     res.send(cartProduct);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//stripe route
+router.post('/create-payment-intent', async (req, res, next) => {
+  // Create a PaymentIntent with the order amount and currency
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: req.body.cartTotal,
+      currency: 'usd',
+      automatic_payment_methods: {
+        enabled: true,
+      },
+      // payment_method_types: ['card'],
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
   } catch (err) {
     next(err);
   }
