@@ -11,7 +11,7 @@ import { me } from './store';
 import SingleProduct from './components/SingleProduct';
 import SignupForm from './components/SignupForm';
 import AdminDashboard from './components/AdminDash';
-import { intendToPurchase } from './store/cart';
+import { getCart, intendToPurchase } from './store/cart';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
@@ -28,16 +28,24 @@ const stripePromise = loadStripe(
 const Routes = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const auth = useSelector((state) => state.auth);
   const { cartItems, cartTotal, clientSecret } = useSelector(
     (state) => state.cartReducer
   );
 
   useEffect(() => {
     dispatch(me());
+  }, []);
+
+  useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     //after stripe works, before using website calc cartTotal on backend and use THAT total to send to stripe
     if (cartTotal) dispatch(intendToPurchase(cartTotal));
-  }, []);
+  }, [cartItems]);
+
+  useEffect(() => {
+    if (isLoggedIn) dispatch(getCart(auth.id));
+  }, [isLoggedIn]);
 
   const appearance = {
     theme: 'stripe',
@@ -55,11 +63,16 @@ const Routes = () => {
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/contact" component={Contact} />
         <Route path="/cart" component={Cart} />
-        {/* {clientSecret && ( */}
-        {/* <Elements options={options} stripe={stripePromise}> */}
-        <Route path="/checkout" component={Checkout} />
-        {/* </Elements> */}
-        {/* )} */}
+        <Route
+          path="/checkout"
+          component={() =>
+            clientSecret && (
+              <Elements options={options} stripe={stripePromise}>
+                <Checkout />
+              </Elements>
+            )
+          }
+        />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         <Route path="/admin" component={AdminDashboard} />

@@ -107,6 +107,7 @@ export const sendOrder = (cartItems, cartTotal) => {
 export const intendToPurchase = (cartTotal) => {
   return async (dispatch) => {
     try {
+      console.log('CART TOTAL:', cartTotal);
       const { data } = await axios.post('/api/orders/create-payment-intent', {
         cartTotal,
       });
