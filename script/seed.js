@@ -73,6 +73,17 @@ const users = [
   }
 ];
 
+const reviews = [
+  {
+    name: 'Angel',
+    description: 'Great product. It definitely exceeded ALL expectations, absolutely perfect.'
+  },
+  {
+    name: 'Alex',
+    description: 'Excellent bowls, excellent lids.'
+  }
+]
+
 const products = [
   {
     name: 'Blue Hickory',

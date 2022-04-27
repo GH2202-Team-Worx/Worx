@@ -10,18 +10,17 @@ const UserDashboard = (props) => {
     return state.auth
   })
   const orders = useSelector((state) => {
-    console.log('state orders use selector', state)
     return state.ordersReducer
   })
+
   const history = useHistory()
   const dispatch = useDispatch()
+
   useEffect(() => {
     if (user.id) {
       dispatch(getUserOrders(user.id))
     }
   }, [user])
-
-  console.log('orders?', orders)
 
   const id = user.id
   const [firstName, setFirstName] = useState(props.firstName)
