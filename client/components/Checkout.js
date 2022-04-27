@@ -33,8 +33,9 @@ const Checkout = () => {
   //   cvc: 0,
   // });
 
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  // const dispatch = useDispatch();
+  //eventually we may want to check if someone is logged in so that we can ask them if they want to make an acct if they aren't
+  // const isLoggedIn = useSelector((state) => !!state.auth.id);
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
 
   const stripe = useStripe();
@@ -171,7 +172,7 @@ const Checkout = () => {
             )}
           </span>
         </button>
-        {/* Show any error or success messages */}
+        {/* Show any error or success messages - can we make them red? */}
         {message && <div id="payment-message">{message}</div>}
       </form>
     </div>

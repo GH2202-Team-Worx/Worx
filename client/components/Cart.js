@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   getCart,
   deleteProduct,
   _deleteProduct,
   editProduct,
   _editProduct,
-} from "../store/cart";
-import "./styles/Checkout.css";
+} from '../store/cart';
+import './styles/Checkout.css';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
-  const [customization, setCustomization] = useState("");
+  const [customization, setCustomization] = useState(
+    cartItems.map((item) =>
+      item.orderproduct ? item.orderproduct.customization : ''
+    )
+  );
   const [isGift, setIsGift] = useState(false);
   const auth = useSelector((state) => state.auth);
 
@@ -26,6 +30,17 @@ const Cart = () => {
   useEffect(() => {
     if (isLoggedIn) dispatch(getCart(auth.id));
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn)
+      setCustomization(
+        cartItems.map((item) =>
+          item.orderproduct && item.orderproduct.customization
+            ? item.orderproduct.customization
+            : ''
+        )
+      );
+  }, [cartItems]);
 
   const deleteItemHandler = (item) => {
     isLoggedIn
@@ -50,7 +65,7 @@ const Cart = () => {
           {cartItems.length === 0 ? (
             <p>There are no items in your cart.</p>
           ) : (
-            cartItems.map((item) => (
+            cartItems.map((item, i) => (
               <div key={item.id}>
                 <p>{item.name}</p>
                 <img className="checkout-image" src={item.image} />
@@ -59,9 +74,9 @@ const Cart = () => {
                   Delete Item
                 </button>
                 <p>
-                  {item.customization
-                    ? `Current customization is: ${item.customization}`
-                    : ""}
+                  {item.orderproduct && item.orderproduct.customization
+                    ? `Current customization is: ${item.orderproduct.customization}`
+                    : ''}
                 </p>
                 <label htmlFor="customization">Edit Customization:</label>
                 <input
@@ -69,12 +84,18 @@ const Cart = () => {
                   id="customization"
                   name="customization"
                   // we don't know why this works but without id it changes every product in cart
-                  value={customization.id}
-                  onChange={(e) => setCustomization(e.target.value)}
+                  value={customization[i]}
+                  onChange={(e) =>
+                    setCustomization(
+                      customization.map((c, j) =>
+                        j === i ? e.target.value : c
+                      )
+                    )
+                  }
                 />
                 <button
                   type="button"
-                  onClick={() => editItemHandler(item, customization)}
+                  onClick={() => editItemHandler(item, customization[i])}
                 >
                   Save Customization
                 </button>
