@@ -6,38 +6,10 @@ import './styles/Navbar.css';
 import icon from '../../public/photos/WoodWorxIcon.jpeg';
 import { fetchSingleUser } from '../store/users';
 
-const Navbar = ({ handleClick, isLoggedIn }) => {
-  // const [user, setUser] = useState({})
-  // const dispatch = useDispatch()
-  // const {name} = useParams()
-  // console.log('name', name)
-  // useEffect(() => {
-  //   const currentUser = dispatch(fetchSingleUser(params.id))
-  //   setUser(currentUser)
-  // })
-  // const cartItems = {length: 3}
 
+// is admin function?
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
   const { cartItems } = useSelector((state) => state.cartReducer);
-
-  let signIn = '';
-  if (isLoggedIn) {
-    signIn = (
-      <div>
-        {/* <Link to="/">{this.auth}</Link> */}
-        <a href="#" onClick={handleClick}>
-          Logout
-        </a>
-        <Link to="/admin">My Dashboard</Link>
-      </div>
-    );
-  } else {
-    signIn = (
-      <div>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign Up</Link>
-      </div>
-    );
-  }
 
   return (
     <div className="navbar-container">
@@ -65,7 +37,22 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''}{' '}
           </Link>
         </div>
-        {signIn}
+        {(isLoggedIn
+          ? (
+          <div>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+            {(isAdmin ? <Link to='/admin'>My Dashboard</Link> : <Link to='/user'>My Profile</Link>) }
+          </div>
+            )
+          : (
+          <div>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+            )
+        )}
       </nav>
       {/* <hr /> */}
     </div>
@@ -78,16 +65,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
-  };
-};
+    isAdmin: state.auth.isAdmin
+  }
+}
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick() {
-      dispatch(logout());
-    },
-    singleUser: (id) => dispatch(fetchSingleUser(id)),
-  };
-};
+    handleClick () {
+      dispatch(logout())
+    }
+  }
+}
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default connect(mapState, mapDispatch)(Navbar)

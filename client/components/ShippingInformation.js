@@ -27,6 +27,15 @@ const ShippingInformation = (props) => {
           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
           onChange={handleChange}
         />
+        <label htmlFor="shipName">
+          <small>Name</small>
+        </label>
+        <input
+          name="shipName"
+          id="shipName"
+          type="text"
+          onChange={handleChange}
+        />
         <label htmlFor="address">
           <small>Street Address</small>
         </label>
