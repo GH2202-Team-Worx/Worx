@@ -48,15 +48,18 @@ export const getCart = (userId) => {
   };
 };
 
-//addProduct thunk is called only for loggedin users in SingleProduct.Since backend returns cart and product, I only passed the product to _addProduct. That way, guests and loggedin users can both use the _addProduct creator. BLOCKER: cannot sign in to test this
+//addProduct thunk is called only for loggedin users in SingleProduct.Since backend returns cart and product, I only passed the product to _addProduct. That way, guests and loggedin users can both use the _addProduct creator.
 export const addProduct = (userId, product) => {
   return async (dispatch) => {
     try {
-      await axios.post('/api/orders/cart', {
+      // console.log('user id from thunk: ', userId)
+      // console.log('prod from thunk: ', product)
+      const { data } = await axios.post('/api/orders/cart', {
         userId,
         product,
       });
-      dispatch(_addProduct(product));
+      // console.log('data back from api', data)
+      dispatch(_addProduct(data));
     } catch (err) {
       console.error('😤 Unable to add product', err);
     }
@@ -142,7 +145,7 @@ export default function cartReducer(state = initialState, action) {
       const newItems = [...state.cartItems, action.product];
       // Update cartTotal amount
       const newTotal = state.cartTotal + +action.product.price;
-
+      console.log('cart items from store', newItems)
       return {
         ...state,
         cartItems: newItems,

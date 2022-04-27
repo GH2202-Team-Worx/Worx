@@ -50,7 +50,10 @@ const Cart = () => {
           {cartItems.length === 0 ? (
             <p>There are no items in your cart.</p>
           ) : (
-            cartItems.map((item) => (
+            cartItems.map((item) =>
+            {
+              console.log('cart item: ', item);
+            return (
               <div key={item.id}>
                 <p>{item.name}</p>
                 <img className="checkout-image" src={item.image} />
@@ -59,7 +62,7 @@ const Cart = () => {
                   Delete Item
                 </button>
                 <p>
-                  {item.orderproduct.customization
+                  {isLoggedIn && item.orderproduct.customization
                     ? `Current customization is: ${item.orderproduct.customization}`
                     : ''}
                 </p>
@@ -86,7 +89,7 @@ const Cart = () => {
                   onClick={() => setIsGift(!isGift)}
                 />
               </div>
-            ))
+            )})
           )}
           <div>{`Total Price: $${cartTotal}`}</div>
         </div>

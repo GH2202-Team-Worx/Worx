@@ -76,7 +76,7 @@ router.post('/', async (req, res, next) => {
 
 //create and add to cart
 //front end should send product and userId - server will find the order or create one
-//returns order and product
+//returns updated orderProduct
 router.post('/cart', async (req, res, next) => {
   try {
     const [cart] = await Order.findOrCreate({
@@ -98,8 +98,8 @@ router.post('/cart', async (req, res, next) => {
         gift: prod.gift,
       },
     });
-
-    res.send({ cart, product });
+    // console.log('product from db', product)
+    res.send(product);
   } catch (err) {
     next(err);
   }
@@ -140,10 +140,13 @@ router.put('/cart/:productId', async (req, res, next) => {
         productId: req.body.product.id,
       },
     });
-    cartProduct.gift = req.body.product.gift;
-    cartProduct.customization = req.body.product.customization;
-    cartProduct.price = req.body.product.price;
-    cartProduct.quantity = req.body.product.quantity;
+
+    const editedProd = req.body.product.orderproduct
+
+    cartProduct.gift = editedProd.gift;
+    cartProduct.customization = editedProd.customization;
+    cartProduct.price = editedProd.price;
+    cartProduct.quantity = editedProd.quantity;
     await cartProduct.save();
     res.send(cartProduct);
   } catch (err) {
@@ -157,15 +160,13 @@ router.post('/create-payment-intent', async (req, res, next) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: req.body.cartTotal,
+      // amount: 50,
       currency: 'usd',
-      automatic_payment_methods: {
-        enabled: true,
-      },
-      // payment_method_types: ['card'],
-    });
-    res.send({
-      clientSecret: paymentIntent.client_secret,
-    });
+      // automatic_payment_methods: {
+      //   enabled: true,
+      payment_method_types: ['card'],
+      })
+      res.send({clientSecret: paymentIntent.client_secret});
   } catch (err) {
     next(err);
   }
