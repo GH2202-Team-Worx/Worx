@@ -2,22 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrder } from "../store/singleOrder";
+import { getOrders } from "../store/orders";
 import { updateOrder } from "../store/singleOrder";
 import OrdersFilter from "./OrdersFilter";
 import "./styles/SingleOrder.css";
 
 const SingleOrder = (props) => {
   const dispatch = useDispatch();
-  const order = useSelector((state) => {
-    return state.orderReducer;
-  });
-  console.log("ORDER: ", order, typeof order);
+  const order = useSelector((state) => state.orderReducer);
+  console.log("ORDER NEW: ", order, typeof order);
 
   const [status, setStatus] = useState(order.status);
-  // const [shippingAddress, setShippingAddress] = useState(order.shippingAddress);
-  // const [paymentInfo, setPaymentInfo] = useState(order.paymentInfo);
-  // const [shippingAmt, setShippingAmt] = useState(order.shippingAmt);
-  // const [taxAmt, setTaxAmt] = useState(order.taxAmt);
 
   const orderId = props.match.params.orderId;
 
@@ -29,26 +24,33 @@ const SingleOrder = (props) => {
     setStatus(selectedStatus);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("ORDERID: ", orderId);
-    const updatedOrderInfo = {
-      orderId,
-      status: status ? status : "Processing",
-      shippingAddress: shippingAddress ? shippingAddress : "",
-      paymentInfo: paymentInfo ? paymentInfo : "",
-      shippingAmt: shippingAmt ? shippingAmt : "",
-      taxAmt: taxAmt ? taxAmt : "",
-    };
-    dispatch(updateOrder(updatedOrderInfo, orderId));
-  };
+  // orderId,
+  //     status: status ? status : "Processing",
+  //     shippingAddress: shippingAddress ? shippingAddress : "",
+  //     paymentInfo: paymentInfo ? paymentInfo : "",
+  //     shippingAmt: shippingAmt ? shippingAmt : "",
+  //     taxAmt: taxAmt ? taxAmt : "",
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("ORDERTOSEND: ", order);
+  //   const updatedOrderInfo = {
+  //     orderId,
+  //     status: status,
+  //     shippingAddress: order.shippingAddress,
+  //     paymentInfo: order.paymentInfo,
+  //     shippingAmt: order.shippingAmt,
+  //     taxAmt: order.taxAmt,
+  //   };
+  //   dispatch(updateOrder(updatedOrderInfo, orderId));
+  // };
 
   return (
     <div>
-      {Object.keys(order).length ? (
+      {!Object.keys(order).length ? (
         <p>Loading</p>
       ) : (
-        <form className="so-container" onSubmit={handleSubmit}>
+        <form className="so-container">
           <h2 className="so-title">Review Order</h2>
           <p>Order Id: {order.id}</p>
           <p>UserId: {order.userId}</p>

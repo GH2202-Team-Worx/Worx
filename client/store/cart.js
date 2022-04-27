@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
-const GET_CART = 'GET_CART';
-const ADD_PRODUCT = 'ADD_PRODUCT';
-const EDIT_PRODUCT = 'EDIT_PRODUCT';
-const DELETE_ITEM = 'DELETE_ITEM';
-const SEND_ORDER = 'SEND_ORDER';
-const PURCHASE_INTENT = 'PURCHASE_INTENT';
+const GET_CART = "GET_CART";
+const ADD_PRODUCT = "ADD_PRODUCT";
+const EDIT_PRODUCT = "EDIT_PRODUCT";
+const DELETE_ITEM = "DELETE_ITEM";
+const SEND_ORDER = "SEND_ORDER";
+const PURCHASE_INTENT = "PURCHASE_INTENT";
 
 const _getCart = (cartProducts) => ({
   type: GET_CART,
@@ -40,10 +40,10 @@ const _intendToPurchase = (clientSecret) => ({
 export const getCart = (userId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`api/orders/${userId}`);
+      const { data } = await axios.get(`/api/users/${userId}/cart`);
       dispatch(_getCart(data.products));
     } catch (err) {
-      console.error('😭 Unable to grab cart', err);
+      console.error("😭 Unable to grab cart", err);
     }
   };
 };
@@ -52,13 +52,13 @@ export const getCart = (userId) => {
 export const addProduct = (userId, product) => {
   return async (dispatch) => {
     try {
-      await axios.post('/api/orders/cart', {
+      await axios.post("/api/orders/cart", {
         userId,
         product,
       });
       dispatch(_addProduct(product));
     } catch (err) {
-      console.error('😤 Unable to add product', err);
+      console.error("😤 Unable to add product", err);
     }
   };
 };
@@ -72,7 +72,7 @@ export const editProduct = (userId, product) => {
       });
       dispatch(_editProduct(product));
     } catch (err) {
-      console.error('😤 Unable to edit product', err);
+      console.error("😤 Unable to edit product", err);
     }
   };
 };
@@ -85,7 +85,7 @@ export const deleteProduct = (userId, product) => {
       });
       dispatch(_deleteProduct(product));
     } catch (err) {
-      console.error('😡 Unable to delete product', err);
+      console.error("😡 Unable to delete product", err);
     }
   };
 };
@@ -99,7 +99,7 @@ export const sendOrder = (cartItems, cartTotal) => {
       //what data is being returned here? Just this cart?
       dispatch(_sendOrder(data));
     } catch (err) {
-      console.error('Unable to send order...', err);
+      console.error("Unable to send order...", err);
     }
   };
 };
@@ -107,12 +107,12 @@ export const sendOrder = (cartItems, cartTotal) => {
 export const intendToPurchase = (cartTotal) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post('/api/orders/create-payment-intent', {
+      const { data } = await axios.post("/api/orders/create-payment-intent", {
         cartTotal,
       });
       dispatch(_intendToPurchase(data));
     } catch (err) {
-      console.error('Unable to create payment intent...', err);
+      console.error("Unable to create payment intent...", err);
     }
   };
 };
@@ -120,7 +120,7 @@ export const intendToPurchase = (cartTotal) => {
 const initialState = {
   cartItems: [],
   cartTotal: 0,
-  clientSecret: '',
+  clientSecret: "",
 };
 
 export default function cartReducer(state = initialState, action) {
