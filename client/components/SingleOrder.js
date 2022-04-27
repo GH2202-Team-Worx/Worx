@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { getOrder } from "../store/singleOrder";
 import { updateOrder } from "../store/singleOrder";
 import OrdersFilter from "./OrdersFilter";
+import "./styles/SingleOrder.css";
 
 const SingleOrder = (props) => {
   const dispatch = useDispatch();
   const order = useSelector((state) => {
     return state.orderReducer;
   });
-  if (order.status) {
-    console.log("ORDER", order);
-  }
+  console.log("ORDER: ", order, typeof order);
+
   const [status, setStatus] = useState(order.status);
-  console.log("STATUS: ", status);
-  const [shippingAddress, setShippingAddress] = useState(order.shippingAddress);
-  const [paymentInfo, setPaymentInfo] = useState(order.paymentInfo);
-  const [shippingAmt, setShippingAmt] = useState(order.shippingAmt);
-  const [taxAmt, setTaxAmt] = useState(order.taxAmt);
+  // const [shippingAddress, setShippingAddress] = useState(order.shippingAddress);
+  // const [paymentInfo, setPaymentInfo] = useState(order.paymentInfo);
+  // const [shippingAmt, setShippingAmt] = useState(order.shippingAmt);
+  // const [taxAmt, setTaxAmt] = useState(order.taxAmt);
 
   const orderId = props.match.params.orderId;
+
   useEffect(() => {
     dispatch(getOrder(orderId));
   }, []);
@@ -42,54 +43,31 @@ const SingleOrder = (props) => {
     dispatch(updateOrder(updatedOrderInfo, orderId));
   };
 
-  return order.status ? (
+  return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <h2>Review/Edit Order</h2>
-        <p>Order Id: {order.id}</p>
-        <p>UserId: {order.userId}</p>
-        <p>Status: </p>
-        <OrdersFilter selected={status} onChangeFilter={statusChangeHandler} />
-        <p>Shipping Address: </p>
-        <input
-          type="text"
-          // placeholder={order.shippingAddress}
-          value={shippingAddress}
-          required
-          onChange={setShippingAddress}
-        />
-        <p>Payment Information:</p>
-        <input
-          type="text"
-          placeholder={order.paymentInfo}
-          required
-          onChange={(e) => {
-            setPaymentInfo(e.target.value);
-          }}
-        />
-        <p>Shipping Amount:</p>
-        <input
-          type="text"
-          placeholder={order.shippingAmt}
-          required
-          onChange={(e) => {
-            setShippingAmt(e.target.value);
-          }}
-        />
-        <p>Tax Amount:</p>
-        <input
-          type="text"
-          placeholder={order.taxAmt}
-          required
-          onChange={(e) => {
-            setTaxAmt(e.target.value);
-          }}
-        />
-        <button type="submit">Submit Changes</button>
-      </form>
+      {Object.keys(order).length ? (
+        <p>Loading</p>
+      ) : (
+        <form className="so-container" onSubmit={handleSubmit}>
+          <h2 className="so-title">Review Order</h2>
+          <p>Order Id: {order.id}</p>
+          <p>UserId: {order.userId}</p>
+          <p>Status: {order.status}</p>
+          <p>Shipping Address:{order.shippingAddress}</p>
+          <p>Payment Information: {order.paymentInfo}</p>
+          <p>Shipping Amount: {order.shippingAmt}</p>
+          <p>Tax Amount: {order.taxAmt}</p>
+          <OrdersFilter
+            selected={status}
+            onChangeFilter={statusChangeHandler}
+          />
+          {/* <button type="submit">Submit Changes</button> */}
+        </form>
+      )}
+      <Link className="return-link" to="/orders">
+        Return to Orders
+      </Link>
     </div>
-  ) : (
-    "Loading order"
   );
 };
 

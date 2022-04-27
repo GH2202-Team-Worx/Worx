@@ -37,7 +37,10 @@ router.get("/", async (req, res, next) => {
 // GET /api/orders/:orderId  only available from admin dashboard
 router.get("/:orderId", async (req, res, next) => {
   try {
+    console.log("PARAMS", req.params);
     const order = await Order.findByPk(req.params.orderId);
+
+    console.log("apiORDER", order);
     res.send(order);
   } catch (err) {
     console.log("Unable to retrive product from database...");

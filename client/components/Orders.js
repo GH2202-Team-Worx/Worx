@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrders } from "../store/orders";
 import OrdersFilter from "./OrdersFilter";
+import "./styles/Orders.css";
 
 const Orders = (props) => {
   const dispatch = useDispatch();
@@ -31,30 +32,32 @@ const Orders = (props) => {
   };
 
   return (
-    <div>
-      <OrdersFilter
-        selected={filterStatus}
-        onChangeFilter={filterChangeHandler}
-      />
-      <h3>View Orders</h3>
-      <div>
-        {ordersToShow().length === 0 ? (
-          <p>No current orders.</p>
-        ) : (
-          ordersToShow().map((order) => {
-            return (
-              <div key={order.id}>
-                <h5>{order.id}</h5>
-                <div>{order.status}</div>
-                <div>{order.shippingAddress}</div>
-                <div>{order.paymentInfo}</div>
-                <div>{order.shippingAmt}</div>
-                <div>{order.taxAmt}</div>
-                <Link to={`/orders/${order.id}`}>View Order</Link>
-              </div>
-            );
-          })
-        )}
+    <div className="orders-main">
+      <div className="orders-container">
+        <OrdersFilter
+          selected={filterStatus}
+          onChangeFilter={filterChangeHandler}
+        />
+        <h3 className="view-orders-title">View Orders</h3>
+        <div className="orders-items-container">
+          {ordersToShow().length === 0 ? (
+            <p>No current orders.</p>
+          ) : (
+            ordersToShow().map((order) => {
+              return (
+                <div key={order.id}>
+                  <h5>OrderId: {order.id}</h5>
+                  <div>Status: {order.status}</div>
+                  <div>{order.shippingAddress}</div>
+                  <div>{order.paymentInfo}</div>
+                  <div>{order.shippingAmt}</div>
+                  <div>{order.taxAmt}</div>
+                  <Link to={`/orders/${order.id}`}>View Order</Link>
+                </div>
+              );
+            })
+          )}
+        </div>
       </div>
     </div>
   );

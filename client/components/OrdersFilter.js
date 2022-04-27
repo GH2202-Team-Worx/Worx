@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./styles/Filter.css";
 
 const OrdersFilter = (props) => {
   const dropDownChangeHandler = (event) => {
@@ -8,13 +9,14 @@ const OrdersFilter = (props) => {
 
   return (
     <div>
-      <label htmlFor="status-select">Status:</label>
+      {/* <label htmlFor="status-select">Status:</label> */}
       <select
+        className="category-dropdown"
         name="status"
         value={props.selected}
         onChange={dropDownChangeHandler}
       >
-        <option value="test">Please choose an option</option>
+        <option value="">Select status</option>
         <option value="Created">Created</option>
         <option value="Processing">Processing</option>
         <option value="Cancelled">Cancelled</option>
