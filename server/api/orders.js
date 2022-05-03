@@ -22,7 +22,6 @@ router.get("/", async (req, res, next) => {
 router.get("/:orderId", async (req, res, next) => {
   console.log("API route HIT!");
   try {
-    console.log("PARAMS", req.params);
     const order = await Order.findByPk(req.params.orderId);
     res.send(order);
   } catch (err) {
@@ -34,7 +33,7 @@ router.get("/:orderId", async (req, res, next) => {
 // PUT /api/orders/:orderId    update an order from admin dashboard
 
 router.put("/:orderId", async (req, res, next) => {
-  console.log("params", req.params);
+  console.log("update order route hit");
   try {
     const order = await Order.findOne({
       where: {

@@ -1,9 +1,16 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-const Order = db.define('order', {
+const Order = db.define("order", {
   status: {
-    type: Sequelize.ENUM('Cart', 'Processing', 'Completed'),
+    type: Sequelize.ENUM(
+      "Cart",
+      "Processing",
+      "Completed",
+      "Shipped",
+      "Cancelled",
+      "Created"
+    ),
   },
   shippingName: Sequelize.STRING,
   shippingAddress: Sequelize.STRING,
