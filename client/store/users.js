@@ -38,26 +38,43 @@ const _editUser = (user) => {
 export const fetchUpdatedUser = (data) => {
   return async (dispatch) => {
     try {
-      const { updatedUser } = await axios.put(`/api/users/${data.id}`, {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phone: data.phone,
-        address: data.address,
-      });
-      dispatch(_editUser(updatedUser));
+      const { updatedUser } = await axios.put(`/api/users/${data.id}`, { firstName: data.firstName, lastName: data.lastName, email: data.email, phone: data.phone, address: data.address, isAdmin: data.isAdmin})
+      dispatch(_editUser(updatedUser))
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-export default function usersReducer(state = [], action) {
+const DELETE_USER = 'DELETE_USER'
+
+export const deleteUser = (user) => {
+  return {
+    type: DELETE_USER,
+    user
+  }
+}
+
+export const DeleteUser = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data: user } = await axios.delete(`/api/users/${id}`)
+      dispatch(deleteUser(user))
+      dispatch(fetchUsers())
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export default function usersReducer (state = [], action) {
   switch (action.type) {
     case GET_USERS:
       return action.users;
     case SINGLE_USER:
-      return action.data;
+      return action.data
+    case DELETE_USER:
+      return state.filter((user) => user.id !== action.user.id)
     default:
       return state;
   }

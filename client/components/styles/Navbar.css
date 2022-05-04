@@ -3,9 +3,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: darkolivegreen;
+  background-color: #826e5c;
   gap: 10px;
-  background-image: url(../../../public/photos/WoodHeader.png);
+  background-image: url(http://localhost:8080/c841f3bbeaf456e8982b.png);
 }
 
 .navbar-left-elements {
@@ -46,12 +46,19 @@
 }
 
 .search-input {
-  border-radius: 7px;
+  /* border-radius: 7px; */
   padding: 5px;
 }
 
 .search-button {
-  padding: 5px;
-  border-radius: 7px;
+  padding: 5px 10px;
+  margin: 0 10px;
+  /* border-radius: 7px; */
   background-color: #dac2ac;
+  font-weight: bold;
+  font-size: 1rem;
+  align-self: center;
+  justify-content: flex-end;
+  border: none;
+
 }

@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
-const GET_CART = "GET_CART";
-const ADD_PRODUCT = "ADD_PRODUCT";
-const EDIT_PRODUCT = "EDIT_PRODUCT";
-const DELETE_ITEM = "DELETE_ITEM";
-const SEND_ORDER = "SEND_ORDER";
-const PURCHASE_INTENT = "PURCHASE_INTENT";
+const GET_CART = 'GET_CART';
+const ADD_PRODUCT = 'ADD_PRODUCT';
+const EDIT_PRODUCT = 'EDIT_PRODUCT';
+const DELETE_ITEM = 'DELETE_ITEM';
+const SEND_ORDER = 'SEND_ORDER';
+const PURCHASE_INTENT = 'PURCHASE_INTENT';
 
 const _getCart = (cartProducts) => ({
   type: GET_CART,
@@ -43,22 +43,25 @@ export const getCart = (userId) => {
       const { data } = await axios.get(`/api/users/${userId}/cart`);
       dispatch(_getCart(data.products));
     } catch (err) {
-      console.error("😭 Unable to grab cart", err);
+      console.error('😭 Unable to grab cart', err);
     }
   };
 };
 
-//addProduct thunk is called only for loggedin users in SingleProduct.Since backend returns cart and product, I only passed the product to _addProduct. That way, guests and loggedin users can both use the _addProduct creator. BLOCKER: cannot sign in to test this
+//addProduct thunk is called only for loggedin users in SingleProduct.Since backend returns cart and product, I only passed the product to _addProduct. That way, guests and loggedin users can both use the _addProduct creator.
 export const addProduct = (userId, product) => {
   return async (dispatch) => {
     try {
-      await axios.post("/api/orders/cart", {
+      // console.log('user id from thunk: ', userId)
+      // console.log('prod from thunk: ', product)
+      const { data } = await axios.post('/api/orders/cart', {
         userId,
         product,
       });
-      dispatch(_addProduct(product));
+      // console.log('data back from api', data)
+      dispatch(_addProduct(data));
     } catch (err) {
-      console.error("😤 Unable to add product", err);
+      console.error('😤 Unable to add product', err);
     }
   };
 };
@@ -72,7 +75,7 @@ export const editProduct = (userId, product) => {
       });
       dispatch(_editProduct(product));
     } catch (err) {
-      console.error("😤 Unable to edit product", err);
+      console.error('😤 Unable to edit product', err);
     }
   };
 };
@@ -85,7 +88,7 @@ export const deleteProduct = (userId, product) => {
       });
       dispatch(_deleteProduct(product));
     } catch (err) {
-      console.error("😡 Unable to delete product", err);
+      console.error('😡 Unable to delete product', err);
     }
   };
 };
@@ -99,7 +102,7 @@ export const sendOrder = (cartItems, cartTotal) => {
       //what data is being returned here? Just this cart?
       dispatch(_sendOrder(data));
     } catch (err) {
-      console.error("Unable to send order...", err);
+      console.error('Unable to send order...', err);
     }
   };
 };
@@ -107,12 +110,12 @@ export const sendOrder = (cartItems, cartTotal) => {
 export const intendToPurchase = (cartTotal) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post("/api/orders/create-payment-intent", {
+      const { data } = await axios.post('/api/orders/create-payment-intent', {
         cartTotal,
       });
       dispatch(_intendToPurchase(data));
     } catch (err) {
-      console.error("Unable to create payment intent...", err);
+      console.error('Unable to create payment intent...', err);
     }
   };
 };
@@ -120,7 +123,7 @@ export const intendToPurchase = (cartTotal) => {
 const initialState = {
   cartItems: [],
   cartTotal: 0,
-  clientSecret: "",
+  clientSecret: '',
 };
 
 export default function cartReducer(state = initialState, action) {
@@ -131,6 +134,7 @@ export default function cartReducer(state = initialState, action) {
         (prevVal, currentVal) => prevVal + +currentVal.price,
         0
       );
+
       return {
         ...state,
         cartItems: cart,
@@ -142,7 +146,6 @@ export default function cartReducer(state = initialState, action) {
       const newItems = [...state.cartItems, action.product];
       // Update cartTotal amount
       const newTotal = state.cartTotal + +action.product.price;
-
       return {
         ...state,
         cartItems: newItems,

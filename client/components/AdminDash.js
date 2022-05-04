@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { createProduct } from "../store/products";
 import "./styles/AdminDash.css";
+import AllUsers from './AllUsers'
 
 const AdminDashboard = () => {
   return (
@@ -10,7 +11,9 @@ const AdminDashboard = () => {
       <Link to="/orders">
         <button className="admin-dash-button">Manage Orders</button>
       </Link>
-      <button className="admin-dash-button">Manage Users</button>
+        <Link to='/allUsers'>
+          <button className="admin-dash-button">Manage Users</button>
+        </Link>
       <Link to="/addproduct">
         <button className="admin-dash-button">Manage Products</button>
       </Link>
