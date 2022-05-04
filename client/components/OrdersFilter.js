@@ -9,7 +9,6 @@ const OrdersFilter = (props) => {
 
   return (
     <div>
-      {/* <label htmlFor="status-select">Status:</label> */}
       <select
         className="category-dropdown"
         name="status"

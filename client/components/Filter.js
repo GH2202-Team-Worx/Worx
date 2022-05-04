@@ -8,7 +8,6 @@ const Filter = (props) => {
 
   return (
     <div>
-      {/* <label htmlFor="category-select">Choose a category:</label> */}
       <select
         className="category-dropdown"
         name="category"
