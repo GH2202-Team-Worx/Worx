@@ -21,6 +21,8 @@ const Filter = (props) => {
         <option value="Vase">Vase</option>
         <option value="Box">Box</option>
         <option value="Cutting board">Cutting Board</option>
+        <option value="low">Price: low to high</option>
+        <option value="high">Price: high to low</option>
       </select>
     </div>
   );

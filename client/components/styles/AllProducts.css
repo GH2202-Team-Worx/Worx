@@ -31,6 +31,10 @@
   width: 200px;
 }
 
+.product-container:hover {
+  transform: scale(1.1);
+}
+
 .allproducts-description {
   color: black;
   /* align-self: center; */

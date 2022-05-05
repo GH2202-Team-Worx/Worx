@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../store/products';
-import { Link } from 'react-router-dom';
-import './styles/AllProducts.css';
-import Filter from './Filter';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../store/products";
+import { Link } from "react-router-dom";
+import "./styles/AllProducts.css";
+import Filter from "./Filter";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
-  const [filteredCategory, setFilteredCategory] = useState('');
+  const [filteredCategory, setFilteredCategory] = useState("");
 
   useEffect(() => {
     dispatch(getProducts());
@@ -19,7 +19,11 @@ const AllProducts = () => {
   };
 
   const productsToShow = () => {
-    if (filteredCategory) {
+    if (filteredCategory === "low") {
+      return products.sort((a, b) => +a.price - +b.price);
+    } else if (filteredCategory === "high") {
+      return products.sort((a, b) => +b.price - +a.price);
+    } else if (filteredCategory) {
       const filteredProducts = products.filter(
         (product) => product.category === filteredCategory
       );
@@ -44,7 +48,7 @@ const AllProducts = () => {
         ) : (
           productsToShow().map((product) => {
             return (
-              <div key={product.id}>
+              <div className="product-container" key={product.id}>
                 <Link to={`/products/${product.id}`}>
                   <img
                     className="allproducts-image"
