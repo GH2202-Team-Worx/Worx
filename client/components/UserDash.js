@@ -41,7 +41,6 @@ const UserDashboard = (props) => {
       fetchUpdatedUser({ id, firstName, lastName, email, phone, address })
     );
   };
-  // dispatch orders
 
   let listOfOrders;
   if (orders.length > 0) {

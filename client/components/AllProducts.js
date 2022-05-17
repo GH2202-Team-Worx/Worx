@@ -4,11 +4,14 @@ import { getProducts } from "../store/products";
 import { Link } from "react-router-dom";
 import "./styles/AllProducts.css";
 import Filter from "./Filter";
+import MaterialColorFilter from "./MaterialColorFilter";
+import { Card, Button, Container, Col, Row } from "react-bootstrap";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   const [filteredCategory, setFilteredCategory] = useState("");
+  const [filteredMaterial, setFilteredMaterial] = useState("");
 
   useEffect(() => {
     dispatch(getProducts());
@@ -18,50 +21,73 @@ const AllProducts = () => {
     setFilteredCategory(selectedCategory);
   };
 
+  const materialChangeHandler = (selectedMaterial) => {
+    setFilteredMaterial(selectedMaterial);
+    console.log("HIT");
+  };
+  // need to separate out price filter
+  // have material && category filters work together
   const productsToShow = () => {
+    let sortedArray = products;
     if (filteredCategory === "low") {
-      return products.sort((a, b) => +a.price - +b.price);
+      sortedArray = products.sort((a, b) => +a.price - +b.price);
     } else if (filteredCategory === "high") {
-      return products.sort((a, b) => +b.price - +a.price);
+      sortedArray = products.sort((a, b) => +b.price - +a.price);
     } else if (filteredCategory) {
       const filteredProducts = products.filter(
         (product) => product.category === filteredCategory
       );
       return filteredProducts;
-    } else {
-      return products;
     }
+    return sortedArray;
   };
 
   return (
-    <div className="allproducts-container">
+    <div>
+      {/* className="allproducts-container" */}
       <div>
         <Filter
           selected={filteredCategory}
           onChangeFilter={filterChangeHandler}
         />
+        <MaterialColorFilter
+          selected={filteredMaterial}
+          onChange={materialChangeHandler}
+        />
       </div>
       <h3 className="allproducts-title">Products</h3>
-      <div className="allproducts-display">
-        {productsToShow().length === 0 ? (
-          <div>There are no products to show at this time</div>
-        ) : (
-          productsToShow().map((product) => {
-            return (
-              <div className="product-container" key={product.id}>
-                <Link to={`/products/${product.id}`}>
-                  <img
-                    className="allproducts-image"
-                    src={product.image}
-                    alt={product.name}
-                  />
-                  <div className="allproducts-title">{`${product.name} $${product.price}`}</div>
-                </Link>
-              </div>
-            );
-          })
-        )}
-      </div>
+      <Container className="allproducts-container">
+        <Row>
+          {productsToShow().length === 0 ? (
+            <div>There are no products to show at this time</div>
+          ) : (
+            productsToShow().map((product) => {
+              return (
+                // <div className="product-container" key={product.id}>
+                <Col md={4} key={product.id} className="product-container">
+                  <Card className="products-card">
+                    <Card.Img variant="top" src={product.image} />
+                    <Card.Body className="products-card-body">
+                      <Card.Title>
+                        {product.name} {product.price}
+                      </Card.Title>
+                      <Card.Text>{product.material}</Card.Text>
+                      <Link to={`/products/${product.id}`}>
+                        <Button
+                          variant="primary"
+                          className="product-card-button"
+                        >
+                          See Details
+                        </Button>
+                      </Link>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })
+          )}
+        </Row>
+      </Container>
     </div>
   );
 };
