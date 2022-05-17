@@ -7,14 +7,17 @@
 
 /* className="allproducts-display" */
 .product-container {
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 }
-
+.products-image {
+  height: 200px;
+}
 .allproducts-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #fceed6;
+  padding: 15px;
 }
 
 .allproducts-title {

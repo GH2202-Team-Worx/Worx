@@ -44,7 +44,6 @@ const AllProducts = () => {
 
   return (
     <div>
-      {/* className="allproducts-container" */}
       <div>
         <Filter
           selected={filteredCategory}
@@ -66,7 +65,11 @@ const AllProducts = () => {
                 // <div className="product-container" key={product.id}>
                 <Col md={4} key={product.id} className="product-container">
                   <Card className="products-card">
-                    <Card.Img variant="top" src={product.image} />
+                    <Card.Img
+                      variant="top"
+                      src={product.image}
+                      className="products-image"
+                    />
                     <Card.Body className="products-card-body">
                       <Card.Title>
                         {product.name} {product.price}

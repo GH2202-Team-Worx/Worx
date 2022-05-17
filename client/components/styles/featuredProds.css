@@ -11,7 +11,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  height: 100%;
+  border: none;
+  background-color: #f5ebd7;
+}
+
+.featured-card {
+  height: 100%;
+  justify-content: space-between;
+  align-content: space-between;
+  background-color: #f5ebd7;
+  border: none;
 }
 
 .featured-prods-container {
@@ -22,13 +33,14 @@
 }
 
 .featured-prod-image {
-  width: 50%;
-  padding: 10px 10px;
+  width: 100%;
+  height: 120px;
 }
 
 .featured-prod-name {
   align-self: center;
-  justify-content: center;
+  justify-content: flex-end;
+  font-size: 0.9rem;
 }
 
 .featured-products-title {
