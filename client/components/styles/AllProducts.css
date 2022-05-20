@@ -6,11 +6,17 @@
 }
 
 /* className="allproducts-display" */
+
+.allproducts-main {
+  padding: 50px;
+}
+
 .product-container {
   padding-bottom: 20px;
+  /* height: 30rem; */
 }
 .products-image {
-  height: 200px;
+  height: 100%;
 }
 .allproducts-container {
   display: flex;
@@ -18,6 +24,11 @@
   align-items: center;
   background-color: #fceed6;
   padding: 15px;
+  width: 90%;
+}
+
+.products-filter {
+  text-align: center;
 }
 
 .allproducts-title {
@@ -32,10 +43,17 @@
   background-color: #f8e0ca;
 } */
 
+.filters-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .product-card-button {
   align-content: flex-end;
   background-color: #5b8a72;
   color: white;
+  border: none;
   /* margin: auto; */
 }
 

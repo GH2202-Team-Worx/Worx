@@ -43,18 +43,20 @@ const AllProducts = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="allproducts-main">
+      <h3 className="allproducts-title">All Products</h3>
+      <div className="filters-div">
         <Filter
+          className="products-filter"
           selected={filteredCategory}
           onChangeFilter={filterChangeHandler}
         />
-        <MaterialColorFilter
+        {/* <MaterialColorFilter
+          className="products-filter"
           selected={filteredMaterial}
           onChange={materialChangeHandler}
-        />
+        /> */}
       </div>
-      <h3 className="allproducts-title">Products</h3>
       <Container className="allproducts-container">
         <Row>
           {productsToShow().length === 0 ? (
