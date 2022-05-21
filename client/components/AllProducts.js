@@ -76,7 +76,7 @@ const AllProducts = () => {
                       <Card.Title>
                         {product.name} {product.price}
                       </Card.Title>
-                      <Card.Text>{product.material}</Card.Text>
+                      <Card.Text>Material: {product.material}</Card.Text>
                       <Link to={`/products/${product.id}`}>
                         <Button
                           variant="primary"

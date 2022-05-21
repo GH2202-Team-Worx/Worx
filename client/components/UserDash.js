@@ -4,6 +4,7 @@ import { fetchUpdatedUser } from "../store/users";
 import { me } from "../store/auth";
 import { Link, useHistory } from "react-router-dom";
 import { getUserOrders } from "../store/orders";
+import "./styles/UserDash.css";
 
 const UserDashboard = (props) => {
   const user = useSelector((state) => {
@@ -21,6 +22,20 @@ const UserDashboard = (props) => {
       dispatch(getUserOrders(user.id));
     }
   }, [user]);
+
+  // const pastOrders = orders.filter((order) => order.status === "completed");
+  // const pastOrdersComponent = () => {
+  //   if(pastOrders.length){
+  //     pastOrders.map(order => {
+  //       return (
+  //         <>
+  //         <h3>{order.title}</h3>
+  //         </>
+  //       )
+  //     })
+  //   }
+
+  // }
 
   const id = user.id;
   const [firstName, setFirstName] = useState(props.firstName);
@@ -60,7 +75,7 @@ const UserDashboard = (props) => {
   } else {
     listOfOrders = (
       <div>
-        <a href="/products">No orders yet! Get to shopping!"</a>
+        <a href="/products">No orders yet! Get to shopping!</a>
       </div>
     );
   }
@@ -68,57 +83,73 @@ const UserDashboard = (props) => {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h2>Edit Profile</h2>
-        <p>First Name:</p>
-        <input
-          type="text"
-          placeholder={user.firstName}
-          required
-          onChange={(e) => {
-            handleFirstNameChange(e);
-          }}
-        />
-        <p>Last Name: </p>
-        <input
-          type="text"
-          placeholder={user.lastName}
-          required
-          onChange={(e) => {
-            handleLastNameChange(e);
-          }}
-        />
-        <p>Email: </p>
-        <input
-          type="text"
-          placeholder={user.email}
-          required
-          onChange={(e) => {
-            handleEmailChange(e);
-          }}
-        />
-        <p>Address:</p>
-        <input
-          type="text"
-          placeholder={user.address}
-          required
-          onChange={(e) => {
-            handleAddressChange(e);
-          }}
-        />
-        <p>Phone Number:</p>
-        <input
-          type="text"
-          placeholder={user.phone}
-          required
-          onChange={(e) => {
-            handlePhoneChange(e);
-          }}
-        />
-        <button type="submit">Edit</button>
-      </form>
-      <div>{listOfOrders}</div>
+    <div className="user-profile-container">
+      <div className="edit-container">
+        <form onSubmit={handleSubmit}>
+          <h4>Edit Profile</h4>
+          <p>First Name:</p>
+          <input
+            className="user-input"
+            type="text"
+            placeholder={user.firstName}
+            required
+            onChange={(e) => {
+              handleFirstNameChange(e);
+            }}
+          />
+          <p>Last Name: </p>
+          <input
+            className="user-input"
+            type="text"
+            placeholder={user.lastName}
+            required
+            onChange={(e) => {
+              handleLastNameChange(e);
+            }}
+          />
+          <p>Email: </p>
+          <input
+            className="user-input"
+            type="text"
+            placeholder={user.email}
+            required
+            onChange={(e) => {
+              handleEmailChange(e);
+            }}
+          />
+          <p>Address:</p>
+          <input
+            className="user-input"
+            type="text"
+            placeholder={user.address}
+            required
+            onChange={(e) => {
+              handleAddressChange(e);
+            }}
+          />
+          <p>Phone Number:</p>
+          <input
+            className="user-input"
+            type="text"
+            placeholder={user.phone}
+            required
+            onChange={(e) => {
+              handlePhoneChange(e);
+            }}
+          />
+          <button className="userdash-button" type="submit">
+            Submit Changes
+          </button>
+        </form>
+      </div>
+      <div className="current-orders">
+        <h4>Current Orders</h4>
+        {listOfOrders}
+      </div>
+      <div className="order-history">
+        <h4>Order History</h4>
+        <p>No order history.</p>
+      </div>
     </div>
   );
 };

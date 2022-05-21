@@ -5,6 +5,7 @@ import { logout } from "../store";
 import "./styles/Navbar.css";
 import icon from "../../public/photos/WoodWorxIcon.jpeg";
 import { fetchSingleUser } from "../store/users";
+import woodHeader from "./styles/woodgradientImage.jpeg";
 
 // is admin function?
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
@@ -12,6 +13,8 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
 
   return (
     <div className="navbar-container">
+      {/* <img className="navbar-background-image" src={woodHeader} alt="wood" /> */}
+      {/* <div className="content"> */}
       <div className="navbar-left-elements">
         <img className="icon" src={icon} alt="icon" />
         <h1 className="navbar-company-name">
@@ -21,7 +24,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
             <div>Worx</div>
           </Link>
         </h1>
-        <Link className="all-products-link" to="/products">
+        <Link id="all-products-link" to="/products">
           Shop Products
         </Link>
       </div>
@@ -54,6 +57,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
           </div>
         )}
       </nav>
+      {/* </div> */}
       {/* <hr /> */}
     </div>
   );

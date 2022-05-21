@@ -5,16 +5,22 @@
   padding: 10px;
   padding-right: 20px;
   align-items: center;
+  color: white;
   background-color: #826e5c;
   gap: 10px;
-  font-family: "Spectral", serif;
+  font-family: "Cormorant", serif;
   font-weight: 700;
-  font-size: 1.3rem;
-  /* background-image: url("../../../public/photos/woodgradientImage.jpeg"); */
+  font-size: 1.7rem;
+  background-image: url("./woodgradientImage.jpeg");
 }
 
 .navbar-container a:hover {
   color: rgb(91, 161, 112);
+}
+
+.navbar-background-image {
+  max-width: 100%;
+  height: 50%;
 }
 
 .navbar-left-elements {
@@ -24,17 +30,19 @@
   gap: 5px;
 }
 
-.all-products-link {
+#all-products-link {
   align-self: center;
-  padding: 5px;
+  padding-left: 15px;
+  font-size: 1.07rem;
+  font-weight: 500;
 }
-
-.nav-links {
+nav.nav-links {
   display: flex;
-  justify-content: space-evenly;
-  justify-content: flex-end;
-  align-items: flex-end;
+}
+.nav-links a {
   padding-top: 5px;
+  font-size: 1.07rem;
+  font-weight: 500;
 }
 
 .icon {

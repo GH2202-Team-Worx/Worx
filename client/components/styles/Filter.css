@@ -4,8 +4,10 @@
   padding: 5px;
   font-weight: bold;
   margin: 10px;
+  font-family: "Spectral", serif;
 }
 
 .filter-label {
   text-align: center;
+  font-family: "Spectral", serif;
 }
