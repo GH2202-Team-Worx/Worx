@@ -65,7 +65,7 @@ const AllProducts = () => {
             productsToShow().map((product) => {
               return (
                 // <div className="product-container" key={product.id}>
-                <Col md={4} key={product.id} className="product-container">
+                <Col md={3} key={product.id} className="product-container">
                   <Card className="products-card">
                     <Card.Img
                       variant="top"

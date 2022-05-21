@@ -31,7 +31,7 @@ const FeaturedProd = () => {
                         <Card.Img
                           variant="top"
                           src={prod.image}
-                          className="featured-prod-image"
+                          id="featured-prod-image"
                         />
                       </Card.Body>
                     </Card>

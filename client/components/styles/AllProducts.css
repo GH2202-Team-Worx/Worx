@@ -33,8 +33,9 @@
 
 .allproducts-title {
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
+  font-family: "Cormorant", serif;
 
   /* align-self: flex-start; */
 }

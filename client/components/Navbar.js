@@ -22,15 +22,20 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
           </Link>
         </h1>
         <Link className="all-products-link" to="/products">
-          All Products
+          Shop Products
         </Link>
       </div>
       <nav className="nav-links">
         <div>
-          <form>
+          {/* <form>
             <input className="search-input" type="text" placeholder="Search Products Here" />
             <button className="search-button" type="submit">Search</button>
-          </form>
+          </form> */}
+          {isAdmin ? (
+            <Link to="/admin">My Dashboard</Link>
+          ) : (
+            <Link to="/user">My Profile</Link>
+          )}
           <Link to="/contact">Contact Us</Link>
           <Link to="/cart">
             Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
@@ -41,11 +46,6 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
             <a href="#" onClick={handleClick}>
               Logout
             </a>
-            {isAdmin ? (
-              <Link to="/admin">My Dashboard</Link>
-            ) : (
-              <Link to="/user">My Profile</Link>
-            )}
           </div>
         ) : (
           <div>

@@ -32,15 +32,23 @@
   justify-content: center;
 }
 
-.featured-prod-image {
+#featured-prod-image {
   width: 100%;
   height: 120px;
+}
+
+#featured-prod-image:hover {
+  transform: scale(1.2);
+  transition-duration: 350ms;
+  /* height: 110%; */
 }
 
 .featured-prod-name {
   align-self: center;
   justify-content: flex-end;
   font-size: 0.9rem;
+  height: 35px;
+  text-align: center;
 }
 
 .featured-products-title {
