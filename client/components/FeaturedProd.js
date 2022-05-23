@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getFeatured } from "../store/products";
+import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import "./styles/featuredProds.css";
 
 const FeaturedProd = () => {
@@ -16,25 +17,30 @@ const FeaturedProd = () => {
     <>
       <div id="featuredProds">
         <h2 className="featured-products-title">Featured Products</h2>
-        <div className="featured-prods-container">
-          {featuredProds.map((prod) => {
-            return (
-              <div className="featuredProd" key={prod.id}>
-                <Link
-                  className="featured-prods-description"
-                  to={`/products/${prod.id}`}
-                >
-                  <img
-                    className="featured-prod-image"
-                    src={prod.image}
-                    alt={prod.name}
-                  />
-                  <h4 className="featured-prod-name">{`${prod.name}`}</h4>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+        <Container className="featured-prods-container">
+          <Row>
+            {featuredProds.map((prod) => {
+              return (
+                <Col className="featuredProd" key={prod.id}>
+                  <Link to={`/products/${prod.id}`}>
+                    <Card className="featured-card">
+                      <Card.Body>
+                        <Card.Title className="featured-prod-name">
+                          {prod.name}
+                        </Card.Title>
+                        <Card.Img
+                          variant="top"
+                          src={prod.image}
+                          id="featured-prod-image"
+                        />
+                      </Card.Body>
+                    </Card>
+                  </Link>
+                </Col>
+              );
+            })}
+          </Row>
+        </Container>
       </div>
     </>
   );

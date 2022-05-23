@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getOrders } from "../store/orders";
 import OrdersFilter from "./OrdersFilter";
+import AdminDashboard from "./AdminDash";
 import "./styles/Orders.css";
 
 const Orders = (props) => {
@@ -33,6 +34,7 @@ const Orders = (props) => {
 
   return (
     <div className="orders-main">
+      <AdminDashboard />
       <div className="orders-container">
         <OrdersFilter
           selected={filterStatus}

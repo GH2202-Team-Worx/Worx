@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   getCart,
   deleteProduct,
   _deleteProduct,
   editProduct,
   _editProduct,
-} from '../store/cart';
-import './styles/Checkout.css';
+} from "../store/cart";
+import "./styles/Checkout.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Cart = () => {
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
   const [customization, setCustomization] = useState(
     cartItems.map((item) =>
-      item.orderproduct ? item.orderproduct.customization : ''
+      item.orderproduct ? item.orderproduct.customization : ""
     )
   );
   const [isGift, setIsGift] = useState(false);
@@ -37,7 +37,7 @@ const Cart = () => {
         cartItems.map((item) =>
           item.orderproduct && item.orderproduct.customization
             ? item.orderproduct.customization
-            : ''
+            : ""
         )
       );
   }, [cartItems]);
@@ -66,46 +66,54 @@ const Cart = () => {
             <p>There are no items in your cart.</p>
           ) : (
             cartItems.map((item, i) => (
-              <div key={item.id}>
-                <p>{item.name}</p>
-                <img className="checkout-image" src={item.image} />
-                <p>{`$${item.price}`}</p>
-                <button type="button" onClick={() => deleteItemHandler(item)}>
+              <div className="checkout-item-card" key={item.id}>
+                <div>
+                  <img className="checkout-image" src={item.image} />
+                </div>
+                <div id="checkout-item-details">
+                  <h5>{item.name}</h5>
+
+                  <p>{`$${item.price}`}</p>
+                  {/* <button type="button" onClick={() => deleteItemHandler(item)}>
                   Delete Item
-                </button>
-                <p>
-                  {item.orderproduct && item.orderproduct.customization
-                    ? `Current customization is: ${item.orderproduct.customization}`
-                    : ''}
-                </p>
-                <label htmlFor="customization">Edit Customization:</label>
-                <input
-                  type="text"
-                  id="customization"
-                  name="customization"
-                  // we don't know why this works but without id it changes every product in cart
-                  value={customization[i]}
-                  onChange={(e) =>
-                    setCustomization(
-                      customization.map((c, j) =>
-                        j === i ? e.target.value : c
+                </button> */}
+                  <p>
+                    {item.orderproduct && item.orderproduct.customization
+                      ? `Current customization is: ${item.orderproduct.customization}`
+                      : ""}
+                  </p>
+                  <label htmlFor="customization">Edit Customization:</label>
+                  <input
+                    type="text"
+                    id="customization"
+                    name="customization"
+                    // we don't know why this works but without id it changes every product in cart
+                    value={customization[i]}
+                    onChange={(e) =>
+                      setCustomization(
+                        customization.map((c, j) =>
+                          j === i ? e.target.value : c
+                        )
                       )
-                    )
-                  }
-                />
-                <button
-                  type="button"
-                  onClick={() => editItemHandler(item, customization[i])}
-                >
-                  Save Customization
-                </button>
-                <label htmlFor="isGift">Is this a gift?</label>
-                <input
-                  type="checkbox"
-                  id="isGift"
-                  name="isGift"
-                  onClick={() => setIsGift(!isGift)}
-                />
+                    }
+                  />
+                  <button
+                    type="button"
+                    onClick={() => editItemHandler(item, customization[i])}
+                  >
+                    Save Customization
+                  </button>
+                  <label htmlFor="isGift">Is this a gift?</label>
+                  <input
+                    type="checkbox"
+                    id="isGift"
+                    name="isGift"
+                    onClick={() => setIsGift(!isGift)}
+                  />
+                  <button type="button" onClick={() => deleteItemHandler(item)}>
+                    Delete Item
+                  </button>
+                </div>
               </div>
             ))
           )}

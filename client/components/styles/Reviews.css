@@ -1,0 +1,25 @@
+.reviews-container {
+  width: 100%;
+  font-family: "Cormorant", serif;
+  margin: 50px;
+  text-align: center;
+}
+
+.reviews-title {
+  font-size: 1.5rem;
+  padding-bottom: 10px;
+}
+
+.review-form {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.review-form label {
+  padding-right: 7px;
+  padding-left: 7px;
+}
+
+.review-form input {
+  padding-left: 7px;
+}

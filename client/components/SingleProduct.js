@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getProduct } from '../store/singleProduct';
-import { _addProduct, addProduct } from '../store/cart';
-import './styles/SingleProduct.css';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getProduct } from "../store/singleProduct";
+import { _addProduct, addProduct } from "../store/cart";
+import "./styles/SingleProduct.css";
 
 const SingleProduct = (props) => {
   const dispatch = useDispatch();
@@ -10,13 +10,6 @@ const SingleProduct = (props) => {
   const auth = useSelector((state) => state.auth);
   //const currentCart = useSelector((state) => state.cartReducer);
   const isLoggedIn = useSelector((state) => !!state.auth.id);
-
-  // console.log("CURRENT CART: ", currentCart);
-  // console.log("PRODUCT: ", product);
-
-  // const user = useSelector((state) => {
-  //   return state.usersReducer;
-  // });
 
   const productId = props.match.params.productId;
 
@@ -29,11 +22,6 @@ const SingleProduct = (props) => {
     isLoggedIn
       ? dispatch(addProduct(auth.id, product))
       : dispatch(_addProduct(product));
-    // let storedItemsArray = JSON.parse(localStorage.getItem("cartItems"));
-    // console.log(storedItemsArray);
-    // let windowItemsArray = [];
-    // windowItemsArray.push(product);
-    // localStorage.setItem("cartItems", JSON.stringify(storedItems));
     localStorage.setItem(`${product.id}`, JSON.stringify(product));
   };
 

@@ -8,20 +8,22 @@ const Filter = (props) => {
 
   return (
     <div>
-      {/* <label htmlFor="category-select">Choose a category:</label> */}
+      <label className="filter-label">Filter products: </label>
       <select
         className="category-dropdown"
         name="category"
         value={props.selected}
         onChange={dropDownChangeHandler}
       >
-        <option value="">Please choose an option</option>
+        <option value="">Select an option</option>
         <option value="Bowl">Bowl</option>
         <option value="Bowl set">Bowl Set</option>
         <option value="Goblet">Goblet</option>
         <option value="Vase">Vase</option>
         <option value="Box">Box</option>
         <option value="Cutting board">Cutting Board</option>
+        <option value="low">Price: low to high</option>
+        <option value="high">Price: high to low</option>
       </select>
     </div>
   );

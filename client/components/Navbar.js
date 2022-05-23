@@ -5,6 +5,7 @@ import { logout } from "../store";
 import "./styles/Navbar.css";
 import icon from "../../public/photos/WoodWorxIcon.jpeg";
 import { fetchSingleUser } from "../store/users";
+import woodHeader from "./styles/woodgradientImage.jpeg";
 
 // is admin function?
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
@@ -12,6 +13,8 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
 
   return (
     <div className="navbar-container">
+      {/* <img className="navbar-background-image" src={woodHeader} alt="wood" /> */}
+      {/* <div className="content"> */}
       <div className="navbar-left-elements">
         <img className="icon" src={icon} alt="icon" />
         <h1 className="navbar-company-name">
@@ -21,16 +24,21 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
             <div>Worx</div>
           </Link>
         </h1>
-        <Link className="all-products-link" to="/products">
-          All Products
+        <Link id="all-products-link" to="/products">
+          Shop Products
         </Link>
       </div>
       <nav className="nav-links">
         <div>
-          <form>
+          {/* <form>
             <input className="search-input" type="text" placeholder="Search Products Here" />
             <button className="search-button" type="submit">Search</button>
-          </form>
+          </form> */}
+          {isAdmin ? (
+            <Link to="/admin">My Dashboard</Link>
+          ) : (
+            <Link to="/user">My Profile</Link>
+          )}
           <Link to="/contact">Contact Us</Link>
           <Link to="/cart">
             Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
@@ -41,11 +49,6 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
             <a href="#" onClick={handleClick}>
               Logout
             </a>
-            {isAdmin ? (
-              <Link to="/admin">My Dashboard</Link>
-            ) : (
-              <Link to="/user">My Profile</Link>
-            )}
           </div>
         ) : (
           <div>
@@ -54,6 +57,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
           </div>
         )}
       </nav>
+      {/* </div> */}
       {/* <hr /> */}
     </div>
   );

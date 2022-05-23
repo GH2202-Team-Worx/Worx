@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchReviews } from '../store/reviews';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchReviews } from "../store/reviews";
+import "./styles/Reviews.css";
 
 const Reviews = () => {
   const dispatch = useDispatch();
-  const [review, setReview] = useState('');
-  const [name, setName] = useState('');
+  const [review, setReview] = useState("");
+  const [name, setName] = useState("");
   const reviews = useSelector((state) => state.reviews);
 
   // console.log('reviews', reviews)
@@ -32,15 +33,17 @@ const Reviews = () => {
   } else {
     listOfReviews = (
       <div>
-        <h3>No reviews at this time.</h3>
+        <h3 className="reviews-title">No reviews at this time.</h3>
       </div>
     );
   }
 
   return (
-    <div>
-      <h2>Leave a review to tell us what you think!</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="reviews-container">
+      <h2 className="reviews-title">
+        Leave a review to tell us what you think!
+      </h2>
+      <form className="review-form" onSubmit={handleSubmit}>
         <label htmlFor="name"> User Name:</label>
         <input
           value={name}
