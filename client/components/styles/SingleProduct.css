@@ -58,6 +58,6 @@
 
 .sp-button:hover {
   background-color: rgb(235, 191, 80);
-  transition-duration: 400ms;
+  transition-duration: 450ms;
   transform: scale(1.05);
 }

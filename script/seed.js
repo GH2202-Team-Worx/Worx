@@ -127,7 +127,7 @@ const products = [
     quantity: 1,
   },
   {
-    name: "Live Oak and Epoxy Bowl",
+    name: "Oak & Epoxy Bowl",
     description:
       "Our first time working with hickory, and it definitely won’t be our last! We hope you love this small beautiful bowl, perfect for whatever you need, as much as we do!",
     material: "Hickory",
@@ -238,7 +238,7 @@ const products = [
     quantity: 1,
   },
   {
-    name: "Spaulted Pecan & Epoxy Bowl",
+    name: "Spaulted Pecan Bowl",
     description:
       "We loved making this very uniquely shaped bowl, and we hope you love this large square shaped spalted pecan just as much!",
     material: "Spaulted Pecan",
@@ -264,7 +264,7 @@ const products = [
     quantity: 2,
   },
   {
-    name: "Spaulted Oak & Epoxy Resin Bowl",
+    name: "Spaulted Oak Bowl",
     description:
       "This beautifully handcrafted piece is more than meets the eye. This one taught us the very important lesson of working with fully dried out wood and what happens when you don’t. We’re learning everyday and loving every minute of it.",
     material: "Spaulted Oak",
@@ -292,12 +292,38 @@ const products = [
   {
     name: "Pecan Bowl",
     description:
-      " 'There is no scrap wppd, just pieces not yet used.' -Unknown \nAnother beautiful pecan bowl handcrafted from Bell’s Custom Worx!",
+      " 'There is no scrap wood, just pieces not yet used.' -Unknown \nAnother beautiful pecan bowl handcrafted from Bell’s Custom Worx!",
     material: "Pecan",
     epoxyColor: "wax",
     price: 35.0,
     category: "Bowl",
     image: "/photos/pecanBowl.jpeg",
+    customizable: true,
+    featured: false,
+    quantity: 1,
+  },
+  {
+    name: "Bradford Pear Board",
+    description:
+      "This Bradford pear cutting board is a unique piece for your home!",
+    material: "Spalted Oak",
+    epoxyColor: "wax",
+    price: 75.0,
+    category: "Cutting board",
+    image: "/photos/BradfordPearCuttingBoard.jpeg",
+    customizable: true,
+    featured: false,
+    quantity: 1,
+  },
+  {
+    name: "Cedar & Epoxy Bowl",
+    description:
+      " 'There are no mistakes in woodworking until you run out of wood.' -Unknown \nHere’s one of my personal favorite pieces, cedar and epoxy bowl",
+    material: "Cedar",
+    epoxyColor: "wax",
+    price: 35.0,
+    category: "Bowl",
+    image: "/photos/CedarAndEpoxyBowl.jpeg",
     customizable: true,
     featured: false,
     quantity: 1,

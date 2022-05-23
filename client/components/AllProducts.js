@@ -64,8 +64,7 @@ const AllProducts = () => {
           ) : (
             productsToShow().map((product) => {
               return (
-                // <div className="product-container" key={product.id}>
-                <Col md={3} key={product.id} className="product-container">
+                <Col md={4} key={product.id} className="product-container">
                   <Card className="products-card">
                     <Card.Img
                       variant="top"
@@ -73,15 +72,12 @@ const AllProducts = () => {
                       className="products-image"
                     />
                     <Card.Body className="products-card-body">
-                      <Card.Title>
-                        {product.name} {product.price}
-                      </Card.Title>
-                      <Card.Text>Material: {product.material}</Card.Text>
+                      <Card.Title id="product-title">{product.name}</Card.Title>
+                      <Card.Text id="product-card-price">
+                        ${product.price}
+                      </Card.Text>
                       <Link to={`/products/${product.id}`}>
-                        <Button
-                          variant="primary"
-                          className="product-card-button"
-                        >
+                        <Button variant="primary" id="product-card-button">
                           See Details
                         </Button>
                       </Link>
