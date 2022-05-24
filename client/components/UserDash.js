@@ -142,7 +142,10 @@ const UserDashboard = (props) => {
               return (
                 <div key={order.id}>
                   <h5>{order.id}</h5>
-                  <div>{order.status}</div>
+                  <div>Status: {order.status}</div>
+                  <div>
+                    Order Date: {new Date(order.createdAt).toDateString()}
+                  </div>
                   <div>{order.shippingAddress}</div>
                   <div>{order.paymentInfo}</div>
                   <div>{order.shippingAmt}</div>
@@ -163,7 +166,10 @@ const UserDashboard = (props) => {
               return (
                 <div key={order.id}>
                   <h5>{order.id}</h5>
-                  <div>{order.status}</div>
+                  <div>Status: {order.status}</div>
+                  <div>
+                    Order Date: {new Date(order.createdAt).toDateString()}
+                  </div>
                   <div>{order.shippingAddress}</div>
                   <div>{order.paymentInfo}</div>
                   <div>{order.shippingAmt}</div>

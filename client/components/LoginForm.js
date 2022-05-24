@@ -1,53 +1,59 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { authenticate } from '../store'
+import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { authenticate } from "../store";
+import "./styles/LoginForm.css";
 
 /**
  * COMPONENT
  */
-const LoginForm = props => {
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const { error } = props
+const LoginForm = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { error } = props;
 
   const handleSubmit = (evt) => {
-    evt.preventDefault()
-    const formName = evt.target.name
-    const email = evt.target.email.value
-    const password = evt.target.password.value
-    dispatch(authenticate(email, password, formName))
-  }
+    evt.preventDefault();
+    const formName = evt.target.name;
+    const email = evt.target.email.value;
+    const password = evt.target.password.value;
+    dispatch(authenticate(email, password, formName));
+  };
   // need to check if user is admin, if so need to make new page where admins can see all orders placed
   // get user id
   return (
     <div>
-      <form name='login' onSubmit={handleSubmit} >
+      <form id="login-form" name="login" onSubmit={handleSubmit}>
         <h2> Login Form</h2>
-      <div>
-    <label htmlFor="email">
-      <small>email</small>
-    </label>
-    <input name="email" type="text" />
-  </div><div>
-      <label htmlFor="password">
-        <small>Password</small>
-      </label>
-      <input name="password" type="password" />
+        <div>
+          <label htmlFor="email">
+            <small>Email</small>
+          </label>
+          <input name="email" type="text" />
+        </div>
+        <div>
+          <label htmlFor="password">
+            <small>Password</small>
+          </label>
+          <input name="password" type="password" />
         </div>
         <div>
           <button type="submit">Login</button>
         </div>
         <div>
-          <a href="/signup"><p>Don't have an accout? Create one today! 😊</p></a>
+          <p>Don't have an accout? Create one today! 😊</p>
+          <Link id="signup-link" to="/signup">
+            Sign Up
+          </Link>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;
 /**
  * CONTAINER
  *   Note that we have two different sets of 'mapStateToProps' functions -
