@@ -155,7 +155,24 @@ const UserDashboard = (props) => {
       </div>
       <div className="order-history">
         <h4>Order History</h4>
-        <p>No order history.</p>
+        {orders.length === 0 ? (
+          <p>No order history.</p>
+        ) : (
+          orders.orders.map((order) => {
+            if (order.status === "Completed")
+              return (
+                <div key={order.id}>
+                  <h5>{order.id}</h5>
+                  <div>{order.status}</div>
+                  <div>{order.shippingAddress}</div>
+                  <div>{order.paymentInfo}</div>
+                  <div>{order.shippingAmt}</div>
+                  <div>{order.taxAmt}</div>
+                  <Link to={`/orders/${order.id}`}>View Order</Link>
+                </div>
+              );
+          })
+        )}
       </div>
     </div>
   );
