@@ -1,7 +1,6 @@
 .signup-form {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   text-align: center;
   width: 50%;
   padding: 10px;
@@ -22,6 +21,21 @@
 .signup-form button {
   padding: 5px 5px;
   border-radius: 5px;
+}
+
+.signup-form label {
+  font-size: 1.2rem;
+}
+
+.signup-content {
+  display: flex;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.signup-password-container {
+  padding-top: 15px;
+  padding-right: 10px;
 }
 
 #login-link {

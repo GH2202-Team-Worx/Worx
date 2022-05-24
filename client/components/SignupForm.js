@@ -52,68 +52,69 @@ const SignupForm = () => {
       >
         <div>
           <h2>Sign Up Form</h2>
-          <div>
-            <label htmlFor="firstName">
-              <small>First Name</small>
-            </label>
-
-            <input
-              value={firstName}
-              type="text"
-              required
-              onChange={(e) => {
-                handleFirstNameChange(e);
-              }}
-            />
-            <label htmlFor="lastName">
-              <small>Last Name</small>
-            </label>
-
-            <input
-              value={lastName}
-              type="text"
-              required
-              onChange={(e) => {
-                handleLastNameChange(e);
-              }}
-            />
+          <div className="signup-content">
+            <div>
+              <div>
+                <label htmlFor="firstName">
+                  <small>First Name</small>
+                </label>
+                <input
+                  value={firstName}
+                  type="text"
+                  required
+                  onChange={(e) => {
+                    handleFirstNameChange(e);
+                  }}
+                />
+                <label htmlFor="lastName">
+                  <small>Last Name</small>
+                </label>
+                <input
+                  value={lastName}
+                  type="text"
+                  required
+                  onChange={(e) => {
+                    handleLastNameChange(e);
+                  }}
+                />
+              </div>
+              <label htmlFor="email">
+                <small>E-mail:</small>
+              </label>
+              <input
+                value={email}
+                type="text"
+                required
+                onChange={(e) => {
+                  handleEmailChange(e);
+                }}
+              />
+            </div>
+            <div className="signup-password-container">
+              <label htmlFor="password">
+                <small>Password:</small>
+              </label>
+              <input
+                value={password}
+                type="password"
+                required
+                onChange={(e) => {
+                  handlePasswordChange(e);
+                }}
+              />
+              <label htmlFor="confPassword">
+                <small>Confirm Password: </small>
+              </label>
+              <input
+                value={confPassword}
+                type="password"
+                required
+                onChange={(e) => {
+                  handleConfPasswordChange(e);
+                }}
+              />
+            </div>
           </div>
-          <label htmlFor="email">
-            <small>E-mail:</small>
-          </label>
-
-          <input
-            value={email}
-            type="text"
-            required
-            onChange={(e) => {
-              handleEmailChange(e);
-            }}
-          />
-          <label htmlFor="password">
-            <small>Password:</small>
-          </label>
-
-          <input
-            value={password}
-            type="password"
-            required
-            onChange={(e) => {
-              handlePasswordChange(e);
-            }}
-          />
-          <label htmlFor="confPassword">
-            <small>Confirm Password: </small>
-          </label>
-
-          <input
-            value={confPassword}
-            type="password"
-            required
-            onChange={(e) => {
-              handleConfPasswordChange(e);
-            }}
-          />
         </div>
         <div>
           <button type="submit">Sign Up</button>

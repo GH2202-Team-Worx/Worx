@@ -42,7 +42,7 @@ const LoginForm = (props) => {
           <button type="submit">Login</button>
         </div>
         <div>
-          <p>Don't have an accout? Create one today! 😊</p>
+          <p>Don't have an account? Create one today! 😊</p>
           <Link id="signup-link" to="/signup">
             Sign Up
           </Link>
