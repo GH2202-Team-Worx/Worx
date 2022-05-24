@@ -7,6 +7,8 @@ import { getUserOrders } from "../store/orders";
 import "./styles/UserDash.css";
 
 const UserDashboard = (props) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const user = useSelector((state) => {
     return state.auth;
   });
@@ -14,28 +16,11 @@ const UserDashboard = (props) => {
     return state.ordersReducer;
   });
 
-  const history = useHistory();
-  const dispatch = useDispatch();
-
   useEffect(() => {
     if (user.id) {
       dispatch(getUserOrders(user.id));
     }
   }, [user]);
-
-  // const pastOrders = orders.filter((order) => order.status === "completed");
-  // const pastOrdersComponent = () => {
-  //   if(pastOrders.length){
-  //     pastOrders.map(order => {
-  //       return (
-  //         <>
-  //         <h3>{order.title}</h3>
-  //         </>
-  //       )
-  //     })
-  //   }
-
-  // }
 
   const id = user.id;
   const [firstName, setFirstName] = useState(props.firstName);
@@ -58,30 +43,35 @@ const UserDashboard = (props) => {
   };
 
   let listOfOrders;
-  if (orders.length > 0) {
-    listOfOrders = orders.map((order) => {
-      return (
-        <div key={order.id}>
-          <h5>{order.id}</h5>
-          <div>{order.status}</div>
-          <div>{order.shippingAddress}</div>
-          <div>{order.paymentInfo}</div>
-          <div>{order.shippingAmt}</div>
-          <div>{order.taxAmt}</div>
-          <Link to={`/orders/${order.id}`}>View Order</Link>
-        </div>
-      );
-    });
-  } else {
-    listOfOrders = (
-      <div>
-        <a href="/products">No orders yet! Get to shopping!</a>
-      </div>
-    );
-  }
+
+  console.log("ORDERS: ", orders);
+
+  // let listOfOrders;
+  // if (orders.length > 0) {
+  //   listOfOrders = orders.map((order) => {
+  //     return (
+  //       <div key={order.id}>
+  //         <h5>{order.id}</h5>
+  //         <div>{order.status}</div>
+  //         <div>{order.shippingAddress}</div>
+  //         <div>{order.paymentInfo}</div>
+  //         <div>{order.shippingAmt}</div>
+  //         <div>{order.taxAmt}</div>
+  //         <Link to={`/orders/${order.id}`}>View Order</Link>
+  //       </div>
+  //     );
+  //   });
+  // } else {
+  //   listOfOrders = (
+  //     <div>
+  //       <a href="/products">No orders yet! Get to shopping!</a>
+  //     </div>
+  //   );
+  // }
   if (!user) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="user-profile-container">
       <div className="edit-container">
@@ -144,7 +134,24 @@ const UserDashboard = (props) => {
       </div>
       <div className="current-orders">
         <h4>Current Orders</h4>
-        {listOfOrders}
+        {orders.length === 0 ? (
+          <p>No current orders! Go shopping!</p>
+        ) : (
+          orders.orders.map((order) => {
+            if (order.status !== "Completed")
+              return (
+                <div key={order.id}>
+                  <h5>{order.id}</h5>
+                  <div>{order.status}</div>
+                  <div>{order.shippingAddress}</div>
+                  <div>{order.paymentInfo}</div>
+                  <div>{order.shippingAmt}</div>
+                  <div>{order.taxAmt}</div>
+                  <Link to={`/orders/${order.id}`}>View Order</Link>
+                </div>
+              );
+          })
+        )}
       </div>
       <div className="order-history">
         <h4>Order History</h4>
