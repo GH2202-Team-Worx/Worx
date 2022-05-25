@@ -9,7 +9,7 @@ import {
   editProduct,
   _editProduct,
 } from "../store/cart";
-import "./styles/Checkout.css";
+import "./styles/Cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -59,19 +59,19 @@ const Cart = () => {
   };
 
   return (
-    <div className="checkout-container">
-      <div className="checkout-items-display">
+    <div className="cart-container">
+      <div className="cart-items-display">
         <h3>Items in Cart</h3>
         <div>
           {cartItems.length === 0 ? (
             <p>There are no items in your cart.</p>
           ) : (
             cartItems.map((item, i) => (
-              <div className="checkout-item-card" key={item.id}>
+              <div className="cart-item-card" key={item.id}>
                 <div>
-                  <img className="checkout-image" src={item.image} />
+                  <img className="cart-image" src={item.image} />
                 </div>
-                <div id="checkout-item-details">
+                <div id="cart-item-details">
                   <h5>{item.name}</h5>
 
                   <p>{`$${item.price}`}</p>
@@ -122,7 +122,7 @@ const Cart = () => {
           )}
         </div>
       </div>
-      <div className="checkout-summary-container">
+      <div className="cart-summary-container">
         <Card id="summary-card">
           <Card.Header as="h5">Cart Overview</Card.Header>
           <Card.Body>
@@ -134,11 +134,6 @@ const Cart = () => {
             </Link>
           </Card.Body>
         </Card>
-
-        {/* <div>{`Total Price: $${cartTotal}`}</div>
-        <Link to="/checkout">
-          <button>Check Out</button>
-        </Link> */}
       </div>
     </div>
   );
