@@ -1,9 +1,8 @@
 .checkout-container {
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 95%;
   list-style: none;
   padding: 4rem;
   font-family: "Cormorant", serif;
@@ -15,37 +14,52 @@
 
 .checkout-item-card {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   gap: 10px;
   width: 100%;
   margin-bottom: 10px;
+  justify-content: center;
 }
 
+#summary-card {
+  width: 12rem;
+  /* height: 10rem; */
+}
 .checkout-image {
   width: 100px;
   height: auto;
   flex: 1;
+  margin-right: 10px;
 }
 
 #checkout-item-details {
   flex: 3;
   width: 60%;
+  max-width: 338px;
 }
-
+#checkout-item-details input {
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
 .checkout-container button {
   background-color: #dac2ac;
-  padding: 7px 7px;
+  padding: 4px 7px;
   font-weight: bold;
   font-size: 1rem;
   align-self: center;
   justify-content: flex-end;
   border: none;
+  border-radius: 5px;
 }
 
 .checkout-container button:hover {
-  background-color: rgb(238, 199, 101);
+  background-color: lavender;
 }
 
+.checkout-summary-container {
+  margin-left: 10px;
+  text-align: center;
+}
 /* .checkout-container input {
   margin-right: 15px;
 } */

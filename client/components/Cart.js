@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { Card, Button } from "react-bootstrap";
 import {
   getCart,
   deleteProduct,
@@ -110,6 +111,8 @@ const Cart = () => {
                     name="isGift"
                     onClick={() => setIsGift(!isGift)}
                   />
+                </div>
+                <div>
                   <button type="button" onClick={() => deleteItemHandler(item)}>
                     Delete Item
                   </button>
@@ -117,12 +120,26 @@ const Cart = () => {
               </div>
             ))
           )}
-          <div>{`Total Price: $${cartTotal}`}</div>
         </div>
       </div>
-      <Link to="/checkout">
-        <button>Check Out</button>
-      </Link>
+      <div className="checkout-summary-container">
+        <Card id="summary-card">
+          <Card.Header as="h5">Cart Overview</Card.Header>
+          <Card.Body>
+            {/* <Card.Title>Special title treatment</Card.Title> */}
+            <Card.Text>{`${cartItems.length} items`}</Card.Text>
+            <Card.Text>{`Total Price: $${cartTotal}`}</Card.Text>
+            <Link to="/checkout">
+              <Button variant="primary">Checkout</Button>
+            </Link>
+          </Card.Body>
+        </Card>
+
+        {/* <div>{`Total Price: $${cartTotal}`}</div>
+        <Link to="/checkout">
+          <button>Check Out</button>
+        </Link> */}
+      </div>
     </div>
   );
 };
