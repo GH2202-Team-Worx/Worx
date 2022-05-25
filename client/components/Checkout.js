@@ -127,6 +127,36 @@ const Checkout = () => {
 
   return (
     <div className="checkout-container">
+      <div className="shipping-billing">
+        <div className="checkout-shippingBilling-container">
+          <ShippingInformation shipping={shipping} setShipping={setShipping} />
+          {/* <BillingInformation billing={billing} setBilling={setBilling} /> */}
+        </div>
+        {/* <button onClick={sendOrderHandler}>Place Order</button> */}
+
+        <div className="billing-container">
+          <h3>Billing Information</h3>
+          <form id="payment-form" onSubmit={handleSubmit}>
+            <PaymentElement id="payment-element" />
+            <button
+              // onClick={sendOrderHandler}
+              disabled={isLoading || !stripe || !elements}
+              id="submit"
+            >
+              <span id="button-text">
+                {isLoading ? (
+                  <div className="spinner" id="spinner"></div>
+                ) : (
+                  "Pay now"
+                )}
+              </span>
+            </button>
+            {/* Show any error or success messages - can we make them red? */}
+            {message && <div id="payment-message">{message}</div>}
+          </form>
+        </div>
+      </div>
+
       <div className="checkout-items-display">
         <h3>Items in Order</h3>
         <div>
@@ -139,7 +169,7 @@ const Checkout = () => {
                 <img className="checkout-image" src={item.image} />
                 <ul>
                   {/* <li>{item.description}</li> */}
-                  <li>{`$${item.price}`}</li>
+                  <li>Price: {`$${item.price}`}</li>
                   <li>{`Customization: ${
                     item.customization ? item.customization : "none"
                   }`}</li>
@@ -150,34 +180,6 @@ const Checkout = () => {
           )}
           <div>{`Total Price: $${cartTotal}`}</div>
         </div>
-      </div>
-
-      <div className="checkout-shippingBilling-container">
-        <ShippingInformation shipping={shipping} setShipping={setShipping} />
-        {/* <BillingInformation billing={billing} setBilling={setBilling} /> */}
-      </div>
-      {/* <button onClick={sendOrderHandler}>Place Order</button> */}
-
-      <div className="billing-container">
-        <h3>Billing Information</h3>
-        <form id="payment-form" onSubmit={handleSubmit}>
-          <PaymentElement id="payment-element" />
-          <button
-            // onClick={sendOrderHandler}
-            disabled={isLoading || !stripe || !elements}
-            id="submit"
-          >
-            <span id="button-text">
-              {isLoading ? (
-                <div className="spinner" id="spinner"></div>
-              ) : (
-                "Pay now"
-              )}
-            </span>
-          </button>
-          {/* Show any error or success messages - can we make them red? */}
-          {message && <div id="payment-message">{message}</div>}
-        </form>
       </div>
     </div>
   );

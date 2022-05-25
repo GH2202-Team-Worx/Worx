@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React from "react";
+import "./styles/ShippingInformation.css";
 //sending to the order db
 //router post cart
 
@@ -17,50 +17,82 @@ const ShippingInformation = (props) => {
       <h3>Shipping Information</h3>
       <div>So we can ship you our beautiful products!</div>
       <form>
-        <label htmlFor="phoneNumber">
-          <small>Phone Number</small>
-        </label>
-        <input
-          name="phone"
-          id="phone"
-          type="tel"
-          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          onChange={handleChange}
-        />
-        <label htmlFor="shipName">
-          <small>Name</small>
-        </label>
-        <input
-          name="shipName"
-          id="shipName"
-          type="text"
-          onChange={handleChange}
-        />
-        <label htmlFor="address">
-          <small>Street Address</small>
-        </label>
-        <input name="street" id="street" type="text" onChange={handleChange} />
-        <label htmlFor="address">
-          <small>{'Street Address (Apt/Suite No.)'}</small>
-        </label>
-        <input name="street" id="street" type="text" onChange={handleChange} />
-        <label htmlFor="city">
-          <small>City</small>
-        </label>
-        <input name="city" id="city" type="text" onChange={handleChange} />
-        <label htmlFor="state">
-          <small>State</small>
-        </label>
-        <input name="state" id="state" type="text" onChange={handleChange} />
-        <label htmlFor="zipCode">
-          <small>Zipcode</small>
-        </label>
-        <input
-          name="zipCode"
-          id="zipCode"
-          type="number"
-          onChange={handleChange}
-        />
+        <div className="phone-name">
+          <div className="ship-name">
+            <label htmlFor="shipName">
+              <small>Name</small>
+            </label>
+            <input
+              name="shipName"
+              id="shipName"
+              type="text"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="ship-phoneNumber">
+            <label htmlFor="phoneNumber">
+              <small>Phone Number</small>
+            </label>
+            <input
+              name="phone"
+              id="phone"
+              type="tel"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <div className="street-address">
+          <label htmlFor="address">
+            <small>Street Address</small>
+          </label>
+          <input
+            name="street"
+            id="street"
+            type="text"
+            onChange={handleChange}
+          />
+          <label htmlFor="address">
+            <small>{"Street Address (Apt/Suite No.)"}</small>
+          </label>
+          <input
+            name="street"
+            id="street"
+            type="text"
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="city-state-zip">
+          <div>
+            <label htmlFor="city">
+              <small>City</small>
+            </label>
+            <input name="city" id="city" type="text" onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="state">
+              <small>State</small>
+            </label>
+            <input
+              name="state"
+              id="state"
+              type="text"
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="zipCode">
+              <small>Zipcode</small>
+            </label>
+            <input
+              name="zipCode"
+              id="zipCode"
+              type="number"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
       </form>
     </div>
   );

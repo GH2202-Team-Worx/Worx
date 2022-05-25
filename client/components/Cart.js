@@ -72,7 +72,9 @@ const Cart = () => {
                   <img className="cart-image" src={item.image} />
                 </div>
                 <div id="cart-item-details">
-                  <h5>{item.name}</h5>
+                  <Link to={`/products/${item.id}`}>
+                    <h5>{item.name}</h5>
+                  </Link>
 
                   <p>{`$${item.price}`}</p>
                   {/* <button type="button" onClick={() => deleteItemHandler(item)}>
