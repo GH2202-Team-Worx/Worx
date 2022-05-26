@@ -44,7 +44,7 @@ const AllProducts = () => {
 
   return (
     <div className="allproducts-main">
-      <h3 className="allproducts-title">All Products</h3>
+      <h3 id="allproducts-title">Our Products</h3>
       <div className="filters-div">
         <Filter
           className="products-filter"

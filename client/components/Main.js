@@ -2,7 +2,7 @@ import React from "react";
 import FeaturedProd from "./FeaturedProd";
 import "./styles/main.css";
 import familyPhoto from "../../public/photos/cropped_family_photo.png";
-import Reviews from './Reviews'
+import Reviews from "./Reviews";
 
 const Main = () => {
   return (
@@ -12,7 +12,7 @@ const Main = () => {
         <div className="about-us">
           <img className="family-photo" src={familyPhoto} alt="family-photo" />
           <div className="bio">
-            <h3 className="bio-header">About Us</h3>
+            <h3 className="bio-header">Our Story</h3>
             <p className="about-paragraph">
               Bell’s Custom Worx specializes in high-end home décor and
               furnishings. All of our products are handcrafted locally in South

@@ -3,9 +3,9 @@ import { connect, useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { logout } from "../store";
 import "./styles/Navbar.css";
-import icon from "../../public/photos/WoodWorxIcon.jpeg";
+import icon from "../../public/photos/BellsIcon.png";
 import { fetchSingleUser } from "../store/users";
-import woodHeader from "./styles/woodgradientImage.jpeg";
+// import woodHeader from "./styles/woodgradientImage.jpeg";
 
 // is admin function?
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
@@ -34,11 +34,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
             <input className="search-input" type="text" placeholder="Search Products Here" />
             <button className="search-button" type="submit">Search</button>
           </form> */}
-          {isAdmin ? (
-            <Link to="/admin">My Dashboard</Link>
-          ) : (
-            <Link to="/user">My Profile</Link>
-          )}
+          {isAdmin ? <Link to="/admin">My Dashboard</Link> : null}
           <Link to="/contact">Contact Us</Link>
           <Link to="/cart">
             Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
@@ -46,6 +42,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
         </div>
         {isLoggedIn ? (
           <div>
+            <Link to="/user">My Profile</Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
