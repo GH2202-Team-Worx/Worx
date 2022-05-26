@@ -113,12 +113,19 @@ const Cart = () => {
                     name="isGift"
                     onClick={() => setIsGift(!isGift)}
                   />
+                  <button
+                    id="cart-delete"
+                    type="button"
+                    onClick={() => deleteItemHandler(item)}
+                  >
+                    | Delete Item |
+                  </button>
                 </div>
-                <div>
+                {/* <div>
                   <button type="button" onClick={() => deleteItemHandler(item)}>
                     Delete Item
                   </button>
-                </div>
+                </div> */}
               </div>
             ))
           )}
