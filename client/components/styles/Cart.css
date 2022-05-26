@@ -28,7 +28,7 @@
 }
 
 #summary-card {
-  width: 12rem;
+  width: 15rem;
 }
 .cart-image {
   width: 100px;
@@ -64,7 +64,7 @@
 }
 
 .cart-container button:hover {
-  background-color: lavender;
+  background-color: goldenrod;
 }
 
 .cart-summary-container {
@@ -81,5 +81,5 @@
 }
 
 #cart-delete:hover {
-  color: darkcyan;
+  color: goldenrod;
 }

@@ -19,76 +19,91 @@ const ShippingInformation = (props) => {
       <form>
         <div className="phone-name">
           <div className="ship-name">
-            <label htmlFor="shipName">
+            {/* <label htmlFor="shipName">
               <small>Name</small>
-            </label>
+            </label> */}
             <input
               name="shipName"
               id="shipName"
               type="text"
+              placeholder="Name"
               onChange={handleChange}
             />
           </div>
           <div className="ship-phoneNumber">
-            <label htmlFor="phoneNumber">
+            {/* <label htmlFor="phoneNumber">
               <small>Phone Number</small>
-            </label>
+            </label> */}
             <input
               name="phone"
               id="phone"
               type="tel"
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              placeholder="123-456-7890"
               onChange={handleChange}
             />
           </div>
         </div>
         <div className="street-address">
-          <label htmlFor="address">
+          {/* <label htmlFor="address">
             <small>Street Address</small>
-          </label>
+          </label> */}
           <input
             name="street"
             id="street"
             type="text"
+            placeholder="Street Address"
             onChange={handleChange}
           />
-          <label htmlFor="address">
+          {/* <label htmlFor="address">
             <small>{"Street Address (Apt/Suite No.)"}</small>
-          </label>
+          </label> */}
           <input
             name="street"
             id="street"
             type="text"
+            placeholder="Street Address (Apt/Suite No.)"
             onChange={handleChange}
           />
         </div>
 
         <div className="city-state-zip">
           <div>
-            <label htmlFor="city">
+            {/* <label htmlFor="city">
               <small>City</small>
-            </label>
-            <input name="city" id="city" type="text" onChange={handleChange} />
-          </div>
-          <div>
-            <label htmlFor="state">
-              <small>State</small>
-            </label>
+            </label> */}
             <input
-              name="state"
-              id="state"
+              name="city"
+              id="city"
               type="text"
+              placeholder="City"
+              className="city"
               onChange={handleChange}
             />
           </div>
           <div>
-            <label htmlFor="zipCode">
+            {/* <label htmlFor="state">
+              <small>State</small>
+            </label> */}
+            <input
+              name="state"
+              id="state"
+              type="text"
+              placeholder="State"
+              className="state"
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            {/* <label htmlFor="zipCode">
               <small>Zipcode</small>
-            </label>
+            </label> */}
             <input
               name="zipCode"
               id="zipCode"
               type="number"
+              placeholder="Zipcode"
+              className="zipcode"
               onChange={handleChange}
             />
           </div>

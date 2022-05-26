@@ -5,6 +5,8 @@
 .phone-name {
   display: flex;
   margin-right: 16px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .ship-name {
@@ -28,9 +30,41 @@
   margin-right: 42px;
 }
 
+.street-address {
+  margin-bottom: 0;
+  padding: 0;
+}
+
 .street-address input {
   width: 80%;
+  margin-bottom: 15px;
 }
 .city-state-zip {
   display: flex;
+  width: 60%;
+  margin-left: 30px;
+  margin-left: 0;
+}
+
+.city {
+  flex: 2;
+  position: relative;
+  right: -30%;
+}
+
+.state {
+  flex: 1;
+  position: relative;
+  right: -36%;
+  width: 4rem;
+}
+
+/* .state input {
+  width: 1.5rem;
+} */
+
+.zipcode {
+  flex: 2;
+  position: relative;
+  left: -2%;
 }
