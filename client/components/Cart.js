@@ -61,7 +61,7 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <div className="cart-items-display">
-        <h3>Items in Your Cart</h3>
+        <h3 className="cart-items-title">Items in Your Cart</h3>
         <div>
           {cartItems.length === 0 ? (
             <p>There are no items in your cart.</p>
@@ -76,7 +76,7 @@ const Cart = () => {
                     <h5>{item.name}</h5>
                   </Link>
 
-                  <p>{`$${item.price}`}</p>
+                  <p>{`Item price: $${item.price}`}</p>
                   {/* <button type="button" onClick={() => deleteItemHandler(item)}>
                   Delete Item
                 </button> */}
@@ -106,13 +106,16 @@ const Cart = () => {
                   >
                     Save Customization
                   </button>
-                  <label htmlFor="isGift">Is this a gift?</label>
-                  <input
-                    type="checkbox"
-                    id="isGift"
-                    name="isGift"
-                    onClick={() => setIsGift(!isGift)}
-                  />
+                  <div>
+                    <label htmlFor="isGift">Is this a gift?</label>
+                    <input
+                      type="checkbox"
+                      id="isGift"
+                      name="isGift"
+                      onClick={() => setIsGift(!isGift)}
+                    />
+                  </div>
+
                   <button
                     id="cart-delete"
                     type="button"
