@@ -9,10 +9,24 @@
 .checkout-items-display {
   flex: 1;
   text-align: center;
+  background-color: white;
+  border-radius: 7px;
+  padding: 20px 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.checkout-items-display p {
+  font-size: 1.5rem;
 }
 
 .checkout-items-display li {
   list-style: none;
+  font-size: 1.3rem;
+}
+
+.checkout-items-display .total-price {
+  font-size: 1.7rem;
 }
 
 .checkout-item-card {
@@ -21,6 +35,7 @@
   width: 100%;
   margin-bottom: 10px;
   justify-content: center;
+  font-size: 1.5rem;
 }
 
 #summary-card {
@@ -28,17 +43,22 @@
   /* height: 10rem; */
 }
 .checkout-image {
-  width: 100px;
+  width: 150px;
   height: auto;
   flex: 1;
   margin-right: 10px;
+  border-radius: 5px;
 }
 
-#checkout-item-details {
+#checkout-item {
+  font-size: 2rem;
+}
+/* #checkout-item-details {
   flex: 3;
   width: 60%;
   max-width: 338px;
-}
+  /* font-size: 1rem; */
+
 #checkout-item-details input {
   margin-bottom: 5px;
   margin-right: 10px;
@@ -82,9 +102,23 @@
 
 .billing-container {
   flex: 1;
+  position: relative;
+  right: -26%;
+  width: 535px;
+}
+
+.billing-container h3 {
   text-align: center;
+  position: relative;
+  right: 7%;
 }
 
 .shipping-billing {
   flex: 2;
+}
+
+#payment-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
 }

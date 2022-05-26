@@ -14,9 +14,15 @@ const ShippingInformation = (props) => {
 
   return (
     <div className="checkout-shipping-container">
-      <h3>Shipping Information</h3>
-      <div>So we can ship you our beautiful products!</div>
+      {/* <div checkout-shipping-header>
+        <h3>Shipping Information</h3>
+        <div>So we can ship you our beautiful products!</div>
+      </div> */}
       <form>
+        <div className="checkout-shipping-header">
+          <h3>Shipping Information</h3>
+          <p>So we can ship you our beautiful products!</p>
+        </div>
         <div className="phone-name">
           <div className="ship-name">
             {/* <label htmlFor="shipName">

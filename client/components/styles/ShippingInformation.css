@@ -1,16 +1,25 @@
+.checkout-shipping-header {
+  margin-bottom: 0;
+}
+
 .checkout-shipping-container form {
   display: flex;
   flex-direction: column;
+  width: 535px;
+  position: relative;
+  right: -20%;
 }
 .phone-name {
   display: flex;
   margin-right: 16px;
   margin-bottom: 0;
+  margin-top: 0;
   padding-bottom: 0;
 }
 
 .ship-name {
   flex: 2;
+  margin-right: 0;
 }
 
 .ship-name input {
@@ -32,6 +41,7 @@
 
 .street-address {
   margin-bottom: 0;
+  margin-top: 0;
   padding: 0;
 }
 
@@ -42,6 +52,7 @@
 .city-state-zip {
   display: flex;
   width: 60%;
+  margin-top: 0;
   margin-left: 30px;
   margin-left: 0;
 }

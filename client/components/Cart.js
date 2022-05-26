@@ -134,10 +134,10 @@ const Cart = () => {
       <div className="cart-summary-container">
         <Card id="summary-card">
           <Card.Header as="h5">Cart Overview</Card.Header>
-          <Card.Body>
+          <Card.Body className="cart-summary-body">
             {/* <Card.Title>Special title treatment</Card.Title> */}
-            <Card.Text>{`${cartItems.length} items`}</Card.Text>
-            <Card.Text>{`Total Price: $${cartTotal}`}</Card.Text>
+            <Card.Text className="cart-itemNum">{`${cartItems.length} Items`}</Card.Text>
+            <Card.Text className="cart-itemNum">{`Total Price: $${cartTotal}`}</Card.Text>
             <Link to="/checkout">
               <Button variant="primary">Checkout</Button>
             </Link>

@@ -147,7 +147,7 @@ const Checkout = () => {
                 {isLoading ? (
                   <div className="spinner" id="spinner"></div>
                 ) : (
-                  "Pay now"
+                  "Submit payment"
                 )}
               </span>
             </button>
@@ -167,18 +167,18 @@ const Checkout = () => {
               <div key={item.id}>
                 <p>{item.name}</p>
                 <img className="checkout-image" src={item.image} />
-                <ul>
+                <ul id="checkout-item">
                   {/* <li>{item.description}</li> */}
                   <li>Price: {`$${item.price}`}</li>
                   <li>{`Customization: ${
-                    item.customization ? item.customization : "none"
+                    item.customization ? item.customization : "None"
                   }`}</li>
                   {item.isGift ? <li>"This item is a gift</li> : null}
                 </ul>
               </div>
             ))
           )}
-          <div>{`Total Price: $${cartTotal}`}</div>
+          <div className="total-price">{`Total Price: $${cartTotal}`}</div>
         </div>
       </div>
     </div>
