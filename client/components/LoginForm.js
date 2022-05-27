@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { authenticate } from "../store";
@@ -43,9 +43,6 @@ const LoginForm = (props) => {
         </div>
         <div>
           <p>Don't have an account? Create one today! 😊</p>
-          <Link id="signup-link" to="/signup">
-            Sign Up
-          </Link>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>

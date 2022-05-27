@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { createNewUser } from "../store/newUser";
 import "./styles/SignUpForm.css";
 
@@ -120,9 +120,6 @@ const SignupForm = () => {
           <button type="submit">Sign Up</button>
         </div>
       </form>
-      <Link id="login-link" to="/login">
-        Log In
-      </Link>
     </div>
   );
 };
