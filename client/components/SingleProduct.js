@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProduct } from "../store/singleProduct";
 import { _addProduct, addProduct } from "../store/cart";
+import EditProduct from "./EditProduct";
 import "./styles/SingleProduct.css";
 
 const SingleProduct = (props) => {
@@ -12,6 +13,8 @@ const SingleProduct = (props) => {
   const isLoggedIn = useSelector((state) => !!state.auth.id);
 
   const productId = props.match.params.productId;
+
+  console.log("STATUS: ", auth.isAdmin);
 
   useEffect(() => {
     dispatch(getProduct(productId));
@@ -46,6 +49,7 @@ const SingleProduct = (props) => {
           <button className="sp-button" type="button" onClick={handleAddToCart}>
             Add to Cart
           </button>
+          {auth.isAdmin === true ? <EditProduct product={product} /> : null}
         </div>
       </div>
     </React.Fragment>
