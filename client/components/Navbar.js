@@ -43,19 +43,25 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
         {isLoggedIn && !isAdmin ? (
           <div>
             <Link to="/user">My Profile</Link>
+          </div>
+        ) : null}
+        {isLoggedIn ? (
+          <div>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
           </div>
-        ) : (
-          <div>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        )}
+        ) : null}
+        <div>
+          {!isLoggedIn && (
+            <div>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Sign Up</Link>
+            </div>
+          )}
+        </div>
+        {/* )} */}
       </nav>
-      {/* </div> */}
-      {/* <hr /> */}
     </div>
   );
 };

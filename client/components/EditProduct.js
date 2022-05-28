@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import productReducer, { getProduct } from "../store/singleProduct";
 import { updateProduct } from "../store/singleProduct";
 import { Modal, Button, Form } from "react-bootstrap";
+import "./styles/EditProduct.css";
 
 function EditProduct(props) {
   const dispatch = useDispatch();
@@ -41,7 +42,11 @@ function EditProduct(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="primary"
+        className="edit-product-button"
+        onClick={handleShow}
+      >
         Edit Product
       </Button>
 

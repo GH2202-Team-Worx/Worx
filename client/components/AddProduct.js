@@ -66,7 +66,7 @@ const AddProduct = () => {
   return (
     <div className="admin-product-container">
       <AdminDashboard />
-      <div>
+      <div className="admin-product-content">
         <div className="product-form">
           <form onSubmit={handleSubmit}>
             <h2>Add a Product:</h2>
@@ -144,6 +144,9 @@ const AddProduct = () => {
               <button type="submit">Submit</button>
             </div>
           </form>
+        </div>
+
+        <div>
           <div className="admin-allprods-container">
             {products.length === 0 ? (
               <p>No products to display</p>
@@ -157,7 +160,8 @@ const AddProduct = () => {
                         src={product.image}
                         alt={product.name}
                       />
-                      <div className="allproducts-title">{`${product.name} $${product.price}`}</div>
+                      <div className="allproducts-title">{`${product.name} `}</div>
+                      <div className="allproducts-title">{`$${product.price}`}</div>
                     </Link>
                   </div>
                 );
