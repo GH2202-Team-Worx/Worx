@@ -16,7 +16,21 @@ function EditProduct(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log("Price ", price);
+  console.log("Category ", category);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(
+      fetchUpdatedUser({
+        name,
+        price,
+        category,
+        material,
+        epoxyColor,
+        description,
+      })
+    );
+  };
 
   return (
     <>
@@ -29,21 +43,42 @@ function EditProduct(props) {
           <Modal.Title>Edit Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="name" placeholder={name} autoFocus />
+              <Form.Control
+                type="name"
+                placeholder={name}
+                autoFocus
+                onChange={(e) => setName(e.target.value)}
+              />
               <Form.Label>Price</Form.Label>
-              <Form.Control type="price" placeholder={price} autoFocus />
+              <Form.Control
+                type="price"
+                placeholder={price}
+                autoFocus
+                onChange={(e) => setPrice(e.target.value)}
+              />
               <Form.Label>Category</Form.Label>
-              <Form.Control type="category" placeholder={category} autoFocus />
+              <Form.Control
+                type="category"
+                placeholder={category}
+                autoFocus
+                onChange={(e) => setCategory(e.target.value)}
+              />
               <Form.Label>Material</Form.Label>
-              <Form.Control type="material" placeholder={material} autoFocus />
+              <Form.Control
+                type="material"
+                placeholder={material}
+                autoFocus
+                onChange={(e) => setMaterial(e.target.value)}
+              />
               <Form.Label>Epoxy Color</Form.Label>
               <Form.Control
                 type="epoxyColor"
                 placeholder={epoxyColor}
                 autoFocus
+                onChange={(e) => setEpoxyColor(e.target.value)}
               />
               {/* <Form.Label>Featured</Form.Label>
               <Form.Control

@@ -11,6 +11,8 @@ import { fetchSingleUser } from "../store/users";
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
   const { cartItems } = useSelector((state) => state.cartReducer);
 
+  console.log("ADMIN", isAdmin);
+
   return (
     <div className="navbar-container">
       {/* <img className="navbar-background-image" src={woodHeader} alt="wood" /> */}
@@ -40,7 +42,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
             Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
           </Link>
         </div>
-        {isLoggedIn ? (
+        {isLoggedIn && !isAdmin ? (
           <div>
             <Link to="/user">My Profile</Link>
             <a href="#" onClick={handleClick}>
