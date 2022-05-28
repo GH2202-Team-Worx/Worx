@@ -1,34 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import productReducer, { getProduct } from "../store/singleProduct";
+import { updateProduct } from "../store/singleProduct";
 import { Modal, Button, Form } from "react-bootstrap";
 
 function EditProduct(props) {
+  const dispatch = useDispatch();
   const [name, setName] = useState(props.product.name);
   const [price, setPrice] = useState(props.product.price);
   const [category, setCategory] = useState(props.product.category);
   const [material, setMaterial] = useState(props.product.material);
   const [epoxyColor, setEpoxyColor] = useState(props.product.epoxyColor);
   const [description, setDescription] = useState(props.product.description);
-
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log("Category ", category);
-
-  const handleSubmit = (event) => {
+  const handleClose = (event) => {
+    console.log("submit hit");
     event.preventDefault();
+    setShow(false);
     dispatch(
-      fetchUpdatedUser({
-        name,
-        price,
-        category,
-        material,
-        epoxyColor,
-        description,
-      })
+      updateProduct(
+        {
+          name,
+          price,
+          category,
+          material,
+          epoxyColor,
+          description,
+          customizable: props.product.customizable,
+          image: props.product.image,
+          featured: props.product.featured,
+          quantity: props.product.quantity,
+        },
+        props.product.id
+      )
     );
   };
 
@@ -43,7 +50,7 @@ function EditProduct(props) {
           <Modal.Title>Edit Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -112,7 +119,11 @@ function EditProduct(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button
+            variant="primary"
+            onClick={handleClose}
+            // onSubmit={handleSubmit}
+          >
             Save Changes
           </Button>
         </Modal.Footer>

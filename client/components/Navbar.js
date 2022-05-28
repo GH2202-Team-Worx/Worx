@@ -11,8 +11,6 @@ import { fetchSingleUser } from "../store/users";
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
   const { cartItems } = useSelector((state) => state.cartReducer);
 
-  console.log("ADMIN", isAdmin);
-
   return (
     <div className="navbar-container">
       {/* <img className="navbar-background-image" src={woodHeader} alt="wood" /> */}

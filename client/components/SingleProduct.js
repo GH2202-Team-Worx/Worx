@@ -14,8 +14,6 @@ const SingleProduct = (props) => {
 
   const productId = props.match.params.productId;
 
-  console.log("STATUS: ", auth.isAdmin);
-
   useEffect(() => {
     dispatch(getProduct(productId));
   }, []);

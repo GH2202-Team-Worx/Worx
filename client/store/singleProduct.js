@@ -39,9 +39,26 @@ export const getProduct = (productId) => {
 //   };
 // };
 
+export const updateProduct = (productInfo, productId) => {
+  console.log("PRODUCT INFO", productInfo);
+  return async (dispatch) => {
+    try {
+      const { data: updatedProduct } = await axios.put(
+        `/api/products/${productId}`,
+        productInfo
+      );
+      dispatch(_updateProduct(updatedProduct));
+    } catch (err) {
+      console.log("Error from update product thunk");
+    }
+  };
+};
+
 export default function productReducer(state = {}, action) {
   switch (action.type) {
     case GET_PRODUCT:
+      return action.product;
+    case UPDATE_PRODUCT:
       return action.product;
     default:
       return state;
