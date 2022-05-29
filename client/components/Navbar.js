@@ -13,7 +13,6 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
 
   return (
     <div className="navbar-container">
-      {/* <img className="navbar-background-image" src={woodHeader} alt="wood" /> */}
       {/* <div className="content"> */}
       <div className="navbar-left-elements">
         <img className="icon" src={icon} alt="icon" />

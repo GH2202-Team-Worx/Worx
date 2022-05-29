@@ -1,12 +1,14 @@
 .reviews-container {
-  width: 100%;
+  width: 80%;
   font-family: "Cormorant", serif;
   margin: 50px;
   text-align: center;
+  padding: 7px 7px;
+  border: 1px solid black;
 }
 
 .reviews-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding-bottom: 10px;
 }
 
@@ -22,4 +24,20 @@
 
 .review-form input {
   padding-left: 7px;
+  margin-right: 5px;
+}
+
+.review-card {
+  border: 1px solid black;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start;
+  align-items: flex-start; */
+  flex: 1;
+  margin: 7px 7px;
+}
+
+.reviews-list {
+  display: flex;
 }

@@ -40,7 +40,6 @@ export const getProduct = (productId) => {
 // };
 
 export const updateProduct = (productInfo, productId) => {
-  console.log("PRODUCT INFO", productInfo);
   return async (dispatch) => {
     try {
       const { data: updatedProduct } = await axios.put(

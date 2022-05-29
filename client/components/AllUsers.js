@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AdminDashboard from "./AdminDash";
 import { fetchUpdatedUser, fetchUsers, DeleteUser } from "../store/users";
+import { updateUser } from "../store/newUser";
+import "./styles/AllUsers.css";
 
 const AllUsers = (props) => {
   const dispatch = useDispatch();
@@ -10,7 +12,6 @@ const AllUsers = (props) => {
     console.log(state.usersReducer);
     return state.usersReducer;
   });
-  console.log(allUsers);
 
   useEffect(() => {
     if (allUsers) {
@@ -19,10 +20,11 @@ const AllUsers = (props) => {
   }, []);
 
   const [admin, setAdmin] = useState(false);
+  const [userId, setUserId] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(fetchUpdatedUser({ admin }));
+    dispatch(updateUser({ isAdmin: event.target.value }, user.id));
   };
 
   const deleteHandler = (event, userId) => {
@@ -35,29 +37,42 @@ const AllUsers = (props) => {
   if (allUsers.length > 0) {
     listOfUsers = allUsers.map((user) => {
       return (
-        <div key={user.id}>
+        <div className="user-card" key={user.id}>
           <h4>
-            {user.firstName} {user.lastName}
+            Name: {user.firstName} {user.lastName}
           </h4>
-          <div>{user.email}</div>
-          <form onSubmit={handleSubmit}>
+          <div>Email: {user.email}</div>
+          <div>Admin: {user.isAdmin}</div>
+
+          <select
+            className="category-dropdown"
+            name="status"
+            // placeholder={user.isAdmin}
+            value={user.isAdmin}
+            onChange={handleSubmit}
+          >
+            <option value="">Select status</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+
+          {/* <form onSubmit={handleSubmit}>
             <div>Give Admin status?</div>
             <input
-              value={admin.isAdmin}
+              value={user.isAdmin}
               type="text"
               onChange={(e) => {
                 setAdmin(e.target.value);
               }}
             />
-            <button type="submit">Submit</button>
-          </form>
-          <div>{user.address}</div>
-          <div>{user.phone}</div>
+            <button type="submit">Change Status</button>
+          </form> */}
+
           <button
             type="button"
             onClick={(event) => deleteHandler(event, user.id)}
           >
-            X
+            Delete User
           </button>
         </div>
       );
@@ -70,10 +85,10 @@ const AllUsers = (props) => {
     );
   }
   return (
-    <div>
+    <div className="admin-users-container">
       <AdminDashboard />
       <h1>Clients:</h1>
-      <div>{listOfUsers}</div>
+      <div className="users-list">{listOfUsers}</div>
     </div>
   );
 };
