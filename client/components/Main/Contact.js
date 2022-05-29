@@ -1,42 +1,42 @@
-import React, { useState } from 'react';
-import emailjs from 'emailjs-com';
-import './styles/contact.css';
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
+import "../styles/contact.css";
 
 const Contact = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleChange = (evt) => {
-    if (evt.target.name === 'name') setName(evt.target.value);
-    if (evt.target.name === 'email') setEmail(evt.target.value);
-    if (evt.target.name === 'subject') setSubject(evt.target.value);
-    if (evt.target.name === 'message') setMessage(evt.target.value);
+    if (evt.target.name === "name") setName(evt.target.value);
+    if (evt.target.name === "email") setEmail(evt.target.value);
+    if (evt.target.name === "subject") setSubject(evt.target.value);
+    if (evt.target.name === "message") setMessage(evt.target.value);
   };
 
   const sendEmail = async (evt) => {
     evt.preventDefault();
     if (!email || !subject || !message) {
-      alert('Email, subject, and message are required!');
-    } else if (!email.includes('@') || !email.includes('.')) {
-      alert('Must enter a valid email');
+      alert("Email, subject, and message are required!");
+    } else if (!email.includes("@") || !email.includes(".")) {
+      alert("Must enter a valid email");
     } else {
       try {
         const response = await emailjs.sendForm(
-          'service_msucc8a',
-          'template_kms7f6e',
+          "service_msucc8a",
+          "template_kms7f6e",
           evt.target,
-          'hiX-yiEKPs0JeFpQY'
+          "hiX-yiEKPs0JeFpQY"
         );
-        console.log('SUCCESS!', response.status, response.text);
-        setName('');
-        setEmail('');
-        setSubject('');
-        setMessage('');
+        console.log("SUCCESS!", response.status, response.text);
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
       } catch (err) {
-        console.error('FAILED...', err);
-        alert('Message failed to send. Please try again');
+        console.error("FAILED...", err);
+        alert("Message failed to send. Please try again");
       }
     }
   };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { sendOrder } from "../store/cart";
+import { sendOrder } from "../../store/cart";
 import ShippingInformation from "./ShippingInformation";
 // import BillingInformation from './BillingInformation';
 import {
@@ -8,7 +8,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import "./styles/Checkout.css";
+import "../styles/Checkout.css";
 
 //notes from server/api/orders
 //if user is guest, front end should save the cart locally and only send to back end route "api/order/" w/ status "Processing" once order is placed.

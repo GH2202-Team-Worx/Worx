@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createNewUser } from "../store/users";
-import "./styles/SignUpForm.css";
+import { createNewUser } from "../../store/users";
+import "../styles/SignUpForm.css";
 
 const SignupForm = () => {
   const dispatch = useDispatch();

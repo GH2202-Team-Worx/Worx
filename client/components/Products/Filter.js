@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Filter.css";
+import "../styles/Filter.css";
 
 const Filter = (props) => {
   const dropDownChangeHandler = (event) => {

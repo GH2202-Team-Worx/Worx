@@ -2,8 +2,8 @@ import React from "react";
 
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { authenticate } from "../store";
-import "./styles/LoginForm.css";
+import { authenticate } from "../../store";
+import "../styles/LoginForm.css";
 
 /**
  * COMPONENT

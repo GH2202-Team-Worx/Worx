@@ -1,26 +1,26 @@
 import React, { useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
-import LoginForm from "./components/LoginForm";
-import AllProducts from "./components/AllProducts";
-import Main from "./components/Main";
-import Checkout from "./components/Checkout";
-import Cart from "./components/Cart";
-import Contact from "./components/Contact";
+import LoginForm from "./components/Main/LoginForm";
+import AllProducts from "./components/Products/AllProducts";
+import Main from "./components/Main/Main";
+import Checkout from "./components/Cart/Checkout";
+import Cart from "./components/Cart/Cart";
+import Contact from "./components/Main/Contact";
 import { me } from "./store";
-import SingleProduct from "./components/SingleProduct";
-import SignupForm from "./components/SignupForm";
-import AdminDashboard from "./components/AdminDash";
-import OrderConfirmation from "./components/OrderConfirmation";
-import Orders from "./components/Orders";
-import SingleOrder from "./components/SingleOrder";
-import UserDashboard from "./components/UserDash";
-import Reviews from "./components/Reviews";
+import SingleProduct from "./components/Products/SingleProduct";
+import SignupForm from "./components/Main/SignupForm";
+import AdminDashboard from "./components/Admin/AdminDash";
+import OrderConfirmation from "./components/Cart/OrderConfirmation";
+import Orders from "./components/Admin/Orders";
+import SingleOrder from "./components/Admin/SingleOrder";
+import UserDashboard from "./components/RegisteredUser/UserDash";
+import Reviews from "./components/Main/Reviews";
 import { getCart, intendToPurchase } from "./store/cart";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import AddProduct from "./components/AddProduct";
-import AllUsers from "./components/AllUsers";
+import AddProduct from "./components/Admin/AddProduct";
+import AllUsers from "./components/Admin/AllUsers";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.

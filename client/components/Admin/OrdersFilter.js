@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./styles/Filter.css";
+import "../styles/Filter.css";
 
 const OrdersFilter = (props) => {
   const dropDownChangeHandler = (event) => {

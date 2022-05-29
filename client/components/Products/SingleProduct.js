@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProduct } from "../store/singleProduct";
-import { _addProduct, addProduct } from "../store/cart";
+import { getProduct } from "../../store/singleProduct";
+import { _addProduct, addProduct } from "../../store/cart";
 import EditProduct from "./EditProduct";
-import "./styles/SingleProduct.css";
+import "../styles/SingleProduct.css";
 
 const SingleProduct = (props) => {
   const dispatch = useDispatch();

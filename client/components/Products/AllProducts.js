@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../store/products";
+import { getProducts } from "../../store/products";
 import { Link } from "react-router-dom";
-import "./styles/AllProducts.css";
+import "../styles/AllProducts.css";
 import Filter from "./Filter";
 import MaterialColorFilter from "./MaterialColorFilter";
 import { Card, Button, Container, Col, Row } from "react-bootstrap";

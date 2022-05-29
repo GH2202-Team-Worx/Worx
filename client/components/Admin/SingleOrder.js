@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getOrder } from "../store/singleOrder";
-import { updateOrder } from "../store/singleOrder";
-
-import "./styles/SingleOrder.css";
+import { getOrder } from "../../store/singleOrder";
+import { updateOrder } from "../../store/singleOrder";
+import AdminDashboard from "./AdminDash";
+import "../styles/SingleOrder.css";
 
 const SingleOrder = (props) => {
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const SingleOrder = (props) => {
 
   return (
     <div>
+      <AdminDashboard />
       {!Object.keys(order).length ? (
         <p>Loading</p>
       ) : (

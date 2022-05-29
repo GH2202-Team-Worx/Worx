@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { logout } from "../store";
-import "./styles/Navbar.css";
-import icon from "../../public/photos/BellsIcon.png";
-import { fetchSingleUser } from "../store/users";
+import { logout } from "../../store";
+import "../styles/Navbar.css";
+import icon from "../../../public/photos/BellsIcon.png";
+import { fetchSingleUser } from "../../store/users";
 // import woodHeader from "./styles/woodgradientImage.jpeg";
 
 // is admin function?

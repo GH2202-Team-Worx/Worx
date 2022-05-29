@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUpdatedUser } from "../store/users";
-import { me } from "../store/auth";
+import { fetchUpdatedUser } from "../../store/users";
+import { me } from "../../store/auth";
 import { Link, useHistory } from "react-router-dom";
-import { getUserOrders } from "../store/orders";
-import "./styles/UserDash.css";
+import { getUserOrders } from "../../store/orders";
+import "../styles/UserDash.css";
 
 const UserDashboard = (props) => {
   const history = useHistory();

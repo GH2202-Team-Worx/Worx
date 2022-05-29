@@ -1,7 +1,7 @@
 import React from "react";
 import FeaturedProd from "./FeaturedProd";
-import "./styles/main.css";
-import familyPhoto from "../../public/photos/cropped_family_photo.png";
+import "../styles/main.css";
+import familyPhoto from "../../../public/photos/cropped_family_photo.png";
 import Reviews from "./Reviews";
 
 const Main = () => {

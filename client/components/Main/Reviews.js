@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchReviews } from "../store/reviews";
-import "./styles/Reviews.css";
+import { fetchReviews } from "../../store/reviews";
+import "../styles/Reviews.css";
 
 const Reviews = () => {
   const dispatch = useDispatch();
   const [review, setReview] = useState("");
   const [name, setName] = useState("");
   const reviews = useSelector((state) => state.reviewReducer);
-
-  console.log("reviews", reviews);
 
   useEffect(() => {
     dispatch(fetchReviews());

@@ -3,7 +3,7 @@
   font-family: "Cormorant", serif;
   margin: 50px;
   text-align: center;
-  padding: 7px 7px;
+  padding: 15px 15px;
   border: 1px solid black;
 }
 
@@ -25,6 +25,11 @@
 .review-form input {
   padding-left: 7px;
   margin-right: 5px;
+}
+
+.review-form button {
+  padding: 2px 5px;
+  border-radius: 5px;
 }
 
 .review-card {

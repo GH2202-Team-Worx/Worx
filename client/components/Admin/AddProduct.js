@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { createProduct } from "../store/products";
-import { getProducts } from "../store/products";
+import { createProduct } from "../../store/products";
+import { getProducts } from "../../store/products";
 import AdminDashboard from "./AdminDash";
-import "./styles/AdminDash.css";
-import "./styles/AddProduct.css";
+import "../styles/AdminDash.css";
+import "../styles/AddProduct.css";
 
 const AddProduct = () => {
   const dispatch = useDispatch();

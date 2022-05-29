@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/ShippingInformation.css";
+import "../styles/ShippingInformation.css";
 //sending to the order db
 //router post cart
 

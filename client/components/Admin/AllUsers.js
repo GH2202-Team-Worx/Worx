@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AdminDashboard from "./AdminDash";
-import { fetchUpdatedUser, fetchUsers, DeleteUser } from "../store/users";
-import { updateUser } from "../store/newUser";
-import "./styles/AllUsers.css";
+import { fetchUpdatedUser, fetchUsers, DeleteUser } from "../../store/users";
+import { updateUser } from "../../store/newUser";
+import "../styles/AllUsers.css";
 
 const AllUsers = (props) => {
   const dispatch = useDispatch();

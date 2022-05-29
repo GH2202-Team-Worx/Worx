@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import productReducer, { getProduct } from "../store/singleProduct";
-import { updateProduct } from "../store/singleProduct";
+import productReducer, { getProduct } from "../../store/singleProduct";
+import { updateProduct } from "../../store/singleProduct";
 import { Modal, Button, Form } from "react-bootstrap";
-import "./styles/EditProduct.css";
+import "../styles/EditProduct.css";
 
 function EditProduct(props) {
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ function EditProduct(props) {
   const handleShow = () => setShow(true);
 
   const handleClose = (event) => {
-    console.log("submit hit");
     event.preventDefault();
     setShow(false);
     dispatch(

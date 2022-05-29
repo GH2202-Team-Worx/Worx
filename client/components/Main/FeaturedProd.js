@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 // import { connect } from 'react-redux';
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getFeatured } from "../store/products";
+import { getFeatured } from "../../store/products";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
-import "./styles/featuredProds.css";
+import "../styles/featuredProds.css";
 
 const FeaturedProd = () => {
   const dispatch = useDispatch();
