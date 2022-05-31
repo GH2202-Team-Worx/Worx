@@ -6,6 +6,7 @@ const {
   Order,
   User,
   OrderProduct,
+  Review,
 } = require("../server/db/models");
 
 const orderProducts = [
@@ -354,6 +355,16 @@ async function seed() {
         return OrderProduct.create(orderProd);
       })
     );
+    await Promise.all(
+      reviews.map((review) => {
+        return Review.create(review);
+      })
+    );
+    // await Promise.all(
+    //   reviews.map((review) => {
+    //     return Review.create(review);
+    //   })
+    // );
   } catch (err) {
     console.log(err);
   }

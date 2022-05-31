@@ -24,17 +24,31 @@ export const getProduct = (productId) => {
   };
 };
 
+// export const updateProduct = (productInfo, productId) => {
+//   console.log("ORDERINFO", orderInfo);
+//   return async (dispatch) => {
+//     try {
+//       const { data: updatedOrder } = await axios.put(
+//         `/api/orders/${orderId}`,
+//         orderInfo
+//       );
+//       dispatch(_updatedOrder(updatedOrder));
+//     } catch (err) {
+//       console.log("Error from update order thunk");
+//     }
+//   };
+// };
+
 export const updateProduct = (productInfo, productId) => {
-  console.log("ORDERINFO", orderInfo);
   return async (dispatch) => {
     try {
-      const { data: updatedOrder } = await axios.put(
-        `/api/orders/${orderId}`,
-        orderInfo
+      const { data: updatedProduct } = await axios.put(
+        `/api/products/${productId}`,
+        productInfo
       );
-      dispatch(_updateOrder(updatedOrder));
+      dispatch(_updateProduct(updatedProduct));
     } catch (err) {
-      console.log("Error from update order thunk");
+      console.log("Error from update product thunk");
     }
   };
 };
@@ -42,6 +56,8 @@ export const updateProduct = (productInfo, productId) => {
 export default function productReducer(state = {}, action) {
   switch (action.type) {
     case GET_PRODUCT:
+      return action.product;
+    case UPDATE_PRODUCT:
       return action.product;
     default:
       return state;
