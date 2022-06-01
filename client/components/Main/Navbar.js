@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { connect, useSelector, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { logout } from "../../store";
-import "../styles/Navbar.css";
-import icon from "../../../public/photos/BellsIcon.png";
-import { fetchSingleUser } from "../../store/users";
-// import woodHeader from "./styles/woodgradientImage.jpeg";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logout } from '../../store';
+import '../styles/Navbar.css';
+import icon from '../../../public/photos/BellsIcon.png';
 
-// is admin function?
-const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
+const Navbar = () => {
+  const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartReducer);
+  const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
 
   return (
     <div className="navbar-container">
-      {/* <div className="content"> */}
       <div className="navbar-left-elements">
         <img className="icon" src={icon} alt="icon" />
         <h1 className="navbar-company-name">
@@ -36,7 +35,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
           {isAdmin ? <Link to="/admin">My Dashboard</Link> : null}
           <Link to="/contact">Contact Us</Link>
           <Link to="/cart">
-            Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
+            Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''}{' '}
           </Link>
         </div>
         {isLoggedIn && !isAdmin ? (
@@ -46,7 +45,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
         ) : null}
         {isLoggedIn ? (
           <div>
-            <a href="#" onClick={handleClick}>
+            <a href="#" onClick={() => dispatch(logout())}>
               Logout
             </a>
           </div>
@@ -59,28 +58,9 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
             </div>
           )}
         </div>
-        {/* )} */}
       </nav>
     </div>
   );
 };
 
-/**
- * CONTAINER
- */
-const mapState = (state) => {
-  return {
-    isLoggedIn: !!state.auth.id,
-    isAdmin: state.auth.isAdmin,
-  };
-};
-
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick() {
-      dispatch(logout());
-    },
-  };
-};
-
-export default connect(mapState, mapDispatch)(Navbar);
+export default Navbar;

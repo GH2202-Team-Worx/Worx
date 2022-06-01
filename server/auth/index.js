@@ -13,8 +13,7 @@ router.post('/login', async (req, res, next) => {
 router.get('/me', async (req, res, next) => {
   try {
     const token = await User.findByToken(req.headers.authorization);
-    // console.log('tokent', token)
-    res.send(token)
+    res.send(token);
   } catch (ex) {
     next(ex);
   }

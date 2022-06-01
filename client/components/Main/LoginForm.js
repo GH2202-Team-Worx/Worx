@@ -1,16 +1,10 @@
-import React from "react";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { authenticate } from '../../store';
+import '../styles/LoginForm.css';
 
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { authenticate } from "../../store";
-import "../styles/LoginForm.css";
-
-/**
- * COMPONENT
- */
 const LoginForm = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { error } = props;
 
   const handleSubmit = (evt) => {
@@ -20,8 +14,7 @@ const LoginForm = (props) => {
     const password = evt.target.password.value;
     dispatch(authenticate(email, password, formName));
   };
-  // need to check if user is admin, if so need to make new page where admins can see all orders placed
-  // get user id
+
   return (
     <div>
       <form id="login-form" name="login" onSubmit={handleSubmit}>
@@ -51,10 +44,3 @@ const LoginForm = (props) => {
 };
 
 export default LoginForm;
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
