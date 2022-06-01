@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
-// import { connect } from 'react-redux';
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { getFeatured } from "../../store/products";
-import { Card, Button, Row, Col, Container } from "react-bootstrap";
-import "../styles/featuredProds.css";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getFeatured } from '../../store/products';
+import { Card, Button, Row, Col, Container } from 'react-bootstrap';
+import '../styles/featuredProds.css';
 
 const FeaturedProd = () => {
   const dispatch = useDispatch();
@@ -46,17 +45,4 @@ const FeaturedProd = () => {
   );
 };
 
-// const mapState = (state) => {
-//   return {
-//     featuredProds: state.products,
-//   };
-// };
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     loadFeatured: () => dispatch(getFeatured()),
-//   };
-// };
-
-// export default connect(mapState, mapDispatch)(FeaturedProd);
 export default FeaturedProd;

@@ -1,32 +1,22 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { createNewUser } from "../../store/users";
-import "../styles/SignUpForm.css";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { createNewUser } from '../../store/users';
+import '../styles/SignUpForm.css';
 
 const SignupForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confPassword, setConfPassword] = useState("");
-
-  const handleFirstNameChange = (e) => setFirstName(e.target.value);
-
-  const handleLastNameChange = (e) => setLastName(e.target.value);
-
-  const handleEmailChange = (e) => setEmail(e.target.value);
-
-  const handlePasswordChange = (e) => setPassword(e.target.value);
-
-  const handleConfPasswordChange = (e) => setConfPassword(e.target.value);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confPassword, setConfPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confPassword) {
-      alert("Passwords do not match.");
+      alert('Passwords do not match.');
     } else {
       alert(
         'A sign up form was submitted with first name: "' +
@@ -62,9 +52,7 @@ const SignupForm = () => {
                   value={firstName}
                   type="text"
                   required
-                  onChange={(e) => {
-                    handleFirstNameChange(e);
-                  }}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
                 <label htmlFor="lastName">
                   <small>Last Name</small>
@@ -73,9 +61,7 @@ const SignupForm = () => {
                   value={lastName}
                   type="text"
                   required
-                  onChange={(e) => {
-                    handleLastNameChange(e);
-                  }}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
               <label htmlFor="email">
@@ -85,9 +71,7 @@ const SignupForm = () => {
                 value={email}
                 type="text"
                 required
-                onChange={(e) => {
-                  handleEmailChange(e);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="signup-password-container">
@@ -98,9 +82,7 @@ const SignupForm = () => {
                 value={password}
                 type="password"
                 required
-                onChange={(e) => {
-                  handlePasswordChange(e);
-                }}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <label htmlFor="confPassword">
                 <small>Confirm Password: </small>
@@ -109,9 +91,7 @@ const SignupForm = () => {
                 value={confPassword}
                 type="password"
                 required
-                onChange={(e) => {
-                  handleConfPasswordChange(e);
-                }}
+                onChange={(e) => setConfPassword(e.target.value)}
               />
             </div>
           </div>

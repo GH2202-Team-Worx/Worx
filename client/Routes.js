@@ -4,14 +4,14 @@ import { withRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/Main/LoginForm";
 import AllProducts from "./components/Products/AllProducts";
 import Main from "./components/Main/Main";
-import Checkout from "./components/Cart/Checkout";
-import Cart from "./components/Cart/Cart";
+import Checkout from "./components/FullCart/Checkout";
+import Cart from "./components/FullCart/Cart";
 import Contact from "./components/Main/Contact";
 import { me } from "./store";
 import SingleProduct from "./components/Products/SingleProduct";
 import SignupForm from "./components/Main/SignupForm";
 import AdminDashboard from "./components/Admin/AdminDash";
-import OrderConfirmation from "./components/Cart/OrderConfirmation";
+import OrderConfirmation from "./components/FullCart/OrderConfirmation";
 import Orders from "./components/Admin/Orders";
 import SingleOrder from "./components/Admin/SingleOrder";
 import UserDashboard from "./components/RegisteredUser/UserDash";
@@ -95,45 +95,4 @@ const Routes = () => {
   );
 };
 
-/**
- * CONTAINER
- */
-// const mapState = (state) => {
-//   return {
-//     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-//     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-//     // isLoggedIn: !!state.auth.id,
-//     // auth: state.auth,
-//   };
-// };
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     loadInitialData() {
-//       dispatch(me());
-//     },
-//     // loadCart(userId) {
-//     //   dispatch(getCart(userId));
-//     // },
-//   };
-// };
-
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
-// export default withRouter(connect(mapState, mapDispatch)(Routes));
-
 export default Routes;
-
-// componentDidMount() {
-// this.props.loadInitialData();
-// this.props.loadCart(this.props.auth.id);
-// }
-// const { isLoggedIn } = this.props;
-//   let loggedIn = ''
-
-//   if (!isLoggedIn) {
-//     loggedIn = (<Switch><Route path="/login" component={Login} />
-//     <Route path="/signup" component={Signup} /></Switch>)
-//   } else {
-//     loggedIn = (<Switch><Route path="/signup" component={Signup} /></Switch>)
-//   }
