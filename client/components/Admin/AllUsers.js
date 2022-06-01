@@ -9,7 +9,7 @@ import "../styles/AllUsers.css";
 const AllUsers = (props) => {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => {
-    console.log(state.usersReducer);
+    // console.log(state.usersReducer);
     return state.usersReducer;
   });
 
@@ -22,9 +22,9 @@ const AllUsers = (props) => {
   const [admin, setAdmin] = useState(false);
   const [userId, setUserId] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, userId) => {
     event.preventDefault();
-    dispatch(updateUser({ isAdmin: event.target.value }, user.id));
+    dispatch(updateUser({ isAdmin: event.target.value }, userId));
   };
 
   const deleteHandler = (event, userId) => {
@@ -49,7 +49,7 @@ const AllUsers = (props) => {
             name="status"
             // placeholder={user.isAdmin}
             value={user.isAdmin}
-            onChange={handleSubmit}
+            onChange={(evt) => handleSubmit(evt, user.id)}
           >
             <option value="">Select status</option>
             <option value="true">True</option>

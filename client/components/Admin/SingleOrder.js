@@ -29,13 +29,45 @@ const SingleOrder = (props) => {
       ) : (
         <div className="so-container">
           <h2 className="so-title">Review Order</h2>
-          <p>Order Id: {order.id}</p>
-          <p>UserId: {order.userId}</p>
-          <p>Status: {order.status}</p>
-          <p>Shipping Address:{order.shippingAddress}</p>
-          <p>Payment Information: {order.paymentInfo}</p>
-          <p>Shipping Amount: {order.shippingAmt}</p>
-          <p>Tax Amount: {order.taxAmt}</p>
+
+          <table>
+            <tr>
+              <td>Order Id:</td>
+              <td>{order.id}</td>
+            </tr>
+            {/* <p>Order Id: {order.id}</p> */}
+            <tr>
+              <td>UserId:</td>
+              <td>{order.userId}</td>
+            </tr>
+            {/* <p>UserId: {order.userId}</p> */}
+            <tr>
+              <td>Status:</td>
+              <td>{order.status}</td>
+            </tr>
+            {/* <p>Status: {order.status}</p> */}
+            <tr>
+              <td>Shipping Address:</td>
+              <td>{order.shippingAddress}</td>
+            </tr>
+            <tr>
+              <td>Payment Information:</td>
+              <td>{order.paymentInfo}</td>
+            </tr>
+            <tr>
+              <td>Shipping Amount:</td>
+              <td>{order.shippingAmt}</td>
+            </tr>
+            <tr>
+              <td>Tax Amount:</td>
+              <td>{order.shippingAmt}</td>
+            </tr>
+            {/* <p>Shipping Address:{order.shippingAddress}</p> */}
+            {/* <p>Payment Information: {order.paymentInfo}</p> */}
+            <p>Shipping Amount: {order.shippingAmt}</p>
+            <p>Tax Amount: {order.taxAmt}</p>
+          </table>
+
           <select
             className="category-dropdown"
             name="status"
