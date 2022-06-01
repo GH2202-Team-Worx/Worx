@@ -10,16 +10,25 @@
 }
 
 .user-card {
-  border: 1px solid black;
   max-width: 400px;
   padding: 20px 20px;
   margin: 10px;
-  background-color: rgb(168, 207, 209);
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
-
+.admin-status-dropdown {
+  margin-right: 5px;
+  padding: 2px 2px;
+}
 .user-card button {
-  padding: 5px 5px;
+  padding: 3px 4px;
   border-radius: 5px;
   background-color: white;
   margin-bottom: 7px;
+  border: 0.5px solid black;
+}
+
+.user-card button:hover {
+  background-color: palegoldenrod;
 }
