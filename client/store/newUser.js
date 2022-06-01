@@ -1,4 +1,5 @@
-import Axios from "axios";
+import axios from "axios";
+
 import { authenticate } from "./auth";
 
 const UPDATE_USER = "UPDATE_USER";
@@ -14,7 +15,7 @@ export const updateUser = (userInfo, userId) => {
   return async (dispatch) => {
     try {
       const { data: updatedUser } = await axios.put(
-        `/api/products/${userId}`,
+        `/api/users/${userId}`,
         userInfo
       );
       dispatch(_updateUser(updatedUser));

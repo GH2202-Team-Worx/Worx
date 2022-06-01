@@ -15,7 +15,7 @@ const OrdersFilter = (props) => {
         value={props.selected}
         onChange={dropDownChangeHandler}
       >
-        <option value="">Select status</option>
+        <option value="">Filter by status</option>
         <option value="Created">Created</option>
         <option value="Processing">Processing</option>
         <option value="Cancelled">Cancelled</option>

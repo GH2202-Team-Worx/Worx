@@ -48,7 +48,6 @@ router.put("/:id", async (req, res, next) => {
 // GET /api/users/id need eager loading to include
 router.get("/:id", async (req, res, next) => {
   try {
-    console.log("userId for orders", req.params.id);
     const userOrders = await User.findByPk(req.params.id, {
       include: {
         model: Order,

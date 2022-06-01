@@ -11,7 +11,7 @@ const AdminDashboard = () => {
       <Link to="/allUsers">
         <button className="admin-dash-button">Manage Users</button>
       </Link>
-      <Link to="/addproduct">
+      <Link to="/adminproducts">
         <button className="admin-dash-button">Manage Products</button>
       </Link>
     </div>

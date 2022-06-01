@@ -53,7 +53,7 @@ export const fetchSingleUser = (id) => {
 
 export const createNewUser = (newUser, history) => {
   return async (dispatch) => {
-    const { data } = await Axios.post("/api/users", {
+    const { data } = await axios.post("/api/users", {
       ...newUser,
       isGuest: false,
     });
