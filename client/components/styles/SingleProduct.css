@@ -3,6 +3,7 @@
   justify-content: center;
   background-color: rgb(248, 239, 218);
   padding: 50px;
+  font-family: "Cormorant", serif;
 }
 
 .sp-image {
@@ -17,14 +18,14 @@
 }
 
 .sp-title {
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   font-weight: bold;
   padding-bottom: 5px;
   /* padding-left: 10px; */
 }
 
 .sp-price {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: bold;
   /* padding-left: 10px; */
 }
@@ -35,10 +36,11 @@
 .sp-description {
   padding-top: 10px;
   padding-bottom: 30px;
+  font-size: 1.2rem;
 }
 
 .sp-shipping {
-  font-size: small;
+  font-size: 0.9rem;
   padding-bottom: 50px;
   font-style: italic;
 }
@@ -52,4 +54,10 @@
   align-self: center;
   justify-content: flex-end;
   border: none;
+}
+
+.sp-button:hover {
+  background-color: rgb(235, 191, 80);
+  transition-duration: 450ms;
+  transform: scale(1.05);
 }

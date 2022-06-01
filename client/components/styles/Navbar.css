@@ -2,10 +2,27 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 10px;
+  padding-right: 20px;
   align-items: center;
+  color: white;
   background-color: #826e5c;
   gap: 10px;
-  background-image: url(http://localhost:8080/c841f3bbeaf456e8982b.png);
+  font-family: "Cormorant", serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+  height: 7rem;
+  background-image: url("/photos/WoodHeader.png");
+}
+
+.navbar-container a:hover {
+  transform: scale(1.1);
+  transition-duration: 500ms;
+}
+
+.navbar-background-image {
+  max-width: 100%;
+  height: 50%;
 }
 
 .navbar-left-elements {
@@ -15,22 +32,25 @@
   gap: 5px;
 }
 
-.all-products-link {
+#all-products-link {
   align-self: center;
-  padding: 5px;
+  padding-left: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
-
-.nav-links {
+nav.nav-links {
   display: flex;
-  justify-content: space-evenly;
-  justify-content: flex-end;
-  align-items: flex-end;
+}
+.nav-links a {
   padding-top: 5px;
+  font-size: 1.07rem;
+  font-weight: 500;
 }
 
 .icon {
   width: 70px;
-  mix-blend-mode: multiply;
+  /* mix-blend-mode: multiply;
+  color: white; */
 }
 
 .navbar-company-name {
@@ -43,6 +63,8 @@
 .navbar-container a {
   color: white;
   align-self: flex-end;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .search-input {
@@ -60,5 +82,4 @@
   align-self: center;
   justify-content: flex-end;
   border: none;
-
 }

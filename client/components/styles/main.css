@@ -4,6 +4,8 @@
   justify-content: center;
   align-items: center;
   background-color: #f5ebd7;
+  /* font-family: "Spectral", serif; */
+  font-family: "Cormorant", serif;
 }
 
 .about-us {
@@ -11,7 +13,7 @@
   justify-content: space-evenly;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 80%;
   border: 1px solid #dac2ac;
   background-color: #dac2ac;
   padding: 5%;
@@ -19,7 +21,7 @@
 }
 
 .family-photo {
-  /* width: 100%; */
+  width: 100%;
   height: auto;
   flex: 1;
   object-fit: contain;
@@ -31,6 +33,7 @@
   flex-direction: column;
   align-items: flex-start;
   flex: 1;
+  font-weight: 500;
   /* padding: 10px; */
   /* background-color: #dac2ac; */
   height: 427px;

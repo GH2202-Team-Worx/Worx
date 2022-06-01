@@ -1,0 +1,81 @@
+.checkout-shipping-header {
+  margin-bottom: 0;
+}
+
+.checkout-shipping-container form {
+  display: flex;
+  flex-direction: column;
+  width: 535px;
+  position: relative;
+  right: -20%;
+}
+.phone-name {
+  display: flex;
+  margin-right: 16px;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
+.ship-name {
+  flex: 2;
+  margin-right: 0;
+}
+
+.ship-name input {
+  width: 90%;
+  margin-left: 34px;
+}
+
+.ship-phoneNumber {
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.ship-phoneNumber label {
+  margin-right: 30px;
+}
+.ship-phoneNumber input {
+  margin-right: 42px;
+}
+
+.street-address {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 0;
+}
+
+.street-address input {
+  width: 80%;
+  margin-bottom: 15px;
+}
+.city-state-zip {
+  display: flex;
+  width: 60%;
+  margin-top: 0;
+  margin-left: 30px;
+  margin-left: 0;
+}
+
+.city {
+  flex: 2;
+  position: relative;
+  right: -30%;
+}
+
+.state {
+  flex: 1;
+  position: relative;
+  right: -36%;
+  width: 4rem;
+}
+
+/* .state input {
+  width: 1.5rem;
+} */
+
+.zipcode {
+  flex: 2;
+  position: relative;
+  left: -2%;
+}

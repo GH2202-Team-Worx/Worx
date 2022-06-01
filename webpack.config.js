@@ -1,8 +1,10 @@
+const path = require("path");
+
 module.exports = {
   entry: ["./client/index.js"],
   output: {
-    path: __dirname,
-    filename: "./public/bundle.js",
+    path: path.resolve(__dirname, "public"),
+    filename: "bundle.js",
   },
   devtool: "source-map",
   module: {
@@ -17,8 +19,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader",
+          { loader: "css-loader", options: { url: false } },
+        ],
       },
+
       {
         test: /\.(jp(e*)g|png)$/,
         use: {

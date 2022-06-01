@@ -1,0 +1,48 @@
+.reviews-container {
+  width: 80%;
+  font-family: "Cormorant", serif;
+  margin: 50px;
+  text-align: center;
+  padding: 15px 15px;
+  border: 1px solid black;
+}
+
+.reviews-title {
+  font-size: 1.3rem;
+  padding-bottom: 10px;
+}
+
+.review-form {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.review-form label {
+  padding-right: 7px;
+  padding-left: 7px;
+}
+
+.review-form input {
+  padding-left: 7px;
+  margin-right: 5px;
+}
+
+.review-form button {
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.review-card {
+  border: 1px solid black;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start;
+  align-items: flex-start; */
+  flex: 1;
+  margin: 7px 7px;
+}
+
+.reviews-list {
+  display: flex;
+}

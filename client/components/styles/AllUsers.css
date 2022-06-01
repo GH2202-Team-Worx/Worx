@@ -1,0 +1,25 @@
+.admin-users-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Cormorant;
+}
+
+.users-list {
+  display: flex;
+}
+
+.user-card {
+  border: 1px solid black;
+  max-width: 400px;
+  padding: 20px 20px;
+  margin: 10px;
+  background-color: rgb(168, 207, 209);
+}
+
+.user-card button {
+  padding: 5px 5px;
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 7px;
+}

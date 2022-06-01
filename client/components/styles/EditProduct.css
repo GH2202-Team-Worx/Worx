@@ -1,0 +1,17 @@
+.edit-product-button {
+  background-color: #dac2ac;
+  color: black;
+  padding: 10px 10px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  width: 80%;
+  align-self: center;
+  justify-content: flex-end;
+  border: none;
+  margin-top: 20px;
+}
+.edit-product-button:hover {
+  background-color: rgb(235, 191, 80);
+  transition-duration: 450ms;
+  transform: scale(1.05);
+}

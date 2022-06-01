@@ -9,7 +9,7 @@ router.get("/", async (req, res, next) => {
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ["id", "email"],
+      attributes: ["id", "email", "isAdmin"],
     });
     res.json(users);
   } catch (err) {
@@ -75,7 +75,7 @@ router.get("/:userId/cart", async (req, res, next) => {
     console.error("Unable to get order from db");
     next(err);
   }
-})
+});
 
 router.delete("/:id", async (req, res, next) => {
   try {
@@ -86,4 +86,4 @@ router.delete("/:id", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-})
+});
