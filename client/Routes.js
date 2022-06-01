@@ -1,32 +1,32 @@
-import React, { useEffect, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { withRouter, Route, Switch } from "react-router-dom";
-import LoginForm from "./components/Main/LoginForm";
-import AllProducts from "./components/Products/AllProducts";
-import Main from "./components/Main/Main";
-import Checkout from "./components/Cart/Checkout";
-import Cart from "./components/Cart/Cart";
-import Contact from "./components/Main/Contact";
-import { me } from "./store";
-import SingleProduct from "./components/Products/SingleProduct";
-import SignupForm from "./components/Main/SignupForm";
-import AdminDashboard from "./components/Admin/AdminDash";
-import OrderConfirmation from "./components/Cart/OrderConfirmation";
-import Orders from "./components/Admin/Orders";
-import SingleOrder from "./components/Admin/SingleOrder";
-import UserDashboard from "./components/RegisteredUser/UserDash";
-import Reviews from "./components/Main/Reviews";
-import { getCart, intendToPurchase } from "./store/cart";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import AddProduct from "./components/Admin/AddProduct";
-import AllUsers from "./components/Admin/AllUsers";
+import React, { useEffect, Fragment } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { withRouter, Route, Switch } from 'react-router-dom';
+import LoginForm from './components/Main/LoginForm';
+import AllProducts from './components/Products/AllProducts';
+import Main from './components/Main/Main';
+import Checkout from './components/FullCart/Checkout';
+import Cart from './components/FullCart/Cart';
+import Contact from './components/Main/Contact';
+import { me } from './store';
+import SingleProduct from './components/Products/SingleProduct';
+import SignupForm from './components/Main/SignupForm';
+import AdminDashboard from './components/Admin/AdminDash';
+import OrderConfirmation from './components/FullCart/OrderConfirmation';
+import Orders from './components/Admin/Orders';
+import SingleOrder from './components/Admin/SingleOrder';
+import UserDashboard from './components/RegisteredUser/UserDash';
+import Reviews from './components/Main/Reviews';
+import { getCart, intendToPurchase } from './store/cart';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import AddProduct from './components/Admin/AddProduct';
+import AllUsers from './components/Admin/AllUsers';
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
 const stripePromise = loadStripe(
-  "pk_test_51KsV0OFre9FhvB1Nn9maNQyFsjbnUnTmzUadLpoQxqD0nKhbcep8g7WQ96OJ35jhTSnRzYOucWnO5ihmXvpjlHIf00lsp2xvDl"
+  'pk_test_51KsV0OFre9FhvB1Nn9maNQyFsjbnUnTmzUadLpoQxqD0nKhbcep8g7WQ96OJ35jhTSnRzYOucWnO5ihmXvpjlHIf00lsp2xvDl'
 );
 
 /**
@@ -55,7 +55,7 @@ const Routes = () => {
   }, [isLoggedIn]);
 
   const appearance = {
-    theme: "stripe",
+    theme: 'stripe',
   };
   const options = {
     clientSecret,
