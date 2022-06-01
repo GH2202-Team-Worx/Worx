@@ -16,8 +16,7 @@
 }
 
 .navbar-container a:hover {
-  transform: scale(1.1);
-  transition-duration: 500ms;
+  color: peru;
 }
 
 .navbar-background-image {

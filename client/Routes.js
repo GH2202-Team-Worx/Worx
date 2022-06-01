@@ -19,7 +19,7 @@ import Reviews from "./components/Main/Reviews";
 import { getCart, intendToPurchase } from "./store/cart";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import AddProduct from "./components/Admin/AddProduct";
+import AdminProducts from "./components/Admin/AdminProducts";
 import AllUsers from "./components/Admin/AllUsers";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -88,7 +88,7 @@ const Routes = () => {
         <Route path="/order/confirmation" component={OrderConfirmation} />
         <Route path="/user" component={UserDashboard} />
         <Route path="/review" component={Reviews} />
-        <Route exact path="/addproduct" component={AddProduct} />
+        <Route exact path="/adminproducts" component={AdminProducts} />
         <Route path="/allUsers" component={AllUsers} />
       </Switch>
     </div>

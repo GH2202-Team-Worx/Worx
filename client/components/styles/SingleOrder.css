@@ -6,12 +6,27 @@
   width: 80%;
   padding: 20px 20px;
   gap: 7px;
+  font-family: Cormorant;
+}
+.so-container h2 {
+  text-decoration: underline;
+}
+.so-table td {
+  font-size: 1.3rem;
+}
+
+.so-container table {
+  margin: 20px;
+}
+
+.so-container label {
+  font-size: 1rem;
 }
 
 .so-title {
   text-transform: capitalize;
 }
 .return-link {
-  justify-self: center;
+  justify-self: flex-start;
   /* color: black; */
 }

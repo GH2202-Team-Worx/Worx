@@ -32,3 +32,10 @@
 .user-card button:hover {
   background-color: palegoldenrod;
 }
+
+@media (max-width: 750px) {
+  .users-list {
+    display: flex;
+    flex-direction: column;
+  }
+}
