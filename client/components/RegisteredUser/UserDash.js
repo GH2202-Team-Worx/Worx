@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchUpdatedUser } from "../../store/users";
-import { me } from "../../store/auth";
-import { Link, useHistory } from "react-router-dom";
-import { getUserOrders } from "../../store/orders";
-import "../styles/UserDash.css";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUpdatedUser } from '../../store/users';
+import { me } from '../../store/auth';
+import { Link } from 'react-router-dom';
+import { getUserOrders } from '../../store/orders';
+import '../styles/UserDash.css';
 
 const UserDashboard = (props) => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => {
     return state.auth;
@@ -42,9 +41,9 @@ const UserDashboard = (props) => {
     );
   };
 
-  let listOfOrders;
+  // let listOfOrders;
 
-  console.log("ORDERS: ", orders);
+  // console.log("ORDERS: ", orders);
 
   // let listOfOrders;
   // if (orders.length > 0) {
@@ -83,9 +82,7 @@ const UserDashboard = (props) => {
             type="text"
             placeholder={user.firstName}
             required
-            onChange={(e) => {
-              handleFirstNameChange(e);
-            }}
+            onChange={(e) => handleFirstNameChange(e)}
           />
           <p>Last Name: </p>
           <input
@@ -93,9 +90,7 @@ const UserDashboard = (props) => {
             type="text"
             placeholder={user.lastName}
             required
-            onChange={(e) => {
-              handleLastNameChange(e);
-            }}
+            onChange={(e) => handleLastNameChange(e)}
           />
           <p>Email: </p>
           <input
@@ -103,9 +98,7 @@ const UserDashboard = (props) => {
             type="text"
             placeholder={user.email}
             required
-            onChange={(e) => {
-              handleEmailChange(e);
-            }}
+            onChange={(e) => handleEmailChange(e)}
           />
           <p>Address:</p>
           <input
@@ -113,9 +106,7 @@ const UserDashboard = (props) => {
             type="text"
             placeholder={user.address}
             required
-            onChange={(e) => {
-              handleAddressChange(e);
-            }}
+            onChange={(e) => handleAddressChange(e)}
           />
           <p>Phone Number:</p>
           <input
@@ -123,9 +114,7 @@ const UserDashboard = (props) => {
             type="text"
             placeholder={user.phone}
             required
-            onChange={(e) => {
-              handlePhoneChange(e);
-            }}
+            onChange={(e) => handlePhoneChange(e)}
           />
           <button className="userdash-button" type="submit">
             Submit Changes
@@ -138,7 +127,7 @@ const UserDashboard = (props) => {
           <p>No current orders! Go shopping!</p>
         ) : (
           orders.orders.map((order) => {
-            if (order.status !== "Completed")
+            if (order.status !== 'Completed')
               return (
                 <div key={order.id}>
                   <h5>{order.id}</h5>
@@ -162,7 +151,7 @@ const UserDashboard = (props) => {
           <p>No order history.</p>
         ) : (
           orders.orders.map((order) => {
-            if (order.status === "Completed")
+            if (order.status === 'Completed')
               return (
                 <div key={order.id}>
                   <h5>{order.id}</h5>

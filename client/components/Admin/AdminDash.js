@@ -1,9 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { createProduct } from "../../store/products";
-import "../styles/AdminDash.css";
-// import "../styles/AllUsers";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/AdminDash.css';
 
 const AdminDashboard = () => {
   return (
