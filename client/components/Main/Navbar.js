@@ -1,9 +1,9 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../../store';
-import '../styles/Navbar.css';
-import icon from '../../../public/photos/BellsIcon.png';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../../store";
+import "../styles/Navbar.css";
+import icon from "../../../public/photos/BellsIcon.png";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -27,17 +27,17 @@ const Navbar = () => {
         </Link>
       </div>
       <nav className="nav-links">
-        <div>
-          {/* <form>
+        {/* <div> */}
+        {/* <form>
             <input className="search-input" type="text" placeholder="Search Products Here" />
             <button className="search-button" type="submit">Search</button>
           </form> */}
-          {isAdmin ? <Link to="/admin">My Dashboard</Link> : null}
-          <Link to="/contact">Contact Us</Link>
-          <Link to="/cart">
-            Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ''}{' '}
-          </Link>
-        </div>
+        {isAdmin ? <Link to="/admin">My Dashboard</Link> : null}
+        <Link to="/contact">Contact Us</Link>
+        <Link to="/cart">
+          Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
+        </Link>
+        {/* </div> */}
         {isLoggedIn && !isAdmin ? (
           <div>
             <Link to="/user">My Profile</Link>
@@ -50,14 +50,14 @@ const Navbar = () => {
             </a>
           </div>
         ) : null}
-        <div>
-          {!isLoggedIn && (
-            <div>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-            </div>
-          )}
-        </div>
+        {/* <div> */}
+        {!isLoggedIn && (
+          <div>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        )}
+        {/* </div> */}
       </nav>
     </div>
   );
