@@ -4,8 +4,8 @@
   padding: 10px 10px;
   font-weight: bold;
   font-size: 1.3rem;
-  width: 80%;
-  align-self: center;
+  width: 200px;
+  /* align-self: center; */
   justify-content: flex-end;
   border: none;
   margin-top: 20px;

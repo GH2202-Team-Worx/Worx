@@ -30,7 +30,8 @@ const Navbar = () => {
         {isAdmin ? <Link to="/admin">My Dashboard</Link> : null}
         <Link to="/contact">Contact Us</Link>
         <Link to="/cart">
-          Cart{cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
+          Cart
+          {isLoggedIn && cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
         </Link>
         {/* </div> */}
         {isLoggedIn && !isAdmin ? (
