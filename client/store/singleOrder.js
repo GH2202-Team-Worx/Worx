@@ -27,7 +27,6 @@ export const getOrder = (orderId) => {
 };
 
 export const updateOrder = (orderInfo, orderId) => {
-  console.log("ORDERINFO", orderInfo);
   return async (dispatch) => {
     try {
       const { data: updatedOrder } = await axios.put(

@@ -3,7 +3,6 @@ import "../styles/Filter.css";
 
 const OrdersFilter = (props) => {
   const dropDownChangeHandler = (event) => {
-    console.log("EVENT: ", event.target.value);
     props.onChangeFilter(event.target.value);
   };
 

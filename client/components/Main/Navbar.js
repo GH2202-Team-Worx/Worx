@@ -27,11 +27,6 @@ const Navbar = () => {
         </Link>
       </div>
       <nav className="nav-links">
-        {/* <div> */}
-        {/* <form>
-            <input className="search-input" type="text" placeholder="Search Products Here" />
-            <button className="search-button" type="submit">Search</button>
-          </form> */}
         {isAdmin ? <Link to="/admin">My Dashboard</Link> : null}
         <Link to="/contact">Contact Us</Link>
         <Link to="/cart">

@@ -21,12 +21,11 @@ const AllProducts = () => {
     setFilteredCategory(selectedCategory);
   };
 
-  const materialChangeHandler = (selectedMaterial) => {
-    setFilteredMaterial(selectedMaterial);
-    console.log("HIT");
-  };
-  // need to separate out price filter
-  // have material && category filters work together
+  // const materialChangeHandler = (selectedMaterial) => {
+  //   setFilteredMaterial(selectedMaterial);
+  //   console.log("HIT");
+  // };
+
   const productsToShow = () => {
     let sortedArray = products;
     if (filteredCategory === "low") {
@@ -42,10 +41,34 @@ const AllProducts = () => {
     return sortedArray;
   };
 
+  let productList = productsToShow();
+
+  const searchChangeHandler = (e) => {
+    console.log(e);
+    if (e) {
+      productList = productList.filter((item) =>
+        item.name.includes(e.target.value)
+      );
+    }
+  };
+
+  searchChangeHandler();
+
   return (
     <div className="allproducts-main">
       <h3 id="allproducts-title">Our Products</h3>
       <div className="filters-div">
+        <div>
+          <label htmlFor="search">Search products</label>
+          <input
+            className="search-input"
+            type="search"
+            id="search"
+            onChange={(e) =>
+              productList.filter((item) => item.name.includes(e.target.value))
+            }
+          />
+        </div>
         <Filter
           className="products-filter"
           selected={filteredCategory}
@@ -59,10 +82,10 @@ const AllProducts = () => {
       </div>
       <Container className="allproducts-container">
         <Row>
-          {productsToShow().length === 0 ? (
+          {productList.length === 0 ? (
             <div>There are no products to show at this time</div>
           ) : (
-            productsToShow().map((product) => {
+            productList.map((product) => {
               return (
                 <Col md={4} key={product.id} className="product-container">
                   <Card className="products-card">
