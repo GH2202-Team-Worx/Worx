@@ -50,14 +50,28 @@
   padding: 10px 10px;
   font-weight: bold;
   font-size: 1.3rem;
-  width: 80%;
-  align-self: center;
+  width: 200px;
+  /* align-self: center; */
   justify-content: flex-end;
   border: none;
+  transition: color 200ms;
 }
 
-.sp-button:hover {
+/* .sp-button:hover {
   background-color: rgb(235, 191, 80);
-  transition-duration: 450ms;
-  transform: scale(1.05);
+
+} */
+
+.sp-button::after {
+  content: "";
+  inset: 0;
+  z-index: -1;
+  background-color: powderblue;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 200ms;
+}
+
+.sp-button:is(:hover, :focus)::after {
+  transform: scale(1);
 }

@@ -12,7 +12,8 @@
   /* font-weight: 700; */
   font-size: 1.7rem;
   height: 7rem;
-  background-image: url("/photos/WoodHeader.png");
+  background-image: url("/photos/OliveWood.png");
+  background-image: cover;
 }
 
 .navbar-container a:hover {

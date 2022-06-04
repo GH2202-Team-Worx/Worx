@@ -8,7 +8,7 @@ const Filter = (props) => {
 
   return (
     <div>
-      <label className="filter-label">Filter products: </label>
+      <label className="filter-label">Filter by category/price: </label>
       <select
         className="category-dropdown"
         name="category"

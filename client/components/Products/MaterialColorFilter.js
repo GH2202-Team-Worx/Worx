@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Filter.css";
 
 const MaterialColorFilter = (props) => {
   const dropDownChangeHandler = (event) => {
@@ -8,6 +9,7 @@ const MaterialColorFilter = (props) => {
   // Materials: "Poplar" "Hickory" "Spalted Oak" "live oak" "olive tree" "Pecan" "Spalted Pecan" "Black Walnut"
   return (
     <div>
+      <label className="material-label">Filter by material: </label>
       <select
         className="material-dropdown"
         name="material"

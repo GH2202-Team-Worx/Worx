@@ -133,7 +133,7 @@ const AdminProducts = () => {
             ) : (
               products.map((product) => {
                 return (
-                  <div key={product.id}>
+                  <div key={product.id} className="admin-product-card">
                     <Link to={`/products/${product.id}`}>
                       <img
                         className="allproducts-image"

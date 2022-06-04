@@ -12,6 +12,7 @@ const AllProducts = () => {
   const products = useSelector((state) => state.products);
   const [filteredCategory, setFilteredCategory] = useState("");
   const [filteredMaterial, setFilteredMaterial] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     dispatch(getProducts());
@@ -21,10 +22,12 @@ const AllProducts = () => {
     setFilteredCategory(selectedCategory);
   };
 
-  // const materialChangeHandler = (selectedMaterial) => {
-  //   setFilteredMaterial(selectedMaterial);
-  //   console.log("HIT");
-  // };
+  const materialChangeHandler = (selectedMaterial) => {
+    setFilteredMaterial(selectedMaterial);
+    console.log("HIT");
+  };
+
+  console.log("MATERIAL: ", filteredMaterial);
 
   const productsToShow = () => {
     let sortedArray = products;
@@ -37,22 +40,22 @@ const AllProducts = () => {
         (product) => product.category === filteredCategory
       );
       return filteredProducts;
+    } else if (filteredMaterial) {
+      const filteredProducts = products.filter(
+        (product) => product.material === filteredMaterial
+      );
+      return filteredProducts;
+    } else if (searchTerm) {
+      sortedArray = products.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
     return sortedArray;
   };
 
   let productList = productsToShow();
 
-  const searchChangeHandler = (e) => {
-    console.log(e);
-    if (e) {
-      productList = productList.filter((item) =>
-        item.name.includes(e.target.value)
-      );
-    }
-  };
-
-  searchChangeHandler();
+  console.log("PRODS: ", productList);
 
   return (
     <div className="allproducts-main">
@@ -64,9 +67,7 @@ const AllProducts = () => {
             className="search-input"
             type="search"
             id="search"
-            onChange={(e) =>
-              productList.filter((item) => item.name.includes(e.target.value))
-            }
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
         <Filter
@@ -74,11 +75,11 @@ const AllProducts = () => {
           selected={filteredCategory}
           onChangeFilter={filterChangeHandler}
         />
-        {/* <MaterialColorFilter
+        <MaterialColorFilter
           className="products-filter"
           selected={filteredMaterial}
-          onChange={materialChangeHandler}
-        /> */}
+          onChange={(e) => setFilteredMaterial(e)}
+        />
       </div>
       <Container className="allproducts-container">
         <Row>

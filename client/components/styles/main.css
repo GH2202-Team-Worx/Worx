@@ -53,7 +53,7 @@
 .about-paragraph {
   padding: 7px;
   line-height: 1.5;
-  font-size: 1.1rem;
+  font-size: 1.2vw;
 }
 
 @media (max-width: 9000px) {
@@ -61,7 +61,7 @@
     width: 200px;
   }
   .about-paragraph {
-    font-size: 0.8rem;
+    /* font-size: 0.8rem; */
     overflow: scroll;
   }
 }
