@@ -14,8 +14,8 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    await reviews.create(req.body);
-    res.sendStatus(201);
+    const data = await Review.create(req.body);
+    res.send(data).status(201);
   } catch (err) {
     next(err);
   }
