@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProduct } from "../../store/singleProduct";
 import { _addProduct, addProduct } from "../../store/cart";
 import EditProduct from "./EditProduct";
-import { Carousel } from "react-bootstrap";
+
 import "../styles/SingleProduct.css";
 
 const SingleProduct = (props) => {
@@ -18,11 +18,6 @@ const SingleProduct = (props) => {
   const [mainPic, setMainPic] = useState(pic1);
 
   const productId = props.match.params.productId;
-
-  // let slider = tns({
-  //   container: ".my-slider",
-  //   slideBy: 1,
-  // });
 
   useEffect(() => {
     dispatch(getProduct(productId));
@@ -68,77 +63,54 @@ const SingleProduct = (props) => {
         <React.Fragment>
           <div className="single-product-container">
             <div id="slider">
-              <section id="slider">
-                <div className="side-container">
-                  <div className="subcontainer">
-                    <div className="slider-wrapper">
-                      <div className="controller">
-                        <div id="controls">
-                          <button
-                            className="previous"
-                            type="button"
-                            onClick={sliderUp}
-                          >
-                            <i className="fa-solid fa-angle-up"></i>
-                          </button>
-                          <button
-                            className="next"
-                            type="button"
-                            onClick={sliderDown}
-                          >
-                            <i className="fa-solid fa-angle-down"></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div className="my-slider">
-                        <div>
-                          <div className="slide">
-                            <div className="slide-img img-1">
-                              <img
-                                src={pic1}
-                                alt="pic1"
-                                className="sp-image"
-                                onClick={() => setMainPic(pic1)}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div className="slide">
-                            <div className="slide-img img-2">
-                              <img
-                                src={pic2}
-                                alt="pic2"
-                                className="sp-image"
-                                onClick={() => setMainPic(pic2)}
-                              />
-                            </div>
-                            <div className="slide-img img-3">
-                              <img
-                                src={pic3}
-                                alt="pic3"
-                                className="sp-image"
-                                onClick={() => setMainPic(pic3)}
-                              />
-                            </div>
-                            <div className="slide-img img-4">
-                              <img
-                                src={pic4}
-                                alt="pic4"
-                                className="sp-image"
-                                onClick={() => setMainPic(pic4)}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div className="controller">
+                <div id="controls">
+                  <button id="previous" type="button" onClick={sliderUp}>
+                    <i className="fa-solid fa-angle-up" id="icon" id="icon"></i>
+                  </button>
+                  <button id="next" type="button" onClick={sliderDown}>
+                    <i className="fa-solid fa-angle-down"></i>
+                  </button>
                 </div>
-              </section>
-            </div>
-            <div>
-              <img src={mainPic} alt="main-pic" className="main-pic" />
+              </div>
+
+              <div className="slider-wrapper">
+                <div className="slide-img img-1">
+                  <img
+                    src={pic1}
+                    alt="pic1"
+                    className="sp-image"
+                    onClick={() => setMainPic(pic1)}
+                  />
+                </div>
+                <div className="slide-img img-2">
+                  <img
+                    src={pic2}
+                    alt="pic2"
+                    className="sp-image"
+                    onClick={() => setMainPic(pic2)}
+                  />
+                </div>
+                <div className="slide-img img-3">
+                  <img
+                    src={pic3}
+                    alt="pic3"
+                    className="sp-image"
+                    onClick={() => setMainPic(pic3)}
+                  />
+                </div>
+                <div className="slide-img img-4">
+                  <img
+                    src={pic4}
+                    alt="pic4"
+                    className="sp-image"
+                    onClick={() => setMainPic(pic4)}
+                  />
+                </div>
+              </div>
+              <div>
+                <img src={mainPic} alt="main-pic" className="main-pic" />
+              </div>
             </div>
 
             <div className="sp-overview">

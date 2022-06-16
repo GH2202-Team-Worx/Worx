@@ -6,7 +6,7 @@
   padding-right: 20px;
   align-items: center;
   color: white;
-  background-color: #826e5c;
+  /* background-color: #826e5c; */
   gap: 10px;
   font-family: "Raleway", sans-serif;
   /* font-weight: 700; */
@@ -17,7 +17,7 @@
 }
 
 .navbar-container a:hover {
-  color: peru;
+  color: black;
 }
 
 .navbar-background-image {

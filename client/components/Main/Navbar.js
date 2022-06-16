@@ -45,7 +45,8 @@ const Navbar = () => {
               href="#"
               onClick={() => {
                 dispatch(logout());
-                cartItems = 0;
+                console.log("hit");
+                //  cartItems = 0;
               }}
             >
               Logout
