@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getFeatured } from '../../store/products';
-import { Card, Button, Row, Col, Container } from 'react-bootstrap';
-import '../styles/featuredProds.css';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { getFeatured } from "../../store/products";
+import { Card, Button, Row, Col, Container } from "react-bootstrap";
+import "../styles/featuredProds.css";
 
 const FeaturedProd = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const FeaturedProd = () => {
                         </Card.Title>
                         <Card.Img
                           variant="top"
-                          src={prod.image}
+                          src={prod.image[0]}
                           id="featured-prod-image"
                         />
                       </Card.Body>

@@ -31,7 +31,7 @@ const Navbar = () => {
         <Link to="/contact">Contact Us</Link>
         <Link to="/cart">
           Cart
-          {isLoggedIn && cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
+          {cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
         </Link>
         {/* </div> */}
         {isLoggedIn && !isAdmin ? (
@@ -41,7 +41,13 @@ const Navbar = () => {
         ) : null}
         {isLoggedIn ? (
           <div>
-            <a href="#" onClick={() => dispatch(logout())}>
+            <a
+              href="#"
+              onClick={() => {
+                dispatch(logout());
+                cartItems = 0;
+              }}
+            >
               Logout
             </a>
           </div>

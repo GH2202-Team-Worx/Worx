@@ -24,10 +24,7 @@ const AllProducts = () => {
 
   const materialChangeHandler = (selectedMaterial) => {
     setFilteredMaterial(selectedMaterial);
-    console.log("HIT");
   };
-
-  console.log("MATERIAL: ", filteredMaterial);
 
   const productsToShow = () => {
     let sortedArray = products;
@@ -54,8 +51,6 @@ const AllProducts = () => {
   };
 
   let productList = productsToShow();
-
-  console.log("PRODS: ", productList);
 
   return (
     <div className="allproducts-main">
@@ -92,7 +87,7 @@ const AllProducts = () => {
                   <Card className="products-card">
                     <Card.Img
                       variant="top"
-                      src={product.image}
+                      src={product.image[0]}
                       className="products-image"
                     />
                     <Card.Body className="products-card-body">

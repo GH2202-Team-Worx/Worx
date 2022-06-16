@@ -14,7 +14,8 @@
   display: flex;
   flex-direction: column;
   padding-top: 20px;
-  padding-left: 20px;
+  padding-left: 2rem;
+  flex: 1;
 }
 
 .sp-title {
@@ -24,6 +25,16 @@
   /* padding-left: 10px; */
 }
 
+#slider {
+  text-align: center;
+  flex: 1;
+}
+
+.main-pic {
+  width: auto;
+  max-width: 37rem;
+  flex: 1;
+}
 .sp-price {
   font-size: 1.4rem;
   font-weight: bold;
@@ -43,6 +54,20 @@
   font-size: 0.9rem;
   padding-bottom: 50px;
   font-style: italic;
+}
+
+button .previous .next {
+  padding: 2px;
+  width: 30px;
+  cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+}
+
+.previous:hover,
+.next:hover {
+  border: 3px solid gray;
 }
 
 .sp-button {
