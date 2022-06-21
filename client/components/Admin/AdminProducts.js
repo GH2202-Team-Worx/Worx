@@ -25,17 +25,6 @@ const AdminProducts = () => {
     dispatch(getProducts());
   }, []);
 
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleDescriptionChange = (e) => setDescription(e.target.value);
-  const handleMaterialChange = (e) => setMaterial(e.target.value);
-  const handleEpoxyColorChange = (e) => setEpoxyColor(e.target.value);
-  const handleCustomizableChange = (e) => setCustomizable(e.target.value);
-  const handleFeaturedChange = (e) => setFeatured(e.target.value);
-  const handlePriceChange = (e) => setPrice(e.target.value);
-  const handleCategoryChange = (e) => setCategory(e.target.value);
-  const handleQuantityChange = (e) => setQuantity(e.target.value);
-  const handleImageChange = (e) => setImage(e.target.value);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(
@@ -66,70 +55,70 @@ const AdminProducts = () => {
               value={name}
               type="text"
               required
-              onChange={handleNameChange}
+              onChange={(e) => setName(e.target.value)}
             />
             <label htmlFor="description">Description: </label>
             <input
               value={description}
               type="text"
               required
-              onChange={handleDescriptionChange}
+              onChange={(e) => setDescription(e.target.value)}
             />
             <label htmlFor="material">Material: </label>
             <input
               value={material}
               type="text"
               required
-              onChange={handleMaterialChange}
+              onChange={(e) => setMaterial(e.target.value)}
             />
             <label htmlFor="epoxyColor">Epoxy Color: </label>
             <input
               value={epoxyColor}
               type="text"
               required
-              onChange={handleEpoxyColorChange}
+              onChange={(e) => setEpoxyColor(e.target.value)}
             />
             <label htmlFor="price">Price: </label>
             <input
               value={price}
               type="text"
               required
-              onChange={handlePriceChange}
+              onChange={(e) => setPrice(e.target.value)}
             />
             <label htmlFor="category">Category: </label>
             <input
               value={category}
               type="text"
               required
-              onChange={handleCategoryChange}
+              onChange={(e) => setCategory(e.target.value)}
             />
             <label htmlFor="image">Image: </label>
             <input
               value={image}
               type="text"
               required
-              onChange={handleImageChange}
+              onChange={(e) => setImage(e.target.value)}
             />
             <label htmlFor="customizable">Customizable: </label>
             <input
               value={customizable}
               type="text"
               required
-              onChange={handleCustomizableChange}
+              onChange={(e) => setCustomizable(e.target.value)}
             />
             <label htmlFor="featured">Featured: </label>
             <input
               value={featured}
               type="text"
               required
-              onChange={handleFeaturedChange}
+              onChange={(e) => setFeatured(e.target.value)}
             />
             <label htmlFor="quantity">Quantity: </label>
             <input
               value={quantity}
               type="text"
               required
-              onChange={handleQuantityChange}
+              onChange={(e) => setQuantity(e.target.value)}
             />
             <div>
               <button type="submit">Submit</button>
@@ -144,7 +133,7 @@ const AdminProducts = () => {
             ) : (
               products.map((product) => {
                 return (
-                  <div key={product.id}>
+                  <div key={product.id} className="admin-product-card">
                     <Link to={`/products/${product.id}`}>
                       <img
                         className="allproducts-image"

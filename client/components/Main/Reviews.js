@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchReviews } from "../../store/reviews";
+import { fetchReviews, addReview } from "../../store/reviews";
 import "../styles/Reviews.css";
 
 const Reviews = () => {
@@ -15,11 +15,18 @@ const Reviews = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    dispatch(
+      addReview({
+        name: name,
+        description: review,
+      })
+    );
   };
-
+  console.log(name, review);
   let listOfReviews;
 
   if (reviews !== undefined) {
+    console.log("REVIEWS: ", reviews);
     listOfReviews = reviews.map((review) => {
       return (
         <div key={review.id} className="review-card">

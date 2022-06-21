@@ -1,20 +1,53 @@
 .single-product-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   justify-content: center;
   background-color: rgb(248, 239, 218);
   padding: 50px;
   font-family: "Cormorant", serif;
+  height: 40rem;
 }
 
 .sp-image {
-  width: 50%;
-  /* flex: 1; */
+  width: 100%;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  max-width: 200px;
 }
-.sp-overview {
+
+#slider {
+  display: flex;
+  margin-right: 10px;
+  justify-content: right;
+}
+
+.slider-wrapper {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  gap: 10px;
+  width: 40%;
+}
+
+.controller {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.main-pic {
+  width: 100%;
+  max-width: 37rem;
+  margin-left: 50px;
+}
+
+.sp-overview {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
   padding-top: 20px;
-  padding-left: 20px;
+  padding-left: 2rem;
+  margin-left: 30px;
+  flex: 1;
 }
 
 .sp-title {
@@ -23,15 +56,16 @@
   padding-bottom: 5px;
   /* padding-left: 10px; */
 }
-
 .sp-price {
   font-size: 1.4rem;
   font-weight: bold;
+  margin-bottom: 20px;
   /* padding-left: 10px; */
 }
 
 .sp-material {
   padding-top: 10px;
+  font-size: 1.2rem;
 }
 .sp-description {
   padding-top: 10px;
@@ -40,9 +74,19 @@
 }
 
 .sp-shipping {
-  font-size: 0.9rem;
+  font-size: 1rem;
   padding-bottom: 50px;
   font-style: italic;
+}
+
+#icon {
+  /* background-color: white; */
+  border: none;
+}
+
+#previous:hover,
+#next:hover {
+  border: 3px solid gray;
 }
 
 .sp-button {
@@ -50,14 +94,42 @@
   padding: 10px 10px;
   font-weight: bold;
   font-size: 1.3rem;
-  width: 80%;
-  align-self: center;
+  width: 200px;
+  /* align-self: center; */
   justify-content: flex-end;
   border: none;
+  transition: color 200ms;
 }
 
 .sp-button:hover {
-  background-color: rgb(235, 191, 80);
-  transition-duration: 450ms;
-  transform: scale(1.05);
+  background-color: #d6b392;
+}
+
+.sp-button::after {
+  content: "";
+  inset: 0;
+  z-index: -1;
+  background-color: powderblue;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 200ms;
+}
+
+.sp-button:is(:hover, :focus)::after {
+  transform: scale(1);
+}
+
+.img-4 {
+  opacity: 0;
+}
+
+@media (max-width: 1250px) {
+  .main-pic {
+    max-width: 500px;
+  }
+}
+@media (max-width: 1000px) {
+  .main-pic {
+    max-width: 300px;
+  }
 }

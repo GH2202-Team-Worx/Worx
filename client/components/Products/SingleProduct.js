@@ -1,15 +1,21 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getProduct } from '../../store/singleProduct';
-import { _addProduct, addProduct } from '../../store/cart';
-import EditProduct from './EditProduct';
-import '../styles/SingleProduct.css';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getProduct } from "../../store/singleProduct";
+import { _addProduct, addProduct } from "../../store/cart";
+import EditProduct from "./EditProduct";
+
+import "../styles/SingleProduct.css";
 
 const SingleProduct = (props) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.singleProduct);
   const auth = useSelector((state) => state.auth);
   const isLoggedIn = useSelector((state) => !!state.auth.id);
+  const [pic1, setPic1] = useState("");
+  const [pic2, setPic2] = useState("");
+  const [pic3, setPic3] = useState("");
+  const [pic4, setPic4] = useState("");
+  const [mainPic, setMainPic] = useState(pic1);
 
   const productId = props.match.params.productId;
 
@@ -25,31 +31,112 @@ const SingleProduct = (props) => {
     localStorage.setItem(`${product.id}`, JSON.stringify(product));
   };
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    if (product.image) {
+      setPic1(product.image[0]);
+      setPic2(product.image[1]);
+      setPic3(product.image[2]);
+      setPic4(product.image[3]);
+      setMainPic(product.image[0]);
+    }
+  }, [product]);
+
+  const sliderUp = () => {
+    setPic1(pic2);
+    setPic2(pic3);
+    setPic3(pic4);
+    setPic4(pic1);
+  };
+
+  const sliderDown = () => {
+    setPic1(pic4);
+    setPic2(pic1);
+    setPic3(pic2);
+    setPic4(pic3);
+  };
+
   return (
-    <React.Fragment>
-      <div className="single-product-container">
-        <img className="sp-image" src={product.image} alt={product.name} />
-        <div className="sp-overview">
-          <div className="sp-title">{product.name}</div>
-          <div className="sp-price">${product.price}</div>
-          <div className="sp-material">
-            Material: {product.material} {product.epoxyColor}
+    <div>
+      {!product ? (
+        <p>Loading</p>
+      ) : (
+        <React.Fragment>
+          <div className="single-product-container">
+            <div id="slider">
+              <div className="controller">
+                <div id="controls">
+                  <button id="previous" type="button" onClick={sliderUp}>
+                    <i className="fa-solid fa-angle-up" id="icon" id="icon"></i>
+                  </button>
+                  <button id="next" type="button" onClick={sliderDown}>
+                    <i className="fa-solid fa-angle-down"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div className="slider-wrapper">
+                <div className="slide-img img-1">
+                  <img
+                    src={pic1}
+                    alt="pic1"
+                    className="sp-image"
+                    onClick={() => setMainPic(pic1)}
+                  />
+                </div>
+                <div className="slide-img img-2">
+                  <img
+                    src={pic2}
+                    alt="pic2"
+                    className="sp-image"
+                    onClick={() => setMainPic(pic2)}
+                  />
+                </div>
+                <div className="slide-img img-3">
+                  <img
+                    src={pic3}
+                    alt="pic3"
+                    className="sp-image"
+                    onClick={() => setMainPic(pic3)}
+                  />
+                </div>
+                <div className="slide-img img-4">
+                  <img
+                    src={pic4}
+                    alt="pic4"
+                    className="sp-image"
+                    onClick={() => setMainPic(pic4)}
+                  />
+                </div>
+              </div>
+              <div>
+                <img src={mainPic} alt="main-pic" className="main-pic" />
+              </div>
+            </div>
+
+            <div className="sp-overview">
+              <div className="sp-title">{product.name}</div>
+              <div className="sp-price">${product.price}</div>
+              <div className="sp-material">
+                Material: {product.material} {product.epoxyColor}
+              </div>
+              <div className="sp-description">{product.description}</div>
+              <p className="sp-shipping">
+                Shipping Information: Please allow 3-5 business days for
+                shipping after the product is completed.
+              </p>
+              <button
+                className="sp-button"
+                type="button"
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </button>
+              {auth.isAdmin === true ? <EditProduct product={product} /> : null}
+            </div>
           </div>
-          <div className="sp-description">{product.description}</div>
-          <p className="sp-shipping">
-            Shipping Information: Please allow 3-5 business days for shipping
-            after the product is completed.
-          </p>
-          <button className="sp-button" type="button" onClick={handleAddToCart}>
-            Add to Cart
-          </button>
-          {auth.isAdmin === true ? <EditProduct product={product} /> : null}
-        </div>
-      </div>
-    </React.Fragment>
+        </React.Fragment>
+      )}
+    </div>
   );
 };
 

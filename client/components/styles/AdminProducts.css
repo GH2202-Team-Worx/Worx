@@ -44,9 +44,19 @@
 }
 
 .admin-allprods-container {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 150px 150px 150px;
-  gap: 30px;
+  gap: 30px; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 900px;
+  margin-bottom: 50px;
+}
+
+.admin-product-card {
+  flex: 1 1 200px;
+  text-align: center;
 }
 
 .allproducts-image {

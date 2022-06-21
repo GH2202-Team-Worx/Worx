@@ -41,7 +41,7 @@ const Cart = () => {
             : ""
         )
       );
-  }, [cartItems]);
+  }, [cartItems, isLoggedIn]);
 
   const deleteItemHandler = (item) => {
     isLoggedIn
@@ -69,7 +69,7 @@ const Cart = () => {
             cartItems.map((item, i) => (
               <div className="cart-item-card" key={item.id}>
                 <div>
-                  <img className="cart-image" src={item.image} />
+                  <img className="cart-image" src={item.image[0]} />
                 </div>
                 <div id="cart-item-details">
                   <Link to={`/products/${item.id}`}>

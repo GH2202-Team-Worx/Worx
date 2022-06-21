@@ -12,6 +12,7 @@ const AllProducts = () => {
   const products = useSelector((state) => state.products);
   const [filteredCategory, setFilteredCategory] = useState("");
   const [filteredMaterial, setFilteredMaterial] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     dispatch(getProducts());
@@ -23,10 +24,8 @@ const AllProducts = () => {
 
   const materialChangeHandler = (selectedMaterial) => {
     setFilteredMaterial(selectedMaterial);
-    console.log("HIT");
   };
-  // need to separate out price filter
-  // have material && category filters work together
+
   const productsToShow = () => {
     let sortedArray = products;
     if (filteredCategory === "low") {
@@ -38,37 +37,57 @@ const AllProducts = () => {
         (product) => product.category === filteredCategory
       );
       return filteredProducts;
+    } else if (filteredMaterial) {
+      const filteredProducts = products.filter(
+        (product) => product.material === filteredMaterial
+      );
+      return filteredProducts;
+    } else if (searchTerm) {
+      sortedArray = products.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
     return sortedArray;
   };
+
+  let productList = productsToShow();
 
   return (
     <div className="allproducts-main">
       <h3 id="allproducts-title">Our Products</h3>
       <div className="filters-div">
+        <div>
+          <label htmlFor="search">Search products</label>
+          <input
+            className="search-input"
+            type="search"
+            id="search"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
         <Filter
           className="products-filter"
           selected={filteredCategory}
           onChangeFilter={filterChangeHandler}
         />
-        {/* <MaterialColorFilter
+        <MaterialColorFilter
           className="products-filter"
           selected={filteredMaterial}
-          onChange={materialChangeHandler}
-        /> */}
+          onChange={(e) => setFilteredMaterial(e)}
+        />
       </div>
       <Container className="allproducts-container">
         <Row>
-          {productsToShow().length === 0 ? (
+          {productList.length === 0 ? (
             <div>There are no products to show at this time</div>
           ) : (
-            productsToShow().map((product) => {
+            productList.map((product) => {
               return (
                 <Col md={4} key={product.id} className="product-container">
                   <Card className="products-card">
                     <Card.Img
                       variant="top"
-                      src={product.image}
+                      src={product.image[0]}
                       className="products-image"
                     />
                     <Card.Body className="products-card-body">

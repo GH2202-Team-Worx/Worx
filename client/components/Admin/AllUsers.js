@@ -31,50 +31,45 @@ const AllUsers = (props) => {
     dispatch(DeleteUser(userId));
   };
 
-  let listOfUsers;
-
-  if (allUsers.length > 0) {
-    listOfUsers = allUsers.map((user) => {
-      return (
-        <div className="user-card" key={user.id}>
-          <div>
-            <strong>Email:</strong> {user.email}
-          </div>
-          <div>
-            <strong>Admin:</strong> {user.isAdmin === true ? "Yes" : "No"}
-          </div>
-          <div>Give admin status?</div>
-          <select
-            className="admin-status-dropdown"
-            name="status"
-            value={user.isAdmin}
-            onChange={(evt) => handleSubmit(evt, user.id)}
-          >
-            <option value="">Select status</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-          <button
-            type="button"
-            onClick={(event) => deleteHandler(event, user.id)}
-          >
-            Delete User
-          </button>
-        </div>
-      );
-    });
-  } else {
-    listOfUsers = (
-      <div>
-        <div>No clients at this time</div>
-      </div>
-    );
-  }
   return (
     <div className="admin-users-container">
       <AdminDashboard />
       <h1>Clients:</h1>
-      <div className="users-list">{listOfUsers}</div>
+      <div className="users-list">
+        {allUsers.length === 0 ? (
+          <p>No current users.</p>
+        ) : (
+          allUsers.map((user) => {
+            return (
+              <div className="user-card" key={user.id}>
+                <div>
+                  <strong>Email:</strong> {user.email}
+                </div>
+                <div>
+                  <strong>Admin:</strong> {user.isAdmin === true ? "Yes" : "No"}
+                </div>
+                <div>Give admin status?</div>
+                <select
+                  className="admin-status-dropdown"
+                  name="status"
+                  value={user.isAdmin}
+                  onChange={(evt) => handleSubmit(evt, user.id)}
+                >
+                  <option value="">Select status</option>
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+                <button
+                  type="button"
+                  onClick={(event) => deleteHandler(event, user.id)}
+                >
+                  Delete User
+                </button>
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };

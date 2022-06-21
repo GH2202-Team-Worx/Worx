@@ -9,7 +9,6 @@ import "../styles/SingleOrder.css";
 const SingleOrder = (props) => {
   const dispatch = useDispatch();
   const order = useSelector((state) => state.orderReducer);
-  const [status, setStatus] = useState(order.status);
   const orderId = props.match.params.orderId;
 
   useEffect(() => {
@@ -17,7 +16,6 @@ const SingleOrder = (props) => {
   }, []);
 
   const dropDownChangeHandler = (event) => {
-    setStatus(event.target.value);
     dispatch(updateOrder({ ...order, status: event.target.value }, orderId));
   };
 
@@ -79,7 +77,6 @@ const SingleOrder = (props) => {
             <option value="Shipped">Shipped</option>
             <option value="Completed">Completed</option>
           </select>
-          {/* <button type="submit">Submit Changes</button> */}
         </div>
       )}
       <Link className="return-link" to="/orders">

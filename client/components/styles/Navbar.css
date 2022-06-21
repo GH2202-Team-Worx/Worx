@@ -6,17 +6,18 @@
   padding-right: 20px;
   align-items: center;
   color: white;
-  background-color: #826e5c;
+  /* background-color: #826e5c; */
   gap: 10px;
-  font-family: "Cormorant", serif;
-  font-weight: 700;
+  font-family: "Raleway", sans-serif;
+  /* font-weight: 700; */
   font-size: 1.7rem;
   height: 7rem;
-  background-image: url("/photos/WoodHeader.png");
+  background-image: url("/photos/OliveWood.png");
+  background-image: cover;
 }
 
 .navbar-container a:hover {
-  color: peru;
+  color: black;
 }
 
 .navbar-background-image {
@@ -81,4 +82,12 @@ nav.nav-links {
   align-self: center;
   justify-content: flex-end;
   border: none;
+}
+
+@media (max-width: 885px) {
+  .nav-links a {
+    display: flex;
+    /* flex-wrap: wrap; */
+    font-size: 1rem;
+  }
 }

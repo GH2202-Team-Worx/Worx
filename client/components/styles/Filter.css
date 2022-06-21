@@ -4,10 +4,24 @@
   padding: 5px;
   font-weight: bold;
   margin: 10px;
-  font-family: "Spectral", serif;
+  font-family: "Raleway", sans-serif;
+}
+
+.material-dropdown {
+  border: 1px solid #dac2ac;
+  background-color: #fceed6;
+  padding: 5px;
+  font-weight: bold;
+  margin: 10px;
+  font-family: "Raleway", sans-serif;
 }
 
 .filter-label {
   text-align: center;
-  font-family: "Spectral", serif;
+  font-family: "Raleway", sans-serif;
+}
+
+.material-label {
+  text-align: center;
+  font-family: "Raleway", sans-serif;
 }

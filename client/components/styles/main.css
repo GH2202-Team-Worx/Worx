@@ -5,7 +5,7 @@
   align-items: center;
   background-color: #f5ebd7;
   /* font-family: "Spectral", serif; */
-  font-family: "Cormorant", serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .about-us {
@@ -53,4 +53,15 @@
 .about-paragraph {
   padding: 7px;
   line-height: 1.5;
+  font-size: 1.2vw;
+}
+
+@media (max-width: 9000px) {
+  .family-photo {
+    width: 200px;
+  }
+  .about-paragraph {
+    /* font-size: 0.8rem; */
+    overflow: scroll;
+  }
 }
