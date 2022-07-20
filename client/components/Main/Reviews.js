@@ -26,7 +26,6 @@ const Reviews = () => {
   let listOfReviews;
 
   if (reviews !== undefined) {
-    console.log("REVIEWS: ", reviews);
     listOfReviews = reviews.map((review) => {
       return (
         <div key={review.id} className="review-card">
@@ -50,7 +49,7 @@ const Reviews = () => {
           Leave a review to tell us what you think!
         </h2>
         <form className="review-form" onSubmit={handleSubmit}>
-          <label htmlFor="name"> User Name:</label>
+          <label htmlFor="name"> Name:</label>
           <input
             value={name}
             type="text"

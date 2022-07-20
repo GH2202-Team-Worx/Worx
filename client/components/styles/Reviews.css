@@ -1,5 +1,4 @@
 .reviews-container {
-  width: 80%;
   font-family: "Raleway", sans-serif;
   margin: 50px;
   text-align: center;
@@ -15,6 +14,7 @@
 .review-form {
   display: flex;
   padding-bottom: 10px;
+  justify-content: center;
 }
 
 .review-form label {

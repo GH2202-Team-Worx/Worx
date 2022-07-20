@@ -1,9 +1,14 @@
+/* 
+Commented out code is working on implementing pagination
+*/
+
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../store/products";
 import { Link } from "react-router-dom";
 import "../styles/AllProducts.css";
 import Filter from "./Filter";
+// import Pagination from "./Pagination";
 import MaterialColorFilter from "./MaterialColorFilter";
 import { Card, Button, Container, Col, Row } from "react-bootstrap";
 
@@ -13,6 +18,9 @@ const AllProducts = () => {
   const [filteredCategory, setFilteredCategory] = useState("");
   const [filteredMaterial, setFilteredMaterial] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  // const maxPage = Math.ceil(productList.length / 12);
+  // const [loading, setLoading] = useState(false);
+  // const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -52,6 +60,24 @@ const AllProducts = () => {
 
   let productList = productsToShow();
 
+  // const next = () => {
+  //   setCurrentPage((currentPage) => Math.min(currentPage + 1, maxPage));
+  // };
+
+  // const prev = () => {
+  //   setCurrentPage((currentPage) => Math.max(currentPage - 1, 1));
+  // };
+
+  // const paginate = (num) => setCurrentPage(num);
+
+  // let indexOfLastProduct = currentPage * 12;
+  // let indexOfFirstProduct = indexOfLastProduct - 12;
+
+  // let displayedProducts = productList.slice(
+  //   indexOfFirstProduct,
+  //   indexOfLastProduct
+  // );
+
   return (
     <div className="allproducts-main">
       <h3 id="allproducts-title">Our Products</h3>
@@ -75,6 +101,12 @@ const AllProducts = () => {
           selected={filteredMaterial}
           onChange={(e) => setFilteredMaterial(e)}
         />
+        {/* <Pagination
+          productList={productList}
+          itemsPerPage={10}
+          pageNums={productList.length}
+          paginate={paginate}
+        /> */}
       </div>
       <Container className="allproducts-container">
         <Row>

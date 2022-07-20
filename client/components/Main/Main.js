@@ -8,8 +8,9 @@ const Main = () => {
   return (
     <React.Fragment>
       <div className="mainContainer">
-        <FeaturedProd />
+        <FeaturedProd className="featured" />
         <div className="about-us">
+          {/* <div className="family-photo"></div> */}
           <img className="family-photo" src={familyPhoto} alt="family-photo" />
           <div className="bio">
             <h3 className="bio-header">Our Story</h3>
