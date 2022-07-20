@@ -8,6 +8,9 @@
   font-family: "Raleway", sans-serif;
 }
 
+.featured {
+  width: 80%;
+}
 .about-us {
   display: flex;
   justify-content: space-evenly;
@@ -21,11 +24,9 @@
 }
 
 .family-photo {
-  width: 100%;
   height: auto;
   flex: 1;
-  object-fit: contain;
-  /* padding: 10px; */
+  object-fit: cover;
 }
 
 .bio {
@@ -34,10 +35,8 @@
   align-items: flex-start;
   flex: 1;
   font-weight: 500;
-  /* padding: 10px; */
-  /* background-color: #dac2ac; */
+  padding: 15px 15px;
   height: 427px;
-  /* min-height: 500px; */
 }
 
 @media (max-width: 1400px) {
@@ -51,15 +50,15 @@
 }
 
 .about-paragraph {
-  padding: 7px;
+  padding: 15px 15px;
   line-height: 1.5;
   font-size: 1.2vw;
 }
 
 @media (max-width: 9000px) {
-  .family-photo {
+  /* .family-photo {
     width: 200px;
-  }
+  } */
   .about-paragraph {
     /* font-size: 0.8rem; */
     overflow: scroll;

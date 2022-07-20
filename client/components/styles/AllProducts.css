@@ -6,7 +6,7 @@
 }
 
 .products-card-body {
-  font-family: "Cormorant", serif;
+  font-family: "Raleway", sans-serif;
   height: 33%;
 }
 
@@ -69,7 +69,7 @@
   font-size: 2.5rem;
   font-weight: 600;
   text-align: center;
-  font-family: "Cormorant", serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .filters-div {
