@@ -61,14 +61,19 @@ const ShippingInformation = (props) => {
             placeholder="Street Address"
             onChange={handleChange}
           />
-          {/* <label htmlFor="address">
-            <small>{"Street Address (Apt/Suite No.)"}</small>
-          </label> */}
+
           <input
             name="street"
             id="street"
             type="text"
             placeholder="Street Address (Apt/Suite No.)"
+            onChange={handleChange}
+          />
+          <input
+            name="email"
+            id="email"
+            type="text"
+            placeholder="Email"
             onChange={handleChange}
           />
         </div>

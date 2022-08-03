@@ -12,6 +12,7 @@ const Order = db.define("order", {
       "Created"
     ),
   },
+  email: Sequelize.STRING,
   shippingName: Sequelize.STRING,
   shippingAddress: Sequelize.STRING,
   paymentInfo: Sequelize.STRING,

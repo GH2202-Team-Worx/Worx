@@ -15,16 +15,37 @@ import "../styles/Checkout.css";
 //if user is logged in, front end should send cart data to server via "api/order/cart" with status "Cart" whenever cart is modified.
 
 const Checkout = () => {
+  const dispatch = useDispatch();
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [shipping, setShipping] = useState({
     phone: 0,
     shipName: "",
-    streetOne: "",
-    streetTwo: "",
+    // streetOne: "",
+    // streetTwo: "",
     city: "",
     state: "",
-    zip: 0,
+    // zipcode: "",
+  });
+  const [streetAddress, setStreetAddress] = useState(shipping["streetOne"]);
+  const [shipAddress, setShipAddress] = useState("");
+  const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
+
+  // console.log("ADDRESS", shipping["street"]);
+  console.log("ORDERINFO: ", {
+    status: "Processing",
+    email: shipping["email"],
+    shippingName: shipping["shipName"],
+    shippingAddress:
+      shipping["street"] +
+      " " +
+      shipping["city"] +
+      " " +
+      shipping["state"] +
+      " " +
+      shipping["zipCode"],
+    shippingAmt: cartTotal,
+    taxAmt: cartTotal * 0.06,
   });
   // const [billing, setBilling] = useState({
   //   name: '',
@@ -33,10 +54,8 @@ const Checkout = () => {
   //   cvc: 0,
   // });
 
-  // const dispatch = useDispatch();
   //eventually we may want to check if someone is logged in so that we can ask them if they want to make an acct if they aren't
   // const isLoggedIn = useSelector((state) => !!state.auth.id);
-  const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
 
   const stripe = useStripe();
   const elements = useElements();
@@ -123,6 +142,24 @@ const Checkout = () => {
     }
 
     setIsLoading(false);
+
+    dispatch(
+      sendOrder({
+        status: "Processing",
+        email: shipping["email"],
+        shippingName: shipping["shipName"],
+        shippingAddress:
+          shipping["street"] +
+          " " +
+          shipping["city"] +
+          " " +
+          shipping["state"] +
+          " " +
+          shipping["zipCode"],
+        shippingAmt: cartTotal,
+        taxAmt: cartTotal * 0.06,
+      })
+    );
   };
 
   return (
