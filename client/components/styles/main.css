@@ -39,6 +39,19 @@
   height: 427px;
 }
 
+@media (max-width: 600px) {
+  .about-us {
+    flex-direction: column;
+    width: 100%;
+  }
+  .bio {
+    padding: 0%;
+  }
+  .family-photo {
+    width: 90%;
+  }
+}
+
 @media (max-width: 1400px) {
   .bio {
     overflow: scroll;
@@ -56,11 +69,7 @@
 }
 
 @media (max-width: 9000px) {
-  /* .family-photo {
-    width: 200px;
-  } */
   .about-paragraph {
-    /* font-size: 0.8rem; */
     overflow: scroll;
   }
 }

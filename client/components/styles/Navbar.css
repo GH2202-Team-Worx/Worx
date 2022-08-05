@@ -84,10 +84,15 @@ nav.nav-links {
   border: none;
 }
 
+@media (max-width: 600px) {
+  .navbar-container {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 885px) {
   .nav-links a {
     display: flex;
-    /* flex-wrap: wrap; */
     font-size: 1rem;
   }
 }

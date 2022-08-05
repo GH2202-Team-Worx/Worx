@@ -6,6 +6,7 @@
   /* border: 1px solid #DAC2AC; */
   margin-top: 3rem;
   margin-bottom: 3rem;
+  width: 80%;
 }
 
 .featuredProd {
@@ -34,14 +35,13 @@
 }
 
 #featured-prod-image {
-  width: 100%;
-  height: 140px;
+  width: 200px;
+  height: 200px;
 }
 
 #featured-prod-image:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   transition-duration: 350ms;
-  /* height: 110%; */
 }
 
 .featured-prod-name {
@@ -69,4 +69,13 @@
 
 .featured-prods-description:hover {
   color: #826e5c;
+}
+
+@media (max-width: 600px) {
+  .featured-prods-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }

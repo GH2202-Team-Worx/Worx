@@ -17,7 +17,6 @@ const FeaturedProd = () => {
       <div id="featuredProds">
         <h2 className="featured-products-title">Featured Products</h2>
         <Container className="featured-prods-container">
-          <Row>
             {featuredProds.map((prod) => {
               return (
                 <Col className="featuredProd" key={prod.id}>
@@ -38,7 +37,6 @@ const FeaturedProd = () => {
                 </Col>
               );
             })}
-          </Row>
         </Container>
       </div>
     </>

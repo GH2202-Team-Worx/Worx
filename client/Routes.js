@@ -63,7 +63,7 @@ const Routes = () => {
   };
 
   return (
-    <div>
+    <div className="content">
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/products" component={AllProducts} />
