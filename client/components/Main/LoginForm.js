@@ -16,7 +16,7 @@ const LoginForm = (props) => {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <form id="login-form" name="login" onSubmit={handleSubmit}>
         <h2> Login Form</h2>
         <div>
@@ -39,7 +39,7 @@ const LoginForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-    </div>
+    </React.Fragment>
   );
 };
 

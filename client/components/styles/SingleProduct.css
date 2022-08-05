@@ -5,7 +5,6 @@
   background-color: rgb(248, 239, 218);
   padding: 50px;
   font-family: "Raleway", sans-serif;
-  height: 40rem;
 }
 
 .sp-image {
@@ -131,5 +130,20 @@
 @media (max-width: 1000px) {
   .main-pic {
     max-width: 300px;
+  }
+}
+@media (max-width: 600px) {
+  #slider {
+    flex-direction: column;
+  }
+  .slider-wrapper {
+    flex-direction: row;
+    width: 100%;
+  }
+  .sp-image {
+    margin-left: 0%;
+  }
+  .main-pic {
+    margin-left: 0%;
   }
 }
