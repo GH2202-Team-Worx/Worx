@@ -1,15 +1,21 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { logout } from "../../store";
-import "../styles/Navbar.css";
-import icon from "../../../public/photos/BellsIcon.png";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logout } from '../../store';
+import { getCart } from '../../store/cart';
+import '../styles/Navbar.css';
+import icon from '../../../public/photos/BellsIcon.png';
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartReducer);
   const isLoggedIn = useSelector((state) => !!state.auth.id);
   const isAdmin = useSelector((state) => state.auth.isAdmin);
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isLoggedIn) dispatch(getCart(auth.id));
+  }, []);
 
   return (
     <div className="navbar-container">
@@ -31,7 +37,7 @@ const Navbar = () => {
         <Link to="/contact">Contact Us</Link>
         <Link to="/cart">
           Cart
-          {cartItems.length > 0 ? ` (${cartItems.length})` : ""}{" "}
+          {cartItems.length > 0 ? ` (${cartItems.length})` : ''}{' '}
         </Link>
         {/* </div> */}
         {isLoggedIn && !isAdmin ? (
@@ -45,7 +51,7 @@ const Navbar = () => {
               href="#"
               onClick={() => {
                 dispatch(logout());
-                console.log("hit");
+                console.log('hit');
                 //  cartItems = 0;
               }}
             >

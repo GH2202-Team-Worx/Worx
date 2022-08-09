@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Card, Button } from 'react-bootstrap';
 import {
   getCart,
   deleteProduct,
   _deleteProduct,
   editProduct,
   _editProduct,
-} from "../../store/cart";
-import "../styles/Cart.css";
+} from '../../store/cart';
+import '../styles/Cart.css';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Cart = () => {
   const { cartItems, cartTotal } = useSelector((state) => state.cartReducer);
   const [customization, setCustomization] = useState(
     cartItems.map((item) =>
-      item.orderproduct ? item.orderproduct.customization : ""
+      item.orderproduct ? item.orderproduct.customization : ''
     )
   );
   const [isGift, setIsGift] = useState(false);
@@ -28,9 +28,11 @@ const Cart = () => {
 
   //put this on homepage (first page that you go to when someone logs in - or call in thunk when someone logs in - because cart does not show total until you actually click on cart)
   //can load localstorage and this use effect in navbar or routes
-  useEffect(() => {
-    if (isLoggedIn) dispatch(getCart(auth.id));
-  }, []);
+
+  // Below useEffect was placed in NavBar, can likely be deleted below
+  // useEffect(() => {
+  //   if (isLoggedIn) dispatch(getCart(auth.id));
+  // }, []);
 
   useEffect(() => {
     if (isLoggedIn)
@@ -38,7 +40,7 @@ const Cart = () => {
         cartItems.map((item) =>
           item.orderproduct && item.orderproduct.customization
             ? item.orderproduct.customization
-            : ""
+            : ''
         )
       );
   }, [cartItems, isLoggedIn]);
@@ -63,6 +65,7 @@ const Cart = () => {
       <div className="cart-items-display">
         <h3 className="cart-items-title">Items in Your Cart</h3>
         <div>
+          {console.log('CART ITEMS', cartItems)}
           {cartItems.length === 0 ? (
             <p>There are no items in your cart.</p>
           ) : (
@@ -83,7 +86,7 @@ const Cart = () => {
                   <p>
                     {item.orderproduct && item.orderproduct.customization
                       ? `Current customization is: ${item.orderproduct.customization}`
-                      : ""}
+                      : ''}
                   </p>
                   <label htmlFor="customization">Edit Customization:</label>
                   <input

@@ -41,7 +41,7 @@ export const getCart = (userId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`/api/users/${userId}/cart`);
-      dispatch(_getCart(data.products));
+      data ? dispatch(_getCart(data.products)) : dispatch(_getCart([]));
     } catch (err) {
       console.error('😭 Unable to grab cart', err);
     }
@@ -52,13 +52,10 @@ export const getCart = (userId) => {
 export const addProduct = (userId, product) => {
   return async (dispatch) => {
     try {
-      // console.log('user id from thunk: ', userId)
-      // console.log('prod from thunk: ', product)
       const { data } = await axios.post('/api/orders/cart', {
         userId,
         product,
       });
-      // console.log('data back from api', data)
       dispatch(_addProduct(data));
     } catch (err) {
       console.error('😤 Unable to add product', err);
