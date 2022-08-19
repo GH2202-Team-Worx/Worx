@@ -46,7 +46,9 @@ const Navbar = () => {
           />
         </svg>
       </button>
-      <div className={isNavExpanded ? "nav-links expanded" : "nav-links"} >
+      <div className={isNavExpanded ? "nav-links expanded" : "nav-links"} onClick={() => {
+          setIsNavExpanded(false);
+        }}>
         {isAdmin ? <Link to="/admin">My Dashboard</Link> : null}
         <Link to="/contact">Contact Us</Link>
         <Link to="/cart">
