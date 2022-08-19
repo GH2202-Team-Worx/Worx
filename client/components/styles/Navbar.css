@@ -1,19 +1,16 @@
 .navbar-container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   padding: 10px;
   padding-right: 20px;
   align-items: center;
   color: white;
-  /* background-color: #826e5c; */
   gap: 10px;
   font-family: "Raleway", sans-serif;
-  /* font-weight: 700; */
   font-size: 1.7rem;
   height: 7rem;
   background-image: url("/photos/LightedWoodBanner.png");
-  background-image: cover;
+  position: relative;
 }
 
 .navbar-container a:hover {
@@ -32,25 +29,43 @@
   gap: 5px;
 }
 
+.hamburger {
+  border: 0;
+  height: 40px;
+  width: 40px;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  display: none;
+}
+
+.hamburger svg {
+  vertical-align: top;
+}
+
 #all-products-link {
   align-self: center;
   padding-left: 15px;
   font-size: 2rem;
   font-weight: bold;
 }
-nav.nav-links {
+.nav-links {
   display: flex;
 }
 .nav-links a {
-  padding-top: 5px;
+  padding: 5px 10px;
   font-size: 1.07rem;
   font-weight: 500;
 }
 
 .icon {
   width: 70px;
-  /* mix-blend-mode: multiply;
-  color: white; */
 }
 
 .navbar-company-name {
@@ -68,14 +83,12 @@ nav.nav-links {
 }
 
 .search-input {
-  /* border-radius: 7px; */
   padding: 5px;
 }
 
 .search-button {
   padding: 5px 10px;
   margin: 0 10px;
-  /* border-radius: 7px; */
   background-color: #dac2ac;
   font-weight: bold;
   font-size: 1rem;
@@ -85,14 +98,31 @@ nav.nav-links {
 }
 
 @media (max-width: 600px) {
-  .navbar-container {
+  .hamburger {
+    display: block;
+  }
+  nav.nav-links {
+    display: none;
+  }
+  .nav-links {
+    position: absolute;
+    background-color: #826e5c;
+    top: 112px;
+    left: 0;
     flex-direction: column;
+    width: 100%;
+    display: none;
+    z-index: 1;
+  }
+
+  .nav-links.expanded {
+    display: flex;
   }
 }
 
-@media (max-width: 885px) {
+/* @media (max-width: 885px) {
   .nav-links a {
     display: flex;
     font-size: 1rem;
   }
-}
+} */
