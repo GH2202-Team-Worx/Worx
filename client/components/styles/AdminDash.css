@@ -19,7 +19,7 @@
   border-bottom: 1px solid peru;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
   .admin-dash-container {
     display: flex;
     flex-direction: column;

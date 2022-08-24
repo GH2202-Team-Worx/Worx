@@ -117,3 +117,12 @@
 #cart-delete:hover {
   color: goldenrod;
 }
+
+@media (max-width: 600px) {
+  .cart-container {
+    flex-direction: column;
+  }
+  .cart-item-card {
+    flex-direction: column;
+  }
+}

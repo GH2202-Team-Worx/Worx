@@ -46,3 +46,12 @@
 .reviews-list {
   display: flex;
 }
+
+@media (max-width: 600px) {
+  .review-form {
+    flex-direction: column;
+  }
+  .reviews-list {
+    flex-direction: column;
+  }
+}

@@ -40,9 +40,7 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div>
           <Reviews />
-        </div>
       </div>
     </React.Fragment>
   );

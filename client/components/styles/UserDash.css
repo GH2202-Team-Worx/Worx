@@ -5,7 +5,13 @@
   justify-content: center;
   width: 100%;
   gap: 2rem;
-  margin: 20px;
+  margin-bottom: 50px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem;
 }
 
 .user-input {
@@ -16,4 +22,26 @@
 .userdash-button {
   padding: 5px 5px;
   margin-left: 10px;
+}
+
+.current-orders {
+  margin: 3rem;
+}
+.order-history {
+  margin: 3rem;
+}
+
+@media (max-width: 600px) {
+  .user-profile-container {
+    flex-direction: column;
+  }
+  .edit-form {
+    margin: 1rem;
+  }
+  .current-orders {
+    margin: 1rem;
+  }
+  .order-history {
+    margin: 1rem;
+  }
 }

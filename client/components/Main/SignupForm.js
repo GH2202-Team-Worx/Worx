@@ -38,7 +38,7 @@ const SignupForm = () => {
       <form
         onSubmit={(e) => {
           handleSubmit(e);
-        }}
+        }} className="signup-form-container"
       >
         <div>
           <h2>Sign Up Form</h2>

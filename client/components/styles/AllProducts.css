@@ -97,8 +97,11 @@
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 600px) {
   .allproducts-display {
     grid-template-columns: 200px;
+  }
+  .filters-div {
+    flex-direction: column;
   }
 }

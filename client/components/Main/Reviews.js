@@ -44,7 +44,7 @@ const Reviews = () => {
 
   return (
     <div className="reviews-container">
-      <div>
+      <React.Fragment>
         <h2 className="reviews-title">
           Leave a review to tell us what you think!
         </h2>
@@ -56,7 +56,7 @@ const Reviews = () => {
             required
             onChange={(e) => setName(e.target.value)}
           />
-          <label htmlFor="review">Leave your review:</label>
+          <label htmlFor="review">Review:</label>
           <input
             value={review}
             type="text"
@@ -65,7 +65,7 @@ const Reviews = () => {
           />
           <button type="submit">Submit</button>
         </form>
-      </div>
+      </React.Fragment>
       <div className="reviews-list">{listOfReviews}</div>
     </div>
   );

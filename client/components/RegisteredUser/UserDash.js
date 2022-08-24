@@ -74,7 +74,7 @@ const UserDashboard = (props) => {
   return (
     <div className="user-profile-container">
       <div className="edit-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="edit-form">
           <h4>Edit Profile</h4>
           <p>First Name:</p>
           <input
